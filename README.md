@@ -119,4 +119,5 @@ This repo does not include:
 - [Packaging for Platform](docs/packaging.md)
 - [Optional plugins](docs/plugins.md)
 - [Reference app patterns](docs/reference-patterns.md)
+- [AI assistant prompt](docs/ai-prompt.md)
 - [Troubleshooting](docs/troubleshooting.md)
