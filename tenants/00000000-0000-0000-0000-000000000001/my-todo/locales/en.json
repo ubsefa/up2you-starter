@@ -1,0 +1,57 @@
+{
+  "apps": {
+    "my-todo": {
+      "name": "My Todo",
+      "description": "Task management for teams"
+    }
+  },
+  "fields": {
+    "title": "Title",
+    "description": "Description",
+    "assignee_user_id": "Assignee",
+    "priority": "Priority",
+    "due_date": "Due Date",
+    "started_at": "Started At",
+    "completed_at": "Completed At",
+    "archived_at": "Archived At",
+    "archive_reason": "Archive Reason",
+    "attachment_url": "Attachment",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "count": "Count"
+  },
+  "actions": {
+    "start": "Start",
+    "complete": "Complete",
+    "assign": "Assign",
+    "archive": "Archive",
+    "reopen": "Reopen"
+  },
+  "states": {
+    "open": "Open",
+    "in_progress": "In Progress",
+    "done": "Done",
+    "archived": "Archived"
+  },
+  "transitions": {
+    "start": "Start",
+    "complete": "Complete",
+    "assign": "Assign",
+    "reopen": "Reopen",
+    "archive": "Archive"
+  },
+  "roles": {
+    "admin": "Admin"
+  },
+  "views": {
+    "tasks": "List",
+    "stats": "Stats"
+  },
+  "charts": {
+    "tasks_by_state": "Tasks by State"
+  },
+  "validation": {
+    "reasonRequired": "Reason is required."
+  }
+}

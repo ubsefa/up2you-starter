@@ -1,0 +1,43 @@
+workflow:
+  name: task_flow
+  entity: ref:entities/Task
+  transitions:
+    start:
+      from: [open]
+      to: in_progress
+      permissions: [user, admin]
+      mutation:
+        assignee_user_id: "event.user_id"
+        started_at: "event.timestamp"
+
+    assign:
+      from: [open, in_progress]
+      to: in_progress
+      permissions: [user, admin]
+      mutation:
+        assignee_user_id: "event.assignee_user_id"
+
+    complete:
+      from: [in_progress]
+      to: done
+      permissions: [user, admin]
+      guard: "state.assignee_user_id == event.user_id"
+      mutation:
+        completed_at: "event.timestamp"
+
+    reopen:
+      from: [done]
+      to: open
+      permissions: [user, admin]
+      mutation:
+        completed_at: ""
+
+    archive:
+      from: [open, done]
+      to: archived
+      permissions: [user, admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        archived_at: "event.timestamp"
+        archive_reason: "event.reason"

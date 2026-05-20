@@ -1,0 +1,6 @@
+app:
+  key: my-todo
+  name: My Todo
+  version: "1.0.0"
+  description: Task management for teams
+  main_view: MyTodo

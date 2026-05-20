@@ -1,0 +1,7 @@
+effects:
+  my_todo_log_task_event:
+    plugin: todo-logger
+    action: log
+    payload:
+      task_title: "state.title"
+      assignee_user_id: "state.assignee_user_id"

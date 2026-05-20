@@ -1,0 +1,75 @@
+queries:
+  my_todo_all:
+    entity: ref:entities/Task
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  my_open_tasks:
+    entity: ref:entities/Task
+    filter:
+      field: current_state
+      op: eq
+      value: open
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  my_assigned_tasks:
+    entity: ref:entities/Task
+    filter:
+      and:
+        - field: assignee_user_id
+          op: eq
+          value: $current_user_id
+        - field: current_state
+          op: in
+          value: [open, in_progress]
+    sort:
+      - field: priority
+        order: asc
+    limit: 100
+
+  completed_tasks:
+    entity: ref:entities/Task
+    filter:
+      field: current_state
+      op: eq
+      value: done
+    sort:
+      - field: completed_at
+        order: desc
+    limit: 100
+
+  archived_tasks:
+    entity: ref:entities/Task
+    filter:
+      field: current_state
+      op: eq
+      value: archived
+    sort:
+      - field: archived_at
+        order: desc
+    limit: 100
+
+  tasks_by_state:
+    entity: ref:entities/Task
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  public_open_tasks:
+    entity: ref:entities/Task
+    public: true
+    filter:
+      field: current_state
+      op: eq
+      value: open
+    sort:
+      - field: created_at
+        order: desc
+    limit: 50

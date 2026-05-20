@@ -1,0 +1,13 @@
+view:
+  name: MyTodo
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: tasks
+            label: List
+            view: MyTodoTasks
+          - key: stats
+            label: Stats
+            view: MyTodoStats

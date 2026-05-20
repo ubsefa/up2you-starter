@@ -1,0 +1,12 @@
+view:
+  name: MyTodoStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.tasks_by_state
+        data_source: ref:queries/tasks_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states

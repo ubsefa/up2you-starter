@@ -1,0 +1,12 @@
+auth:
+  provider: jwt
+  secret_env: JWT_SECRET
+  token_expiry: 24h
+  roles:
+    - admin
+    - user
+  permissions:
+    Task.read: [admin, user]
+    Task.create: [admin, user]
+    Task.update: [admin, user]
+    Task.delete: [admin, user]
