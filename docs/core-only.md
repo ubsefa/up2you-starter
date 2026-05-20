@@ -29,7 +29,8 @@ Health checks:
 
 ```bash
 curl http://localhost:8080/health
-curl http://localhost:8080/api/v1/_schema
+curl http://localhost:8080/api/v1/_schema \
+  -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
 ## Tenant Config
@@ -52,6 +53,7 @@ Create a task:
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/Task \
+  -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001" \
   -H "Content-Type: application/json" \
   -d '{"title":"Try UP2YOU","priority":"medium"}'
 ```
@@ -59,13 +61,15 @@ curl -X POST http://localhost:8080/api/v1/Task \
 List tasks:
 
 ```bash
-curl http://localhost:8080/api/v1/Task
+curl http://localhost:8080/api/v1/Task \
+  -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
 Run a named query:
 
 ```bash
-curl http://localhost:8080/api/v1/_query/my_todo_all
+curl http://localhost:8080/api/v1/_query/my_todo_all \
+  -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
 Run a public query:

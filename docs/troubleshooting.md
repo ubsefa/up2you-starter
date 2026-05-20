@@ -13,7 +13,8 @@ make setup
 ```bash
 docker compose ps
 curl http://localhost:8080/health
-curl http://localhost:8080/api/v1/_schema
+curl http://localhost:8080/api/v1/_schema \
+  -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
 Demo screen:
