@@ -93,6 +93,12 @@ Hosted Platform:
 https://up2you.app
 ```
 
+Hosted documentation:
+
+```text
+https://up2you.app/docs
+```
+
 For advanced app design, plugin deployment, production usage, or hosted Platform questions, contact:
 
 ```text

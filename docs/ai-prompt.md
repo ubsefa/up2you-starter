@@ -16,6 +16,8 @@ First read these docs from this repository:
 
 Use examples/my-todo as the reference app shape.
 
+Use https://up2you.app/docs as the hosted Platform documentation reference when you need current Platform UI, publishing, or developer-flow details.
+
 Goal:
 Create a packageable UP2YOU app folder that can run in the local starter and be zipped for the hosted UP2YOU Platform.
 
