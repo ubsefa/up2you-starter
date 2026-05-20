@@ -38,11 +38,16 @@ function setStatus(message, isError = false) {
 
 function unwrapList(payload) {
   if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data?.data)) return payload.data.data;
   if (Array.isArray(payload?.data)) return payload.data;
   if (Array.isArray(payload?.data?.items)) return payload.data.items;
   if (Array.isArray(payload?.items)) return payload.items;
   if (Array.isArray(payload?.records)) return payload.records;
   return [];
+}
+
+function taskData(task) {
+  return task.data && typeof task.data === 'object' ? task.data : task;
 }
 
 function getId(task) {
@@ -141,6 +146,65 @@ async function runTransition(task, transition) {
   }
 }
 
+async function updateTask(task) {
+  const id = getId(task);
+  const data = taskData(task);
+  if (!id) {
+    setStatus('Task id is missing in the API response.', true);
+    return;
+  }
+
+  const title = window.prompt('Task title', data.title || '');
+  if (title === null) return;
+
+  const description = window.prompt('Task description', data.description || '');
+  if (description === null) return;
+
+  const body = {
+    ...data,
+    title: title.trim(),
+    description: description.trim(),
+  };
+
+  if (!body.title) {
+    setStatus('Title is required.', true);
+    return;
+  }
+
+  try {
+    setStatus('Updating task...');
+    await request(`/api/v1/Task/${encodeURIComponent(id)}`, {
+      method: 'PUT',
+      headers: task.version ? { 'X-Expected-Version': String(task.version) } : {},
+      body: JSON.stringify(body),
+    });
+    await loadTasks();
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+}
+
+async function deleteTask(task) {
+  const id = getId(task);
+  const data = taskData(task);
+  if (!id) {
+    setStatus('Task id is missing in the API response.', true);
+    return;
+  }
+
+  if (!window.confirm(`Delete "${data.title || 'Untitled task'}"?`)) return;
+
+  try {
+    setStatus('Deleting task...');
+    await request(`/api/v1/Task/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
+    await loadTasks();
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+}
+
 async function loadPublicTasks() {
   els.publicList.textContent = 'Loading public tasks...';
   els.publicList.classList.add('empty');
@@ -157,7 +221,7 @@ async function loadPublicTasks() {
 
 function actionsFor(task) {
   const current = getState(task);
-  const actions = [];
+  const actions = [['edit', 'Edit'], ['delete', 'Delete']];
 
   if (current === 'open') actions.push(['start', 'Start'], ['archive', 'Archive']);
   if (current === 'in_progress') actions.push(['complete', 'Complete']);
@@ -175,21 +239,22 @@ function renderTasks() {
   }
 
   els.tasks.innerHTML = state.tasks.map((task, index) => {
+    const data = taskData(task);
     const current = getState(task);
     const actions = actionsFor(task).map(([name, label]) => {
-      const className = name === 'archive' ? 'danger' : 'secondary';
+      const className = name === 'archive' || name === 'delete' ? 'danger' : 'secondary';
       return `<button class="${className}" type="button" data-index="${index}" data-action="${name}">${label}</button>`;
     }).join('');
 
     return `
       <article class="task">
         <div>
-          <h3>${escapeHtml(task.title || 'Untitled task')}</h3>
-          <p>${escapeHtml(task.description || 'No description.')}</p>
+          <h3>${escapeHtml(data.title || 'Untitled task')}</h3>
+          <p>${escapeHtml(data.description || 'No description.')}</p>
           <div class="meta">
             <span class="pill">${escapeHtml(current)}</span>
-            <span class="pill">${escapeHtml(task.priority || 'medium')}</span>
-            ${task.due_date ? `<span class="pill">${escapeHtml(new Date(task.due_date).toLocaleString())}</span>` : ''}
+            <span class="pill">${escapeHtml(data.priority || 'medium')}</span>
+            ${data.due_date ? `<span class="pill">${escapeHtml(new Date(data.due_date).toLocaleString())}</span>` : ''}
           </div>
         </div>
         <div class="actions">${actions || '<span class="pill">No actions</span>'}</div>
@@ -206,9 +271,10 @@ function renderPublicTasks(tasks) {
   }
 
   els.publicList.classList.remove('empty');
-  els.publicList.innerHTML = tasks.map(task => (
-    `<div class="compact-item">${escapeHtml(task.title || 'Untitled task')}</div>`
-  )).join('');
+  els.publicList.innerHTML = tasks.map(task => {
+    const data = taskData(task);
+    return `<div class="compact-item">${escapeHtml(data.title || 'Untitled task')}</div>`;
+  }).join('');
 }
 
 els.form.addEventListener('submit', createTask);
@@ -219,7 +285,19 @@ els.tasks.addEventListener('click', event => {
   if (!button) return;
 
   const task = state.tasks[Number(button.dataset.index)];
-  if (task) runTransition(task, button.dataset.action);
+  if (!task) return;
+
+  if (button.dataset.action === 'edit') {
+    updateTask(task);
+    return;
+  }
+
+  if (button.dataset.action === 'delete') {
+    deleteTask(task);
+    return;
+  }
+
+  runTransition(task, button.dataset.action);
 });
 
 loadTasks();
