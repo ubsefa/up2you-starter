@@ -1,0 +1,6 @@
+.env
+dist/
+tmp/
+*.zip
+.DS_Store
+

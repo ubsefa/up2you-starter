@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Task.read: [admin, user]
+    Task.create: [admin, user]
+    Task.update: [admin, user]
+    Task.delete: [admin, user]

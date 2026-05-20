@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UP2YOU Starter Todo</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-label="Connection settings">
+        <div>
+          <p class="eyebrow">UP2YOU Starter</p>
+          <h1>My Todo</h1>
+        </div>
+        <div class="settings">
+          <label>
+            API
+            <input id="baseUrl" type="url" value="http://localhost:8080">
+          </label>
+          <label>
+            Tenant
+            <input id="tenantId" type="text" value="00000000-0000-0000-0000-000000000001">
+          </label>
+          <button id="refreshBtn" type="button">Refresh</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <form id="taskForm" class="panel">
+          <h2>New Task</h2>
+          <label>
+            Title
+            <input id="title" name="title" type="text" autocomplete="off" required>
+          </label>
+          <label>
+            Description
+            <textarea id="description" name="description" rows="4"></textarea>
+          </label>
+          <div class="row">
+            <label>
+              Priority
+              <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>
+              Due Date
+              <input id="dueDate" name="due_date" type="datetime-local">
+            </label>
+          </div>
+          <button type="submit">Create Task</button>
+        </form>
+
+        <section class="panel">
+          <div class="section-head">
+            <h2>Public Open Tasks</h2>
+            <button id="publicBtn" type="button">Load Public</button>
+          </div>
+          <div id="publicList" class="compact-list empty">No public data loaded.</div>
+        </section>
+      </section>
+
+      <section class="panel tasks-panel">
+        <div class="section-head">
+          <h2>Tasks</h2>
+          <span id="count" class="count">0</span>
+        </div>
+        <div id="status" class="status" role="status"></div>
+        <div id="tasks" class="task-list"></div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+plugin:
+  name: todo-logger
+  service: my-todo-todo-logger
+  port: 8201
+  dockerfile: Dockerfile
+  memory: 128m
+  cpus: "0.25"
+  pids_limit: 64
+  effects:
+    - my_todo_log_task_event

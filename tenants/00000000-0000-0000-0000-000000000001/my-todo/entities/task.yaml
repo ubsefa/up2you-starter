@@ -1,0 +1,54 @@
+entity:
+  name: Task
+  initial_state: open
+  soft_delete: true
+  fields:
+    title:
+      type: string
+      required: true
+    description:
+      type: string
+    assignee_user_id:
+      type: string
+    priority:
+      type: string
+      default: medium
+    due_date:
+      type: string
+      format: date-time
+    started_at:
+      type: string
+      format: date-time
+    completed_at:
+      type: string
+      format: date-time
+    archived_at:
+      type: string
+      format: date-time
+    archive_reason:
+      type: string
+    attachment_url:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - title
+      - assignee_user_id
+      - priority
+      - due_date
+      - completed_at
+      - archived_at
+      - attachment_url
+  states:
+    open:
+      fields: {}
+    in_progress:
+      fields: {}
+    done:
+      fields: {}
+    archived:
+      fields: {}
+  indexes:
+    - fields: [assignee_user_id]
+    - fields: [priority]
+    - fields: [current_state]

@@ -1,0 +1,28 @@
+form:
+  name: MyTodoCreate
+  entity: Task
+  fields:
+    - name: title
+      type: TextInput
+      props:
+        required: true
+    - name: description
+      type: TextArea
+      props:
+        rows: 3
+    - name: priority
+      type: Select
+      props:
+        required: true
+        placeholder: fields.priority
+        options:
+          - value: low
+          - value: medium
+          - value: high
+    - name: due_date
+      type: DateInput
+    - name: attachment_url
+      type: Upload
+      props:
+        entity: Task
+        field: attachment_url
