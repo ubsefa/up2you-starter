@@ -1,6 +1,6 @@
 # AI Assistant Prompt
 
-Use this prompt with Codex, Claude, ChatGPT, or another coding assistant when you want help creating an UP2YOU YAML app.
+Use this reusable prompt with your AI coding assistant when you want help creating an UP2YOU YAML app.
 
 ```text
 You are helping me create an UP2YOU YAML app package.
