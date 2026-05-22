@@ -29,6 +29,10 @@ plugins/my-plugin/
 
 `plugins/` is optional. If an app does not need custom side effects, leave it out.
 
+Plugins are language-agnostic HTTP services. The examples use Go by convention, but any language or runtime can be used as long as the service implements the required HTTP contract and can be packaged and deployed safely.
+
+Choose the Dockerfile for the plugin's runtime. A Go plugin might compile a static binary, while a Node.js, Python, PHP, Ruby, Rust, or Java plugin needs its own base image, dependency install step, exposed port, and start command.
+
 ## App Registration
 
 Register the plugin from `app.yaml`.
