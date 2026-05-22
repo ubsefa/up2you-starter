@@ -1,0 +1,15 @@
+view:
+  name: InventoryLiteLow
+  layout: Stack
+  data_source: ref:queries/low_stock
+  components:
+    - type: DataTable
+      props:
+        entity: Item
+        columns:
+          - field: sku
+          - field: name
+          - field: category
+          - field: quantity
+          - field: reorder_level
+          - field: location

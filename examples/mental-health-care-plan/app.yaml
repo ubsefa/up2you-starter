@@ -1,0 +1,17 @@
+app:
+  key: mental-health-care-plan
+  name: Mental Health Care Plan
+  version: "1.0.0"
+  description: Clinical follow-up workflow for care plans, mood check-ins, risk alerts and clinician tasks
+  main_view: MentalHealthCarePlan
+
+plugins:
+  - name: care-alerts
+    type: http
+    endpoint: http://mental-health-care-plan-care-alerts:8204
+    effects:
+      - notify_plan_high_risk
+      - notify_checkin_high_risk
+      - log_plan_completed
+    timeout: 8s
+    retry: 2

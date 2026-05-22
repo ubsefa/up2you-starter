@@ -1,0 +1,44 @@
+workflow:
+  name: lead_flow
+  entity: ref:entities/Lead
+  transitions:
+    qualify:
+      from: [new]
+      to: qualified
+      permissions: [user, admin]
+      mutation:
+        qualified_at: "event.timestamp"
+
+    send_proposal:
+      from: [qualified]
+      to: proposal
+      permissions: [user, admin]
+      mutation:
+        proposal_sent_at: "event.timestamp"
+
+    win:
+      from: [proposal]
+      to: won
+      permissions: [user, admin]
+      mutation:
+        won_at: "event.timestamp"
+
+    lose:
+      from: [new, qualified, proposal]
+      to: lost
+      permissions: [user, admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        lost_at: "event.timestamp"
+        lost_reason: "event.reason"
+
+    archive:
+      from: [won, lost]
+      to: archived
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        archived_at: "event.timestamp"
+        archive_reason: "event.reason"

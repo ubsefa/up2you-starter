@@ -1,0 +1,31 @@
+form:
+  name: ApprovalDeskEdit
+  entity: Request
+  fields:
+    - name: title
+      type: TextInput
+      props:
+        required: true
+    - name: description
+      type: TextArea
+      props:
+        rows: 3
+    - name: category
+      type: Select
+      props:
+        options:
+          - value: purchase
+          - value: access
+          - value: leave
+          - value: other
+    - name: priority
+      type: Select
+      props:
+        options:
+          - value: low
+          - value: medium
+          - value: high
+    - name: amount
+      type: NumberInput
+      props:
+        min: 0

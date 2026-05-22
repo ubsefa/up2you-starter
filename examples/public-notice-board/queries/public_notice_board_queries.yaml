@@ -1,0 +1,43 @@
+queries:
+  public_notice_board_all:
+    entity: ref:entities/Notice
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  public_notices:
+    entity: ref:entities/Notice
+    public: true
+    filter:
+      field: current_state
+      op: eq
+      value: published
+    sort:
+      - field: published_at
+        order: desc
+    limit: 50
+
+  public_notices_by_category:
+    entity: ref:entities/Notice
+    public: true
+    filter:
+      and:
+        - field: current_state
+          op: eq
+          value: published
+        - field: category
+          op: is_not_null
+    aggregates:
+      - func: count
+        field: id
+        group_by: [category]
+        as: count
+
+  notices_by_state:
+    entity: ref:entities/Notice
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count

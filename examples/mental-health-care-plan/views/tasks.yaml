@@ -1,0 +1,38 @@
+view:
+  name: MentalHealthCarePlanTasks
+  layout: Stack
+  data_source: ref:queries/my_clinician_tasks
+  components:
+    - type: DataTable
+      props:
+        entity: ClinicianTask
+        create_form: MentalHealthCarePlanTaskCreate
+        edit_form: MentalHealthCarePlanTaskEdit
+        export: true
+        columns:
+          - field: patient_id
+            label_template: "{{name}}"
+          - field: task_type
+          - field: priority
+          - field: assigned_to_user_id
+          - field: due_at
+        row_actions:
+          - type: edit
+            form: MentalHealthCarePlanTaskEdit
+            from: [open]
+          - type: transition
+            transition: complete
+            from: [open]
+            payload_fields:
+              - name: note
+                type: TextInput
+                required: true
+          - type: transition
+            transition: cancel
+            from: [open]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                required: true
+          - type: delete
+            from: [done, cancelled]

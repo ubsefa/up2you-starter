@@ -1,0 +1,58 @@
+entity:
+  name: ClinicianTask
+  initial_state: open
+  soft_delete: true
+  fields:
+    patient_id:
+      type: ref:Patient
+      required: true
+    care_plan_id:
+      type: ref:CarePlan
+    alert_id:
+      type: ref:RiskAlert
+    assigned_to_user_id:
+      type: string
+    task_type:
+      type: string
+      default: follow_up
+    priority:
+      type: string
+      default: normal
+    due_at:
+      type: string
+      format: date-time
+    note:
+      type: string
+    completed_at:
+      type: string
+      format: date-time
+    completion_note:
+      type: string
+    cancelled_at:
+      type: string
+      format: date-time
+    cancellation_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - patient_id
+      - care_plan_id
+      - alert_id
+      - assigned_to_user_id
+      - task_type
+      - priority
+      - due_at
+      - completed_at
+      - cancelled_at
+  states:
+    open:
+      fields: {}
+    done:
+      fields: {}
+    cancelled:
+      fields: {}
+  indexes:
+    - fields: [assigned_to_user_id]
+    - fields: [priority]
+    - fields: [current_state]

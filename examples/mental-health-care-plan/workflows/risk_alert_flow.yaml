@@ -1,0 +1,28 @@
+workflow:
+  name: risk_alert_flow
+  entity: ref:entities/RiskAlert
+  transitions:
+    acknowledge:
+      from: [open]
+      to: acknowledged
+      permissions: [admin, clinician]
+      mutation:
+        acknowledged_at: "event.timestamp"
+        assigned_to_user_id: "event.user_id"
+    assign:
+      from: [open, acknowledged]
+      to: acknowledged
+      permissions: [admin, clinician]
+      guard: "len(event.assigned_to_user_id) > 0"
+      guard_message: validation.assigneeRequired
+      mutation:
+        assigned_to_user_id: "event.assigned_to_user_id"
+    resolve:
+      from: [open, acknowledged]
+      to: resolved
+      permissions: [admin, clinician]
+      guard: "len(event.note) > 0"
+      guard_message: validation.noteRequired
+      mutation:
+        resolved_at: "event.timestamp"
+        resolution_note: "event.note"

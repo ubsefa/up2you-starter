@@ -1,0 +1,64 @@
+entity:
+  name: Match
+  initial_state: scheduled
+  soft_delete: true
+  fields:
+    round:
+      type: number
+      required: true
+    participant_a_id:
+      type: ref:Participant
+      required: true
+    participant_b_id:
+      type: ref:Participant
+      required: true
+    referee_user_id:
+      type: string
+    scheduled_at:
+      type: string
+      format: date-time
+    started_at:
+      type: string
+      format: date-time
+    completed_at:
+      type: string
+      format: date-time
+    winner_id:
+      type: ref:Participant
+    score_a:
+      type: number
+      default: 0
+    score_b:
+      type: number
+      default: 0
+    notes:
+      type: string
+    cancellation_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - round
+      - participant_a_id
+      - participant_b_id
+      - referee_user_id
+      - scheduled_at
+      - started_at
+      - completed_at
+      - winner_id
+      - score_a
+      - score_b
+  states:
+    scheduled:
+      fields: {}
+    in_progress:
+      fields: {}
+    completed:
+      fields: {}
+    cancelled:
+      fields: {}
+  indexes:
+    - fields: [round]
+    - fields: [referee_user_id]
+    - fields: [winner_id]
+    - fields: [current_state]

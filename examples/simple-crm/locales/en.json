@@ -1,0 +1,69 @@
+{
+  "apps": {
+    "simple-crm": {
+      "name": "Simple CRM",
+      "description": "Lightweight CRM for tracking leads through a sales pipeline"
+    }
+  },
+  "fields": {
+    "name": "Name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "source": "Source",
+    "assignee_user_id": "Assignee",
+    "estimated_value": "Estimated Value",
+    "notes": "Notes",
+    "qualified_at": "Qualified At",
+    "proposal_sent_at": "Proposal Sent At",
+    "won_at": "Won At",
+    "lost_at": "Lost At",
+    "lost_reason": "Lost Reason",
+    "archived_at": "Archived At",
+    "archive_reason": "Archive Reason",
+    "count": "Count",
+    "web": "Web",
+    "referral": "Referral",
+    "event": "Event",
+    "cold": "Cold",
+    "other": "Other"
+  },
+  "actions": {
+    "qualify": "Qualify",
+    "send_proposal": "Send Proposal",
+    "win": "Win",
+    "lose": "Lose",
+    "archive": "Archive"
+  },
+  "states": {
+    "new": "New",
+    "qualified": "Qualified",
+    "proposal": "Proposal",
+    "won": "Won",
+    "lost": "Lost",
+    "archived": "Archived"
+  },
+  "transitions": {
+    "qualify": "Qualify",
+    "send_proposal": "Send Proposal",
+    "win": "Win",
+    "lose": "Lose",
+    "archive": "Archive"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "pipeline": "Pipeline",
+    "mine": "Mine",
+    "stats": "Stats"
+  },
+  "charts": {
+    "leads_by_state": "Leads by State",
+    "leads_by_source": "Leads by Source"
+  },
+  "validation": {
+    "reasonRequired": "Reason is required."
+  }
+}

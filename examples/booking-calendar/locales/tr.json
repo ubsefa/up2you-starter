@@ -1,0 +1,66 @@
+{
+  "apps": {
+    "booking-calendar": {
+      "name": "Rezervasyon Takvimi",
+      "description": "Tarih-saat alanları ve admin çakışma onayıyla rezervasyon yaşam döngüsü"
+    }
+  },
+  "fields": {
+    "resource_name": "Kaynak",
+    "customer_name": "Müşteri",
+    "customer_email": "E-posta",
+    "requester_user_id": "Talep Eden",
+    "start_at": "Başlangıç",
+    "end_at": "Bitiş",
+    "party_size": "Kişi Sayısı",
+    "notes": "Notlar",
+    "conflict_checked": "Çakışma Kontrol Edildi",
+    "confirmed_at": "Onay Tarihi",
+    "cancelled_at": "İptal Tarihi",
+    "cancellation_reason": "İptal Sebebi",
+    "completed_at": "Tamamlanma Tarihi",
+    "no_show_at": "Gelmedi Tarihi",
+    "name": "Ad",
+    "count": "Adet",
+    "room-a": "Oda A",
+    "room-b": "Oda B",
+    "table-1": "Masa 1",
+    "table-2": "Masa 2"
+  },
+  "actions": {
+    "confirm": "Onayla",
+    "cancel": "İptal Et",
+    "complete": "Tamamla",
+    "mark_no_show": "Gelmedi"
+  },
+  "states": {
+    "requested": "Talep Edildi",
+    "confirmed": "Onaylandı",
+    "cancelled": "İptal Edildi",
+    "completed": "Tamamlandı",
+    "no_show": "Gelmedi"
+  },
+  "transitions": {
+    "confirm": "Onayla",
+    "cancel": "İptal Et",
+    "complete": "Tamamla",
+    "mark_no_show": "Gelmedi"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "list": "Liste",
+    "mine": "Benimkiler",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "reservations_by_state": "Duruma Göre Rezervasyonlar",
+    "reservations_by_resource": "Kaynağa Göre Rezervasyonlar"
+  },
+  "validation": {
+    "conflictCheckRequired": "Başlangıç/bitiş zamanı ve çakışma kontrol onayı zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

@@ -1,0 +1,13 @@
+workflow:
+  name: patient_flow
+  entity: ref:entities/Patient
+  transitions:
+    discharge:
+      from: [active]
+      to: discharged
+      permissions: [admin, clinician]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        discharged_at: "event.timestamp"
+        discharge_reason: "event.reason"

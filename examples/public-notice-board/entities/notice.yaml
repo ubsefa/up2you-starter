@@ -1,0 +1,43 @@
+entity:
+  name: Notice
+  initial_state: draft
+  soft_delete: true
+  fields:
+    title:
+      type: string
+      required: true
+    body:
+      type: string
+      required: true
+    category:
+      type: string
+    attachment_url:
+      type: string
+    published_at:
+      type: string
+      format: date-time
+    archived_at:
+      type: string
+      format: date-time
+    archive_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - title
+      - body
+      - category
+      - attachment_url
+      - published_at
+      - archived_at
+  states:
+    draft:
+      fields: {}
+    published:
+      fields: {}
+    archived:
+      fields: {}
+  indexes:
+    - fields: [category]
+    - fields: [current_state]
+    - fields: [published_at]

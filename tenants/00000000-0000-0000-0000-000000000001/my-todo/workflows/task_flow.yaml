@@ -9,6 +9,8 @@ workflow:
       mutation:
         assignee_user_id: "event.user_id"
         started_at: "event.timestamp"
+      effects:
+        - my_todo_log_task_event
 
     assign:
       from: [open, in_progress]
@@ -16,6 +18,8 @@ workflow:
       permissions: [user, admin]
       mutation:
         assignee_user_id: "event.assignee_user_id"
+      effects:
+        - my_todo_log_task_event
 
     complete:
       from: [in_progress]
@@ -24,6 +28,8 @@ workflow:
       guard: "state.assignee_user_id == event.user_id"
       mutation:
         completed_at: "event.timestamp"
+      effects:
+        - my_todo_log_task_event
 
     reopen:
       from: [done]
@@ -31,6 +37,8 @@ workflow:
       permissions: [user, admin]
       mutation:
         completed_at: ""
+      effects:
+        - my_todo_log_task_event
 
     archive:
       from: [open, done]
@@ -41,3 +49,5 @@ workflow:
       mutation:
         archived_at: "event.timestamp"
         archive_reason: "event.reason"
+      effects:
+        - my_todo_log_task_event

@@ -1,0 +1,72 @@
+view:
+  name: TournamentManagerMatches
+  layout: Stack
+  data_source: ref:queries/all_matches
+  components:
+    - type: DataTable
+      props:
+        entity: Match
+        create_form: TournamentManagerCreate
+        export: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: round
+          - field: participant_a_id
+          - field: participant_b_id
+          - field: referee_user_id
+          - field: winner_id
+          - field: score_a
+          - field: score_b
+        row_actions:
+          - type: edit
+            form: TournamentManagerEdit
+            icon: EditOutlined
+            from: [scheduled, in_progress]
+          - type: transition
+            entity: Match
+            transition: assign_referee
+            icon: UserAddOutlined
+            from: [scheduled]
+            payload_fields:
+              - name: referee_user_id
+                type: AppMemberSelect
+                label: fields.referee_user_id
+                required: true
+          - type: transition
+            entity: Match
+            transition: start_match
+            icon: PlayCircleOutlined
+            from: [scheduled]
+          - type: transition
+            entity: Match
+            transition: complete_match
+            icon: TrophyOutlined
+            from: [in_progress]
+            payload_fields:
+              - name: winner_id
+                type: TextInput
+                label: fields.winner_id
+                required: true
+              - name: score_a
+                type: number
+                label: fields.score_a
+                required: true
+              - name: score_b
+                type: number
+                label: fields.score_b
+                required: true
+          - type: transition
+            entity: Match
+            transition: cancel_match
+            icon: CloseCircleOutlined
+            icon_only: true
+            from: [scheduled, in_progress]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.cancellation_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [cancelled]

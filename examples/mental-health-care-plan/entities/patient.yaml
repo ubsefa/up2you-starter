@@ -1,0 +1,42 @@
+entity:
+  name: Patient
+  initial_state: active
+  soft_delete: true
+  fields:
+    name:
+      type: string
+      required: true
+    email:
+      type: string
+    phone:
+      type: string
+    primary_clinician_user_id:
+      type: string
+    risk_level:
+      type: string
+      default: low
+    notes:
+      type: string
+    discharged_at:
+      type: string
+      format: date-time
+    discharge_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - name
+      - email
+      - phone
+      - primary_clinician_user_id
+      - risk_level
+      - discharged_at
+  states:
+    active:
+      fields: {}
+    discharged:
+      fields: {}
+  indexes:
+    - fields: [primary_clinician_user_id]
+    - fields: [risk_level]
+    - fields: [current_state]

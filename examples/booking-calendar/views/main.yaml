@@ -1,0 +1,16 @@
+view:
+  name: BookingCalendar
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: list
+            label: List
+            view: BookingCalendarList
+          - key: mine
+            label: Mine
+            view: BookingCalendarMine
+          - key: stats
+            label: Stats
+            view: BookingCalendarStats

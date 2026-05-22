@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Registration.read: [admin, user]
+    Registration.create: [admin, user]
+    Registration.update: [admin, user]
+    Registration.delete: [admin]

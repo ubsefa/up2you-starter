@@ -1,0 +1,20 @@
+form:
+  name: TournamentManagerParticipantCreate
+  entity: Participant
+  fields:
+    - name: name
+      type: TextInput
+      props:
+        required: true
+    - name: team
+      type: TextInput
+    - name: seed
+      type: NumberInput
+      props:
+        min: 0
+    - name: country
+      type: TextInput
+    - name: notes
+      type: TextArea
+      props:
+        rows: 2

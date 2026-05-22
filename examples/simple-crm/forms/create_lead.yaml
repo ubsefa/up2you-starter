@@ -1,0 +1,32 @@
+form:
+  name: SimpleCrmCreate
+  entity: Lead
+  fields:
+    - name: name
+      type: TextInput
+      props:
+        required: true
+    - name: company
+      type: TextInput
+    - name: email
+      type: TextInput
+    - name: phone
+      type: TextInput
+    - name: source
+      type: Select
+      props:
+        placeholder: fields.source
+        options:
+          - value: web
+          - value: referral
+          - value: event
+          - value: cold
+          - value: other
+    - name: estimated_value
+      type: NumberInput
+      props:
+        min: 0
+    - name: notes
+      type: TextArea
+      props:
+        rows: 3

@@ -1,0 +1,23 @@
+form:
+  name: TournamentManagerCreate
+  entity: Match
+  fields:
+    - name: round
+      type: NumberInput
+      props:
+        required: true
+        min: 1
+    - name: participant_a_id
+      type: TextInput
+      props:
+        required: true
+    - name: participant_b_id
+      type: TextInput
+      props:
+        required: true
+    - name: scheduled_at
+      type: DateInput
+    - name: notes
+      type: TextArea
+      props:
+        rows: 2

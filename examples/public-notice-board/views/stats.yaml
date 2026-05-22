@@ -1,0 +1,20 @@
+view:
+  name: PublicNoticeBoardStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.notices_by_state
+        data_source: ref:queries/notices_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states
+    - type: Chart
+      props:
+        title: charts.public_notices_by_category
+        data_source: ref:queries/public_notices_by_category
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: fields

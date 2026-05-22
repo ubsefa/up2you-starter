@@ -1,0 +1,36 @@
+form:
+  name: BookingCalendarCreate
+  entity: Reservation
+  fields:
+    - name: resource_name
+      type: Select
+      props:
+        required: true
+        placeholder: fields.resource_name
+        options:
+          - value: room-a
+          - value: room-b
+          - value: table-1
+          - value: table-2
+    - name: customer_name
+      type: TextInput
+      props:
+        required: true
+    - name: customer_email
+      type: TextInput
+    - name: start_at
+      type: DateInput
+      props:
+        required: true
+    - name: end_at
+      type: DateInput
+      props:
+        required: true
+    - name: party_size
+      type: NumberInput
+      props:
+        min: 1
+    - name: notes
+      type: TextArea
+      props:
+        rows: 3

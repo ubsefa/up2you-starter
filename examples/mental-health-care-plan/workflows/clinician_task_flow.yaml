@@ -1,0 +1,22 @@
+workflow:
+  name: clinician_task_flow
+  entity: ref:entities/ClinicianTask
+  transitions:
+    complete:
+      from: [open]
+      to: done
+      permissions: [admin, clinician, assistant]
+      guard: "len(event.note) > 0"
+      guard_message: validation.noteRequired
+      mutation:
+        completed_at: "event.timestamp"
+        completion_note: "event.note"
+    cancel:
+      from: [open]
+      to: cancelled
+      permissions: [admin, clinician]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        cancelled_at: "event.timestamp"
+        cancellation_reason: "event.reason"

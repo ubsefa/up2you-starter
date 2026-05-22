@@ -1,0 +1,52 @@
+workflow:
+  name: request_flow
+  entity: ref:entities/Request
+  transitions:
+    submit:
+      from: [draft]
+      to: pending_approval
+      permissions: [user, admin]
+      guard: "len(state.title) > 0"
+      guard_message: validation.titleRequired
+      mutation:
+        requester_user_id: "event.user_id"
+        submitted_at: "event.timestamp"
+
+    approve:
+      from: [pending_approval]
+      to: approved
+      permissions: [admin]
+      guard: "len(event.decision_note) > 0"
+      guard_message: validation.decisionNoteRequired
+      mutation:
+        decision_note: "event.decision_note"
+        approved_at: "event.timestamp"
+      effects:
+        - notify_request_approved
+
+    reject:
+      from: [pending_approval]
+      to: rejected
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        rejection_reason: "event.reason"
+        rejected_at: "event.timestamp"
+      effects:
+        - notify_request_rejected
+
+    revise:
+      from: [rejected]
+      to: draft
+      permissions: [user, admin]
+
+    archive:
+      from: [approved, rejected]
+      to: archived
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        archived_at: "event.timestamp"
+        archive_reason: "event.reason"

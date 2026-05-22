@@ -1,0 +1,70 @@
+{
+  "apps": {
+    "approval-desk": {
+      "name": "Onay Masası",
+      "description": "Rol bazlı kuyruk ve denetim izi ile onay iş akışı"
+    }
+  },
+  "fields": {
+    "title": "Başlık",
+    "description": "Açıklama",
+    "category": "Kategori",
+    "priority": "Öncelik",
+    "amount": "Tutar",
+    "requester_user_id": "Talep Eden",
+    "decision_note": "Karar Notu",
+    "rejection_reason": "Ret Sebebi",
+    "submitted_at": "Gönderim Tarihi",
+    "approved_at": "Onay Tarihi",
+    "rejected_at": "Ret Tarihi",
+    "archived_at": "Arşivlenme Tarihi",
+    "archive_reason": "Arşiv Sebebi",
+    "count": "Adet",
+    "purchase": "Satın Alma",
+    "access": "Erişim",
+    "leave": "İzin",
+    "other": "Diğer",
+    "low": "Düşük",
+    "medium": "Orta",
+    "high": "Yüksek"
+  },
+  "actions": {
+    "submit": "Gönder",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "revise": "Revize Et",
+    "archive": "Arşivle"
+  },
+  "states": {
+    "draft": "Taslak",
+    "pending_approval": "Onay Bekliyor",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi",
+    "archived": "Arşivlendi"
+  },
+  "transitions": {
+    "submit": "Gönder",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "revise": "Revize Et",
+    "archive": "Arşivle"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "queue": "Kuyruk",
+    "mine": "Benimkiler",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "requests_by_state": "Duruma Göre Talepler",
+    "requests_by_category": "Kategoriye Göre Talepler"
+  },
+  "validation": {
+    "titleRequired": "Göndermeden önce başlık zorunludur.",
+    "decisionNoteRequired": "Karar notu zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

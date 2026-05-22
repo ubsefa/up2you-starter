@@ -1,0 +1,51 @@
+workflow:
+  name: care_plan_flow
+  entity: ref:entities/CarePlan
+  transitions:
+    activate:
+      from: [enrolled]
+      to: active
+      permissions: [admin, clinician]
+      mutation:
+        start_date: "event.timestamp"
+        status_note: "event.note"
+    mark_at_risk:
+      from: [active]
+      to: at_risk
+      permissions: [admin, clinician]
+      guard: "event.risk_score >= 7"
+      guard_message: validation.riskScoreAtLeast7
+      mutation:
+        risk_score: "event.risk_score"
+        last_checkin_at: "event.timestamp"
+        status_note: "event.note"
+      effects:
+        - notify_plan_high_risk
+    stabilize:
+      from: [at_risk]
+      to: active
+      permissions: [admin, clinician]
+      guard: "len(event.note) > 0"
+      guard_message: validation.noteRequired
+      mutation:
+        status_note: "event.note"
+    complete:
+      from: [active, at_risk]
+      to: completed
+      permissions: [admin, clinician]
+      guard: "len(event.note) > 0"
+      guard_message: validation.noteRequired
+      mutation:
+        completed_at: "event.timestamp"
+        status_note: "event.note"
+      effects:
+        - log_plan_completed
+    discontinue:
+      from: [enrolled, active, at_risk]
+      to: discontinued
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        discontinued_at: "event.timestamp"
+        discontinue_reason: "event.reason"

@@ -1,0 +1,44 @@
+form:
+  name: MentalHealthCarePlanTaskCreate
+  entity: ClinicianTask
+  fields:
+    - name: patient_id
+      type: EntitySelect
+      props:
+        required: true
+        options_query: all_patients
+        label_field: name
+    - name: care_plan_id
+      type: EntitySelect
+      props:
+        options_query: mental_health_care_plan_all
+        label_template: "{{patient_id.name}} — {{program_key:fields}} — {{current_state:states}}"
+    - name: alert_id
+      type: EntitySelect
+      props:
+        options_query: open_risk_alerts
+        label_field: summary
+    - name: assigned_to_user_id
+      type: AppMemberSelect
+    - name: task_type
+      type: Select
+      props:
+        required: true
+        options:
+          - value: follow_up
+          - value: call_patient
+          - value: schedule_session
+          - value: review_checkin
+    - name: priority
+      type: Select
+      props:
+        options:
+          - value: normal
+          - value: high
+          - value: urgent
+    - name: due_at
+      type: DateInput
+    - name: note
+      type: TextArea
+      props:
+        rows: 3

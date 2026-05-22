@@ -1,0 +1,54 @@
+{
+  "apps": {
+    "public-notice-board": {
+      "name": "Halka Açık Duyuru Panosu",
+      "description": "Halka açık salt-okunur görünüm ve SSE güncellemeleriyle duyuru panosu"
+    }
+  },
+  "fields": {
+    "title": "Başlık",
+    "body": "İçerik",
+    "category": "Kategori",
+    "attachment_url": "Ek Dosya",
+    "published_at": "Yayın Tarihi",
+    "archived_at": "Arşivlenme Tarihi",
+    "archive_reason": "Arşiv Sebebi",
+    "count": "Adet",
+    "general": "Genel",
+    "maintenance": "Bakım",
+    "safety": "Güvenlik",
+    "event": "Etkinlik"
+  },
+  "actions": {
+    "publish": "Yayınla",
+    "unpublish": "Yayından Kaldır",
+    "archive": "Arşivle"
+  },
+  "states": {
+    "draft": "Taslak",
+    "published": "Yayında",
+    "archived": "Arşivlendi"
+  },
+  "transitions": {
+    "publish": "Yayınla",
+    "unpublish": "Yayından Kaldır",
+    "archive": "Arşivle"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "admin": "Yönetim",
+    "published": "Yayında",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "notices_by_state": "Duruma Göre Duyurular",
+    "public_notices_by_category": "Kategoriye Göre Yayındaki Duyurular"
+  },
+  "validation": {
+    "titleAndBodyRequired": "Yayınlamadan önce başlık ve içerik zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

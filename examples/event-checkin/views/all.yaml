@@ -1,0 +1,37 @@
+view:
+  name: EventCheckinAll
+  layout: Stack
+  data_source: ref:queries/event_checkin_all
+  components:
+    - type: DataTable
+      props:
+        entity: Registration
+        create_form: EventCheckinCreate
+        export: true
+        import: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: event_name
+          - field: attendee_name
+          - field: email
+          - field: code
+          - field: seat
+        row_actions:
+          - type: edit
+            form: EventCheckinEdit
+            icon: EditOutlined
+            from: [registered]
+          - type: transition
+            entity: Registration
+            transition: cancel
+            icon: CloseCircleOutlined
+            from: [registered]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.cancellation_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [cancelled, no_show]

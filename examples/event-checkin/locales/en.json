@@ -1,0 +1,56 @@
+{
+  "apps": {
+    "event-checkin": {
+      "name": "Event Check-in",
+      "description": "Event registration with code-based check-in and public discovery"
+    }
+  },
+  "fields": {
+    "event_name": "Event",
+    "attendee_name": "Attendee",
+    "email": "Email",
+    "phone": "Phone",
+    "code": "Code",
+    "seat": "Seat",
+    "registered_at": "Registered At",
+    "checked_in_at": "Checked In At",
+    "cancelled_at": "Cancelled At",
+    "cancellation_reason": "Cancellation Reason",
+    "no_show_at": "No Show At",
+    "name": "Name",
+    "count": "Count"
+  },
+  "actions": {
+    "check_in": "Check In",
+    "cancel": "Cancel",
+    "mark_no_show": "No Show"
+  },
+  "states": {
+    "registered": "Registered",
+    "checked_in": "Checked In",
+    "cancelled": "Cancelled",
+    "no_show": "No Show"
+  },
+  "transitions": {
+    "check_in": "Check In",
+    "cancel": "Cancel",
+    "mark_no_show": "No Show"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "gate": "Gate",
+    "all": "All",
+    "stats": "Stats"
+  },
+  "charts": {
+    "registrations_by_state": "Registrations by State",
+    "public_event_listings": "Active Registrations by Event"
+  },
+  "validation": {
+    "codeRequired": "A valid check-in code is required.",
+    "reasonRequired": "Reason is required."
+  }
+}

@@ -1,0 +1,71 @@
+entity:
+  name: Lead
+  initial_state: new
+  soft_delete: true
+  fields:
+    name:
+      type: string
+      required: true
+    company:
+      type: string
+    email:
+      type: string
+    phone:
+      type: string
+    source:
+      type: string
+    assignee_user_id:
+      type: string
+    estimated_value:
+      type: number
+      default: 0
+    notes:
+      type: string
+    qualified_at:
+      type: string
+      format: date-time
+    proposal_sent_at:
+      type: string
+      format: date-time
+    won_at:
+      type: string
+      format: date-time
+    lost_at:
+      type: string
+      format: date-time
+    lost_reason:
+      type: string
+    archived_at:
+      type: string
+      format: date-time
+    archive_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - name
+      - company
+      - email
+      - assignee_user_id
+      - source
+      - estimated_value
+      - won_at
+      - lost_at
+      - archived_at
+  states:
+    new:
+      fields: {}
+    qualified:
+      fields: {}
+    proposal:
+      fields: {}
+    won:
+      fields: {}
+    lost:
+      fields: {}
+    archived:
+      fields: {}
+  indexes:
+    - fields: [assignee_user_id]
+    - fields: [current_state]
+    - fields: [source]

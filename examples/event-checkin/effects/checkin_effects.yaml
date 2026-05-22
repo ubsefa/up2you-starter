@@ -1,0 +1,26 @@
+effects:
+  log_check_in:
+    plugin: checkin-logger
+    action: log
+    payload:
+      event_name: "state.event_name"
+      attendee_name: "state.attendee_name"
+      seat: "state.seat"
+      checked_in_at: "state.checked_in_at"
+
+  log_no_show:
+    plugin: checkin-logger
+    action: log
+    payload:
+      event_name: "state.event_name"
+      attendee_name: "state.attendee_name"
+      no_show_at: "state.no_show_at"
+
+  log_cancellation:
+    plugin: checkin-logger
+    action: log
+    payload:
+      event_name: "state.event_name"
+      attendee_name: "state.attendee_name"
+      cancellation_reason: "state.cancellation_reason"
+      cancelled_at: "state.cancelled_at"

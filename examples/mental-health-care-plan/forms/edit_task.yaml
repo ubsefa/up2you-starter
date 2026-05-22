@@ -1,0 +1,27 @@
+form:
+  name: MentalHealthCarePlanTaskEdit
+  entity: ClinicianTask
+  fields:
+    - name: assigned_to_user_id
+      type: AppMemberSelect
+    - name: task_type
+      type: Select
+      props:
+        options:
+          - value: follow_up
+          - value: call_patient
+          - value: schedule_session
+          - value: review_checkin
+    - name: priority
+      type: Select
+      props:
+        options:
+          - value: normal
+          - value: high
+          - value: urgent
+    - name: due_at
+      type: DateInput
+    - name: note
+      type: TextArea
+      props:
+        rows: 3

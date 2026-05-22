@@ -1,0 +1,61 @@
+queries:
+  event_checkin_all:
+    entity: ref:entities/Registration
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  pending_checkin:
+    entity: ref:entities/Registration
+    filter:
+      field: current_state
+      op: eq
+      value: registered
+    sort:
+      - field: created_at
+        order: asc
+    limit: 100
+
+  checked_in:
+    entity: ref:entities/Registration
+    filter:
+      field: current_state
+      op: eq
+      value: checked_in
+    sort:
+      - field: checked_in_at
+        order: desc
+    limit: 100
+
+  cancelled_registrations:
+    entity: ref:entities/Registration
+    filter:
+      field: current_state
+      op: eq
+      value: cancelled
+    sort:
+      - field: cancelled_at
+        order: desc
+    limit: 100
+
+  registrations_by_state:
+    entity: ref:entities/Registration
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  public_event_listings:
+    entity: ref:entities/Registration
+    public: true
+    filter:
+      field: current_state
+      op: in
+      value: [registered, checked_in]
+    aggregates:
+      - func: count
+        field: id
+        group_by: [event_name]
+        as: count

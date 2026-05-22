@@ -1,0 +1,19 @@
+view:
+  name: TournamentManagerStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.matches_by_state
+        data_source: ref:queries/matches_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states
+    - type: Chart
+      props:
+        title: charts.wins_by_participant
+        data_source: ref:queries/wins_by_participant
+        chartType: column
+        xField: name
+        yField: count

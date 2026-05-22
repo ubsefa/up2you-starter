@@ -1,0 +1,6 @@
+app:
+  key: booking-calendar
+  name: Booking Calendar
+  version: "1.0.0"
+  description: Reservation lifecycle with date-time fields and admin conflict attestation
+  main_view: BookingCalendar

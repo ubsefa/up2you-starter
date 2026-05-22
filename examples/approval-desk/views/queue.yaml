@@ -1,0 +1,68 @@
+view:
+  name: ApprovalDeskQueue
+  layout: Stack
+  data_source: ref:queries/approval_desk_all
+  components:
+    - type: DataTable
+      props:
+        entity: Request
+        create_form: ApprovalDeskCreate
+        export: true
+        import: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: title
+          - field: category
+          - field: priority
+          - field: amount
+          - field: requester_user_id
+        row_actions:
+          - type: edit
+            form: ApprovalDeskEdit
+            icon: EditOutlined
+            from: [draft, rejected]
+          - type: transition
+            entity: Request
+            transition: submit
+            icon: SendOutlined
+            from: [draft]
+          - type: transition
+            entity: Request
+            transition: approve
+            icon: CheckCircleOutlined
+            from: [pending_approval]
+            payload_fields:
+              - name: decision_note
+                type: TextInput
+                label: fields.decision_note
+                required: true
+          - type: transition
+            entity: Request
+            transition: reject
+            icon: CloseCircleOutlined
+            from: [pending_approval]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.rejection_reason
+                required: true
+          - type: transition
+            entity: Request
+            transition: revise
+            icon: RedoOutlined
+            from: [rejected]
+          - type: transition
+            entity: Request
+            transition: archive
+            icon: InboxOutlined
+            icon_only: true
+            from: [approved, rejected]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.archive_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [archived]

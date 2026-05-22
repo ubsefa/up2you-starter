@@ -1,0 +1,27 @@
+form:
+  name: PublicNoticeBoardCreate
+  entity: Notice
+  fields:
+    - name: title
+      type: TextInput
+      props:
+        required: true
+    - name: body
+      type: TextArea
+      props:
+        required: true
+        rows: 5
+    - name: category
+      type: Select
+      props:
+        placeholder: fields.category
+        options:
+          - value: general
+          - value: maintenance
+          - value: safety
+          - value: event
+    - name: attachment_url
+      type: Upload
+      props:
+        entity: Notice
+        field: attachment_url

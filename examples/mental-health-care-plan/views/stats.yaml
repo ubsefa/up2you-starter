@@ -1,0 +1,28 @@
+view:
+  name: MentalHealthCarePlanStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.care_plans_by_state
+        data_source: ref:queries/care_plans_by_state
+        chartType: column
+        xField: name
+        xLabelKey: states
+        yField: count
+    - type: Chart
+      props:
+        title: charts.alerts_by_severity
+        data_source: ref:queries/alerts_by_severity
+        chartType: column
+        xField: name
+        xLabelKey: fields
+        yField: count
+    - type: Chart
+      props:
+        title: charts.checkins_by_state
+        data_source: ref:queries/checkins_by_state
+        chartType: column
+        xField: name
+        xLabelKey: states
+        yField: count

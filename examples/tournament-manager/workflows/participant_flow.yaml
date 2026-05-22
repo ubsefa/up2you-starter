@@ -1,0 +1,13 @@
+workflow:
+  name: participant_flow
+  entity: ref:entities/Participant
+  transitions:
+    archive:
+      from: [active]
+      to: archived
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        archived_at: "event.timestamp"
+        archive_reason: "event.reason"

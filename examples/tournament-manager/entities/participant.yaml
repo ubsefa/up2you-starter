@@ -1,0 +1,39 @@
+entity:
+  name: Participant
+  initial_state: active
+  soft_delete: true
+  fields:
+    name:
+      type: string
+      required: true
+    team:
+      type: string
+    seed:
+      type: number
+      default: 0
+    country:
+      type: string
+    notes:
+      type: string
+    archived_at:
+      type: string
+      format: date-time
+    archive_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - name
+      - team
+      - seed
+      - country
+      - archived_at
+  states:
+    active:
+      fields: {}
+    archived:
+      fields: {}
+  indexes:
+    - fields: [team]
+    - fields: [country]
+    - fields: [current_state]

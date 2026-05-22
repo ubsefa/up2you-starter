@@ -1,0 +1,20 @@
+view:
+  name: BookingCalendarStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.reservations_by_state
+        data_source: ref:queries/reservations_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states
+    - type: Chart
+      props:
+        title: charts.reservations_by_resource
+        data_source: ref:queries/reservations_by_resource
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: fields

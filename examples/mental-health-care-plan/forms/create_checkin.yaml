@@ -1,0 +1,44 @@
+form:
+  name: MentalHealthCarePlanCheckinCreate
+  entity: DailyCheckin
+  fields:
+    - name: care_plan_id
+      type: EntitySelect
+      props:
+        required: true
+        options_query: active_care_plans
+        label_template: "{{patient_id.name}} — {{program_key:fields}} — {{current_state:states}}"
+    - name: mood_score
+      type: NumberInput
+      props:
+        min: 0
+        max: 10
+    - name: anxiety_score
+      type: NumberInput
+      props:
+        min: 0
+        max: 10
+    - name: sleep_hours
+      type: NumberInput
+      props:
+        min: 0
+        max: 24
+    - name: medication_adherence
+      type: Select
+      props:
+        options:
+          - value: "yes"
+          - value: partial
+          - value: "no"
+          - value: unknown
+    - name: suicidal_ideation
+      type: BooleanInput
+    - name: risk_score
+      type: NumberInput
+      props:
+        min: 0
+        max: 10
+    - name: notes
+      type: TextArea
+      props:
+        rows: 3

@@ -1,0 +1,25 @@
+view:
+  name: MentalHealthCarePlan
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: patients
+            label: Patients
+            view: MentalHealthCarePlanPatients
+          - key: plans
+            label: Care Plans
+            view: MentalHealthCarePlanPlans
+          - key: checkins
+            label: Check-ins
+            view: MentalHealthCarePlanCheckins
+          - key: alerts
+            label: Risk Alerts
+            view: MentalHealthCarePlanAlerts
+          - key: tasks
+            label: Tasks
+            view: MentalHealthCarePlanTasks
+          - key: stats
+            label: Stats
+            view: MentalHealthCarePlanStats

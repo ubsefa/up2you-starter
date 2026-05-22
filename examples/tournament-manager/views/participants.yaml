@@ -1,0 +1,36 @@
+view:
+  name: TournamentManagerParticipants
+  layout: Stack
+  data_source: ref:queries/all_participants
+  components:
+    - type: DataTable
+      props:
+        entity: Participant
+        export: true
+        import: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: name
+          - field: team
+          - field: seed
+          - field: country
+        row_actions:
+          - type: edit
+            form: TournamentManagerParticipantEdit
+            icon: EditOutlined
+            from: [active]
+          - type: transition
+            entity: Participant
+            transition: archive
+            icon: InboxOutlined
+            icon_only: true
+            from: [active]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.archive_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [archived]

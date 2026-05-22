@@ -1,0 +1,25 @@
+form:
+  name: MentalHealthCarePlanPatientEdit
+  entity: Patient
+  fields:
+    - name: name
+      type: TextInput
+      props:
+        required: true
+    - name: email
+      type: TextInput
+    - name: phone
+      type: TextInput
+    - name: primary_clinician_user_id
+      type: AppMemberSelect
+    - name: risk_level
+      type: Select
+      props:
+        options:
+          - value: low
+          - value: medium
+          - value: high
+    - name: notes
+      type: TextArea
+      props:
+        rows: 3

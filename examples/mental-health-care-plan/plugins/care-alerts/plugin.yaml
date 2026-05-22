@@ -1,0 +1,12 @@
+plugin:
+  name: care-alerts
+  service: mental-health-care-plan-care-alerts
+  port: 8204
+  dockerfile: Dockerfile
+  memory: 128m
+  cpus: "0.25"
+  pids_limit: 64
+  effects:
+    - notify_plan_high_risk
+    - notify_checkin_high_risk
+    - log_plan_completed

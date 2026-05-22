@@ -1,0 +1,45 @@
+view:
+  name: PublicNoticeBoardAdmin
+  layout: Stack
+  data_source: ref:queries/public_notice_board_all
+  components:
+    - type: DataTable
+      props:
+        entity: Notice
+        create_form: PublicNoticeBoardCreate
+        export: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: title
+          - field: category
+          - field: published_at
+        row_actions:
+          - type: edit
+            form: PublicNoticeBoardEdit
+            icon: EditOutlined
+            from: [draft, published]
+          - type: transition
+            entity: Notice
+            transition: publish
+            icon: SendOutlined
+            from: [draft]
+          - type: transition
+            entity: Notice
+            transition: unpublish
+            icon: RollbackOutlined
+            from: [published]
+          - type: transition
+            entity: Notice
+            transition: archive
+            icon: InboxOutlined
+            icon_only: true
+            from: [published]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.archive_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [archived]

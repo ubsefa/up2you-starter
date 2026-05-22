@@ -1,0 +1,59 @@
+view:
+  name: InventoryLiteStock
+  layout: Stack
+  data_source: ref:queries/inventory_lite_all
+  components:
+    - type: DataTable
+      props:
+        entity: Item
+        create_form: InventoryLiteCreate
+        export: true
+        import: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: sku
+          - field: name
+          - field: category
+          - field: quantity
+          - field: unit_cost
+          - field: location
+        row_actions:
+          - type: edit
+            form: InventoryLiteEdit
+            icon: EditOutlined
+            from: [active, low_stock, out_of_stock]
+          - type: transition
+            entity: Item
+            transition: mark_low
+            icon: WarningOutlined
+            from: [active]
+          - type: transition
+            entity: Item
+            transition: mark_out
+            icon: StopOutlined
+            from: [active, low_stock]
+          - type: transition
+            entity: Item
+            transition: restock
+            icon: ReloadOutlined
+            from: [low_stock, out_of_stock]
+            payload_fields:
+              - name: note
+                type: TextInput
+                label: fields.restock_note
+                required: true
+          - type: transition
+            entity: Item
+            transition: discontinue
+            icon: DeleteRowOutlined
+            icon_only: true
+            from: [active, low_stock, out_of_stock]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.discontinue_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [discontinued]

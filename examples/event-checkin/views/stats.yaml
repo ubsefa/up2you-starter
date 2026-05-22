@@ -1,0 +1,19 @@
+view:
+  name: EventCheckinStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.registrations_by_state
+        data_source: ref:queries/registrations_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states
+    - type: Chart
+      props:
+        title: charts.public_event_listings
+        data_source: ref:queries/public_event_listings
+        chartType: column
+        xField: name
+        yField: count

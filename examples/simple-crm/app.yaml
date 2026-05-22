@@ -1,0 +1,6 @@
+app:
+  key: simple-crm
+  name: Simple CRM
+  version: "1.0.0"
+  description: Lightweight CRM for tracking leads through a sales pipeline
+  main_view: SimpleCrm

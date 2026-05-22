@@ -1,0 +1,73 @@
+queries:
+  inventory_lite_all:
+    entity: ref:entities/Item
+    sort:
+      - field: name
+        order: asc
+    limit: 100
+
+  low_stock:
+    entity: ref:entities/Item
+    filter:
+      field: current_state
+      op: in
+      value: [low_stock, out_of_stock]
+    sort:
+      - field: name
+        order: asc
+    limit: 100
+
+  discontinued:
+    entity: ref:entities/Item
+    filter:
+      field: current_state
+      op: eq
+      value: discontinued
+    sort:
+      - field: discontinued_at
+        order: desc
+    limit: 100
+
+  items_by_category:
+    entity: ref:entities/Item
+    filter:
+      field: category
+      op: is_not_null
+    aggregates:
+      - func: count
+        field: id
+        group_by: [category]
+        as: count
+
+  items_by_location:
+    entity: ref:entities/Item
+    filter:
+      field: location
+      op: is_not_null
+    aggregates:
+      - func: count
+        field: id
+        group_by: [location]
+        as: count
+
+  quantity_by_category:
+    entity: ref:entities/Item
+    filter:
+      field: category
+      op: is_not_null
+    aggregates:
+      - func: sum
+        field: quantity
+        group_by: [category]
+        as: count
+
+  unit_cost_by_category:
+    entity: ref:entities/Item
+    filter:
+      field: category
+      op: is_not_null
+    aggregates:
+      - func: sum
+        field: unit_cost
+        group_by: [category]
+        as: count

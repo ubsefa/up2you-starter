@@ -1,0 +1,44 @@
+view:
+  name: MentalHealthCarePlanCheckins
+  layout: Stack
+  data_source: ref:queries/submitted_checkins
+  components:
+    - type: DataTable
+      props:
+        entity: DailyCheckin
+        create_form: MentalHealthCarePlanCheckinCreate
+        edit_form: MentalHealthCarePlanCheckinEdit
+        import: true
+        export: true
+        columns:
+          - field: care_plan_id
+            label_template: "{{program_key:fields}}"
+          - field: mood_score
+          - field: anxiety_score
+          - field: sleep_hours
+          - field: suicidal_ideation
+          - field: risk_score
+        row_actions:
+          - type: edit
+            form: MentalHealthCarePlanCheckinEdit
+            from: [submitted]
+          - type: transition
+            transition: review
+            from: [submitted]
+            payload_fields:
+              - name: risk_score
+                type: NumberInput
+                required: true
+          - type: transition
+            transition: escalate
+            from: [submitted, reviewed]
+            payload_fields:
+              - name: risk_score
+                type: NumberInput
+                required: true
+              - name: suicidal_ideation
+                type: BooleanInput
+              - name: reason
+                type: TextInput
+          - type: delete
+            from: [reviewed]

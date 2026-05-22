@@ -1,0 +1,76 @@
+entity:
+  name: Reservation
+  initial_state: draft
+  soft_delete: true
+  fields:
+    resource_name:
+      type: string
+      required: true
+    customer_name:
+      type: string
+      required: true
+    customer_email:
+      type: string
+    requester_user_id:
+      type: string
+    start_at:
+      type: string
+      format: date-time
+      required: true
+    end_at:
+      type: string
+      format: date-time
+      required: true
+    party_size:
+      type: number
+      default: 1
+    notes:
+      type: string
+    conflict_checked:
+      type: boolean
+      default: false
+    confirmed_at:
+      type: string
+      format: date-time
+    cancelled_at:
+      type: string
+      format: date-time
+    cancellation_reason:
+      type: string
+    completed_at:
+      type: string
+      format: date-time
+    no_show_at:
+      type: string
+      format: date-time
+  read_model:
+    enabled: true
+    fields:
+      - resource_name
+      - customer_name
+      - customer_email
+      - requester_user_id
+      - start_at
+      - end_at
+      - party_size
+      - confirmed_at
+      - completed_at
+      - cancelled_at
+  states:
+    draft:
+      fields: {}
+    requested:
+      fields: {}
+    confirmed:
+      fields: {}
+    cancelled:
+      fields: {}
+    completed:
+      fields: {}
+    no_show:
+      fields: {}
+  indexes:
+    - fields: [resource_name]
+    - fields: [start_at]
+    - fields: [current_state]
+    - fields: [requester_user_id]

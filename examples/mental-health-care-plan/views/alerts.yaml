@@ -1,0 +1,41 @@
+view:
+  name: MentalHealthCarePlanAlerts
+  layout: Stack
+  data_source: ref:queries/open_risk_alerts
+  components:
+    - type: DataTable
+      props:
+        entity: RiskAlert
+        create_form: MentalHealthCarePlanAlertCreate
+        edit_form: MentalHealthCarePlanAlertEdit
+        export: true
+        columns:
+          - field: patient_id
+            label_template: "{{name}}"
+          - field: severity
+          - field: summary
+          - field: assigned_to_user_id
+          - field: acknowledged_at
+        row_actions:
+          - type: edit
+            form: MentalHealthCarePlanAlertEdit
+            from: [open, acknowledged]
+          - type: transition
+            transition: acknowledge
+            from: [open]
+          - type: transition
+            transition: assign
+            from: [open, acknowledged]
+            payload_fields:
+              - name: assigned_to_user_id
+                type: AppMemberSelect
+                required: true
+          - type: transition
+            transition: resolve
+            from: [open, acknowledged]
+            payload_fields:
+              - name: note
+                type: TextInput
+                required: true
+          - type: delete
+            from: [resolved]

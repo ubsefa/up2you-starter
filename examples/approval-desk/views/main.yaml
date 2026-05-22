@@ -1,0 +1,16 @@
+view:
+  name: ApprovalDesk
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: queue
+            label: Queue
+            view: ApprovalDeskQueue
+          - key: mine
+            label: Mine
+            view: ApprovalDeskMine
+          - key: stats
+            label: Stats
+            view: ApprovalDeskStats

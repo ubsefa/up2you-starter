@@ -1,0 +1,31 @@
+view:
+  name: MentalHealthCarePlanPatients
+  layout: Stack
+  data_source: ref:queries/all_patients
+  components:
+    - type: DataTable
+      props:
+        entity: Patient
+        create_form: MentalHealthCarePlanPatientCreate
+        edit_form: MentalHealthCarePlanPatientEdit
+        import: true
+        export: true
+        columns:
+          - field: name
+          - field: email
+          - field: primary_clinician_user_id
+          - field: risk_level
+          - field: discharged_at
+        row_actions:
+          - type: edit
+            form: MentalHealthCarePlanPatientEdit
+            from: [active]
+          - type: transition
+            transition: discharge
+            from: [active]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                required: true
+          - type: delete
+            from: [discharged]

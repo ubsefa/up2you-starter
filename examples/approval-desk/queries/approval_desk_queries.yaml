@@ -1,0 +1,70 @@
+queries:
+  approval_desk_all:
+    entity: ref:entities/Request
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  my_requests:
+    entity: ref:entities/Request
+    filter:
+      field: requester_user_id
+      op: eq
+      value: $current_user_id
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  pending_for_admin:
+    entity: ref:entities/Request
+    filter:
+      field: current_state
+      op: eq
+      value: pending_approval
+    sort:
+      - field: created_at
+        order: asc
+    limit: 100
+
+  approved_requests:
+    entity: ref:entities/Request
+    filter:
+      field: current_state
+      op: eq
+      value: approved
+    sort:
+      - field: approved_at
+        order: desc
+    limit: 100
+
+  rejected_requests:
+    entity: ref:entities/Request
+    filter:
+      field: current_state
+      op: eq
+      value: rejected
+    sort:
+      - field: rejected_at
+        order: desc
+    limit: 100
+
+  requests_by_state:
+    entity: ref:entities/Request
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  requests_by_category:
+    entity: ref:entities/Request
+    filter:
+      field: category
+      op: is_not_null
+    aggregates:
+      - func: count
+        field: id
+        group_by: [category]
+        as: count

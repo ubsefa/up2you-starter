@@ -1,0 +1,13 @@
+view:
+  name: ApprovalDeskMine
+  layout: Stack
+  data_source: ref:queries/my_requests
+  components:
+    - type: DataTable
+      props:
+        entity: Request
+        columns:
+          - field: title
+          - field: category
+          - field: priority
+          - field: amount

@@ -1,0 +1,18 @@
+form:
+  name: MentalHealthCarePlanAlertEdit
+  entity: RiskAlert
+  fields:
+    - name: severity
+      type: Select
+      props:
+        options:
+          - value: medium
+          - value: high
+          - value: urgent
+    - name: summary
+      type: TextArea
+      props:
+        required: true
+        rows: 3
+    - name: assigned_to_user_id
+      type: AppMemberSelect

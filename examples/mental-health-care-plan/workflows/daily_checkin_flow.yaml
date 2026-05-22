@@ -1,0 +1,27 @@
+workflow:
+  name: daily_checkin_flow
+  entity: ref:entities/DailyCheckin
+  transitions:
+    review:
+      from: [submitted]
+      to: reviewed
+      permissions: [admin, clinician]
+      guard: "event.risk_score < 7"
+      guard_message: validation.riskScoreBelow7
+      mutation:
+        risk_score: "event.risk_score"
+        reviewed_by_user_id: "event.user_id"
+        reviewed_at: "event.timestamp"
+    escalate:
+      from: [submitted, reviewed]
+      to: escalated
+      permissions: [admin, clinician]
+      guard: "event.risk_score >= 7 || event.suicidal_ideation == true"
+      guard_message: validation.riskScoreOrSuicidalRequired
+      mutation:
+        risk_score: "event.risk_score"
+        reviewed_by_user_id: "event.user_id"
+        escalated_at: "event.timestamp"
+        escalation_reason: "event.reason"
+      effects:
+        - notify_checkin_high_risk

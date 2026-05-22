@@ -1,0 +1,63 @@
+{
+  "apps": {
+    "inventory-lite": {
+      "name": "Hafif Envanter",
+      "description": "İçe/dışa aktarma ve toplamlarla hafif envanter takibi"
+    }
+  },
+  "fields": {
+    "sku": "Stok Kodu",
+    "name": "Ad",
+    "category": "Kategori",
+    "quantity": "Miktar",
+    "unit_cost": "Birim Maliyet",
+    "reorder_level": "Yeniden Sipariş Seviyesi",
+    "location": "Konum",
+    "notes": "Notlar",
+    "restocked_at": "Yenilenme Tarihi",
+    "restock_note": "Yenilenme Notu",
+    "discontinued_at": "Durdurma Tarihi",
+    "discontinue_reason": "Durdurma Sebebi",
+    "count": "Adet",
+    "electronics": "Elektronik",
+    "office": "Ofis",
+    "consumable": "Sarf",
+    "other": "Diğer"
+  },
+  "actions": {
+    "mark_low": "Düşük İşaretle",
+    "mark_out": "Tükendi İşaretle",
+    "restock": "Stoğa Ekle",
+    "discontinue": "Durdur"
+  },
+  "states": {
+    "active": "Aktif",
+    "low_stock": "Düşük Stok",
+    "out_of_stock": "Tükendi",
+    "discontinued": "Durduruldu"
+  },
+  "transitions": {
+    "mark_low": "Düşük İşaretle",
+    "mark_out": "Tükendi İşaretle",
+    "restock": "Stoğa Ekle",
+    "discontinue": "Durdur"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "stock": "Stok",
+    "low": "Düşük",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "items_by_category": "Kategoriye Göre Ürünler",
+    "quantity_by_category": "Kategoriye Göre Miktar",
+    "items_by_location": "Konuma Göre Ürünler"
+  },
+  "validation": {
+    "noteRequired": "Stok yenileme notu zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

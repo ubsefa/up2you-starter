@@ -1,0 +1,19 @@
+view:
+  name: TournamentManager
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: matches
+            label: Matches
+            view: TournamentManagerMatches
+          - key: participants
+            label: Participants
+            view: TournamentManagerParticipants
+          - key: scoreboard
+            label: Scoreboard
+            view: TournamentManagerScoreboard
+          - key: stats
+            label: Stats
+            view: TournamentManagerStats

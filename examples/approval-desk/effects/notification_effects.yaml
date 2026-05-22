@@ -1,0 +1,21 @@
+effects:
+  notify_request_approved:
+    plugin: approval-notifier
+    action: notify_approved
+    payload:
+      request_title: "state.title"
+      requester_user_id: "state.requester_user_id"
+      category: "state.category"
+      amount: "state.amount"
+      decision_note: "state.decision_note"
+      approved_at: "state.approved_at"
+
+  notify_request_rejected:
+    plugin: approval-notifier
+    action: notify_rejected
+    payload:
+      request_title: "state.title"
+      requester_user_id: "state.requester_user_id"
+      category: "state.category"
+      rejection_reason: "state.rejection_reason"
+      rejected_at: "state.rejected_at"

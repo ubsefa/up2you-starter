@@ -1,0 +1,12 @@
+view:
+  name: EventCheckinPublic
+  layout: Stack
+  public: true
+  components:
+    - type: Chart
+      props:
+        title: charts.public_event_listings
+        data_source: ref:queries/public_event_listings
+        chartType: column
+        xField: name
+        yField: count

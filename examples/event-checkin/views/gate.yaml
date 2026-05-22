@@ -1,0 +1,31 @@
+view:
+  name: EventCheckinGate
+  layout: Stack
+  data_source: ref:queries/pending_checkin
+  components:
+    - type: DataTable
+      props:
+        entity: Registration
+        create_form: EventCheckinCreate
+        columns:
+          - field: event_name
+          - field: attendee_name
+          - field: email
+          - field: seat
+        row_actions:
+          - type: transition
+            entity: Registration
+            transition: check_in
+            icon: CheckCircleOutlined
+            from: [registered]
+            payload_fields:
+              - name: code
+                type: TextInput
+                label: fields.code
+                required: true
+          - type: transition
+            entity: Registration
+            transition: mark_no_show
+            icon: ExclamationCircleOutlined
+            icon_only: true
+            from: [registered]

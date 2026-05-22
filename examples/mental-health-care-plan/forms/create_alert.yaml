@@ -1,0 +1,36 @@
+form:
+  name: MentalHealthCarePlanAlertCreate
+  entity: RiskAlert
+  fields:
+    - name: patient_id
+      type: EntitySelect
+      props:
+        required: true
+        options_query: all_patients
+        label_field: name
+    - name: care_plan_id
+      type: EntitySelect
+      props:
+        required: true
+        options_query: mental_health_care_plan_all
+        label_template: "{{patient_id.name}} — {{program_key:fields}} — {{current_state:states}}"
+    - name: checkin_id
+      type: EntitySelect
+      props:
+        options_query: all_checkins
+        label_template: "{{care_plan_id.program_key:fields}} — risk {{risk_score}}"
+    - name: severity
+      type: Select
+      props:
+        required: true
+        options:
+          - value: medium
+          - value: high
+          - value: urgent
+    - name: summary
+      type: TextArea
+      props:
+        required: true
+        rows: 3
+    - name: assigned_to_user_id
+      type: AppMemberSelect
