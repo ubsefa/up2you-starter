@@ -8,7 +8,7 @@ This repository is intentionally small. It does not contain the private hosted P
 
 - A Core-only Docker Compose stack.
 - A demo tenant with a plugin-free `my-todo` app ready to run.
-- A full `examples/my-todo` package that can be zipped for Platform upload.
+- Reference app packages under `examples/` that can be zipped for Platform upload.
 - Guides for Core runtime usage, YAML app development, packaging, and optional plugins.
 
 ## Prerequisites
@@ -71,7 +71,23 @@ AUTH_ENABLED=false
 
 That keeps local app development and API smoke tests simple. The hosted Platform uses authenticated users, licenses, marketplace workflows, quotas, and review flows. Those product-layer services are not included here.
 
-## Package My Todo
+## Reference Apps
+
+The `examples/` directory contains small reference apps for common YAML patterns:
+
+- `my-todo` — minimal task app and the default local demo.
+- `approval-desk` — approval workflow and role-based queues.
+- `inventory-lite` — inventory records, import/export, and aggregate charts.
+- `public-notice-board` — public read-only view and SSE-friendly notice board.
+- `event-checkin` — registration and code-based check-in.
+- `booking-calendar` — reservation lifecycle with date-time fields.
+- `simple-crm` — lightweight sales pipeline.
+- `tournament-manager` — participants, matches, referees, and public scoreboard.
+- `mental-health-care-plan` — domain workflow with follow-ups and risk alerts.
+
+These examples are intentionally compact. Treat them as package patterns, not finished vertical products.
+
+## Package An App
 
 ```bash
 ./scripts/package-app.sh examples/my-todo
