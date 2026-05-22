@@ -1,0 +1,58 @@
+entity:
+  name: Registration
+  initial_state: registered
+  soft_delete: true
+  fields:
+    event_name:
+      type: string
+      required: true
+    attendee_name:
+      type: string
+      required: true
+    email:
+      type: string
+    phone:
+      type: string
+    code:
+      type: string
+      required: true
+    seat:
+      type: string
+    registered_at:
+      type: string
+      format: date-time
+    checked_in_at:
+      type: string
+      format: date-time
+    cancelled_at:
+      type: string
+      format: date-time
+    cancellation_reason:
+      type: string
+    no_show_at:
+      type: string
+      format: date-time
+  read_model:
+    enabled: true
+    fields:
+      - event_name
+      - attendee_name
+      - email
+      - code
+      - seat
+      - checked_in_at
+      - cancelled_at
+      - no_show_at
+  states:
+    registered:
+      fields: {}
+    checked_in:
+      fields: {}
+    cancelled:
+      fields: {}
+    no_show:
+      fields: {}
+  indexes:
+    - fields: [event_name]
+    - fields: [code]
+    - fields: [current_state]

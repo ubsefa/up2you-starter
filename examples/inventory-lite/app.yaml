@@ -1,0 +1,6 @@
+app:
+  key: inventory-lite
+  name: Inventory Lite
+  version: "1.0.0"
+  description: Lightweight inventory tracking with import/export and aggregates
+  main_view: InventoryLite

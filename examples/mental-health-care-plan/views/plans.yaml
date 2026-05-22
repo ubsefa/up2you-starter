@@ -1,0 +1,59 @@
+view:
+  name: MentalHealthCarePlanPlans
+  layout: Stack
+  data_source: ref:queries/mental_health_care_plan_all
+  components:
+    - type: DataTable
+      props:
+        entity: CarePlan
+        create_form: MentalHealthCarePlanCreate
+        export: true
+        columns:
+          - field: patient_id
+            label_template: "{{name}}"
+          - field: program_key
+          - field: clinician_user_id
+          - field: risk_score
+          - field: last_checkin_at
+        row_actions:
+          - type: edit
+            form: MentalHealthCarePlanEdit
+            from: [enrolled, active, at_risk]
+          - type: transition
+            transition: activate
+            from: [enrolled]
+            payload_fields:
+              - name: note
+                type: TextInput
+          - type: transition
+            transition: mark_at_risk
+            from: [active]
+            payload_fields:
+              - name: risk_score
+                type: NumberInput
+                required: true
+              - name: note
+                type: TextInput
+          - type: transition
+            transition: stabilize
+            from: [at_risk]
+            payload_fields:
+              - name: note
+                type: TextInput
+                required: true
+          - type: transition
+            transition: complete
+            from: [active, at_risk]
+            payload_fields:
+              - name: note
+                type: TextInput
+                required: true
+          - type: transition
+            transition: discontinue
+            from: [enrolled, active, at_risk]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                required: true
+          - type: delete
+            from: [completed, discontinued]

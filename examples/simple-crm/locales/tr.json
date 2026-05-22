@@ -1,0 +1,69 @@
+{
+  "apps": {
+    "simple-crm": {
+      "name": "Basit CRM",
+      "description": "Satış sürecinde potansiyel müşterileri takip etmek için hafif CRM"
+    }
+  },
+  "fields": {
+    "name": "Ad",
+    "company": "Şirket",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "source": "Kaynak",
+    "assignee_user_id": "Sorumlu",
+    "estimated_value": "Tahmini Değer",
+    "notes": "Notlar",
+    "qualified_at": "Niteliklendirme Tarihi",
+    "proposal_sent_at": "Teklif Tarihi",
+    "won_at": "Kazanma Tarihi",
+    "lost_at": "Kayıp Tarihi",
+    "lost_reason": "Kayıp Sebebi",
+    "archived_at": "Arşivlenme Tarihi",
+    "archive_reason": "Arşiv Sebebi",
+    "count": "Adet",
+    "web": "Web",
+    "referral": "Tavsiye",
+    "event": "Etkinlik",
+    "cold": "Soğuk",
+    "other": "Diğer"
+  },
+  "actions": {
+    "qualify": "Nitelikli",
+    "send_proposal": "Teklif Gönder",
+    "win": "Kazandı",
+    "lose": "Kaybetti",
+    "archive": "Arşivle"
+  },
+  "states": {
+    "new": "Yeni",
+    "qualified": "Nitelikli",
+    "proposal": "Teklifte",
+    "won": "Kazanıldı",
+    "lost": "Kaybedildi",
+    "archived": "Arşivlendi"
+  },
+  "transitions": {
+    "qualify": "Niteliklendir",
+    "send_proposal": "Teklif Gönder",
+    "win": "Kazandı",
+    "lose": "Kaybetti",
+    "archive": "Arşivle"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "pipeline": "Süreç",
+    "mine": "Bana Atananlar",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "leads_by_state": "Duruma Göre Fırsatlar",
+    "leads_by_source": "Kaynağa Göre Fırsatlar"
+  },
+  "validation": {
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

@@ -1,0 +1,27 @@
+form:
+  name: MentalHealthCarePlanCreate
+  entity: CarePlan
+  fields:
+    - name: patient_id
+      type: EntitySelect
+      props:
+        required: true
+        options_query: all_patients
+        label_field: name
+    - name: program_key
+      type: Select
+      props:
+        required: true
+        options:
+          - value: anxiety_cbt_8_weeks
+          - value: depression_followup
+          - value: medication_adherence_program
+          - value: relapse_prevention
+    - name: clinician_user_id
+      type: AppMemberSelect
+    - name: target_end_date
+      type: DateInput
+    - name: status_note
+      type: TextArea
+      props:
+        rows: 3

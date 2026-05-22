@@ -1,0 +1,60 @@
+queries:
+  simple_crm_all:
+    entity: ref:entities/Lead
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  my_active_leads:
+    entity: ref:entities/Lead
+    filter:
+      and:
+        - field: assignee_user_id
+          op: eq
+          value: $current_user_id
+        - field: current_state
+          op: in
+          value: [new, qualified, proposal]
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  pipeline_open:
+    entity: ref:entities/Lead
+    filter:
+      field: current_state
+      op: in
+      value: [new, qualified, proposal]
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  recent_wins:
+    entity: ref:entities/Lead
+    filter:
+      field: current_state
+      op: eq
+      value: won
+    sort:
+      - field: won_at
+        order: desc
+    limit: 50
+
+  leads_by_state:
+    entity: ref:entities/Lead
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  leads_by_source:
+    entity: ref:entities/Lead
+    aggregates:
+      - func: count
+        field: id
+        group_by: [source]
+        as: count

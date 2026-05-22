@@ -1,0 +1,70 @@
+{
+  "apps": {
+    "tournament-manager": {
+      "name": "Tournament Manager",
+      "description": "Tournament management with participants, matches, referee assignment and public scoreboard"
+    }
+  },
+  "fields": {
+    "name": "Name",
+    "team": "Team",
+    "seed": "Seed",
+    "country": "Country",
+    "notes": "Notes",
+    "round": "Round",
+    "participant_a_id": "Participant A",
+    "participant_b_id": "Participant B",
+    "referee_user_id": "Referee",
+    "scheduled_at": "Scheduled At",
+    "started_at": "Started At",
+    "completed_at": "Completed At",
+    "winner_id": "Winner",
+    "score_a": "Score A",
+    "score_b": "Score B",
+    "cancellation_reason": "Cancellation Reason",
+    "archived_at": "Archived At",
+    "archive_reason": "Archive Reason",
+    "count": "Count"
+  },
+  "actions": {
+    "archive": "Archive",
+    "assign_referee": "Assign Referee",
+    "start_match": "Start",
+    "complete_match": "Complete",
+    "cancel_match": "Cancel"
+  },
+  "states": {
+    "active": "Active",
+    "archived": "Archived",
+    "scheduled": "Scheduled",
+    "in_progress": "In Progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "transitions": {
+    "archive": "Archive",
+    "assign_referee": "Assign Referee",
+    "start_match": "Start",
+    "complete_match": "Complete",
+    "cancel_match": "Cancel"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "matches": "Matches",
+    "participants": "Participants",
+    "scoreboard": "Scoreboard",
+    "stats": "Stats"
+  },
+  "charts": {
+    "matches_by_state": "Matches by State",
+    "wins_by_participant": "Wins by Participant"
+  },
+  "validation": {
+    "winnerRequired": "Winner is required.",
+    "refereeRequired": "Referee is required.",
+    "reasonRequired": "Reason is required."
+  }
+}

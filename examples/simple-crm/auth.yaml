@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Lead.read: [admin, user]
+    Lead.create: [admin, user]
+    Lead.update: [admin, user]
+    Lead.delete: [admin]

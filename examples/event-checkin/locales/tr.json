@@ -1,0 +1,56 @@
+{
+  "apps": {
+    "event-checkin": {
+      "name": "Etkinlik Giriş",
+      "description": "Kod ile giriş ve halka açık etkinlik listesiyle etkinlik kayıt"
+    }
+  },
+  "fields": {
+    "event_name": "Etkinlik",
+    "attendee_name": "Katılımcı",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "code": "Kod",
+    "seat": "Koltuk",
+    "registered_at": "Kayıt Tarihi",
+    "checked_in_at": "Giriş Tarihi",
+    "cancelled_at": "İptal Tarihi",
+    "cancellation_reason": "İptal Sebebi",
+    "no_show_at": "Gelmedi Tarihi",
+    "name": "Ad",
+    "count": "Adet"
+  },
+  "actions": {
+    "check_in": "Giriş Yap",
+    "cancel": "İptal Et",
+    "mark_no_show": "Gelmedi"
+  },
+  "states": {
+    "registered": "Kayıtlı",
+    "checked_in": "Giriş Yapıldı",
+    "cancelled": "İptal Edildi",
+    "no_show": "Gelmedi"
+  },
+  "transitions": {
+    "check_in": "Giriş Yap",
+    "cancel": "İptal Et",
+    "mark_no_show": "Gelmedi"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "gate": "Giriş Kapısı",
+    "all": "Tümü",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "registrations_by_state": "Duruma Göre Kayıtlar",
+    "public_event_listings": "Etkinliğe Göre Aktif Kayıtlar"
+  },
+  "validation": {
+    "codeRequired": "Geçerli giriş kodu zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

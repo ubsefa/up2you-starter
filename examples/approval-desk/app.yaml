@@ -1,0 +1,16 @@
+app:
+  key: approval-desk
+  name: Approval Desk
+  version: "1.0.0"
+  description: Approval workflow with role-based queue and audit trail
+  main_view: ApprovalDesk
+
+plugins:
+  - name: approval-notifier
+    type: http
+    endpoint: http://approval-desk-approval-notifier:8202
+    effects:
+      - notify_request_approved
+      - notify_request_rejected
+    timeout: 10s
+    retry: 2

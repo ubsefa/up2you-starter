@@ -1,0 +1,20 @@
+view:
+  name: ApprovalDeskStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.requests_by_state
+        data_source: ref:queries/requests_by_state
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: states
+    - type: Chart
+      props:
+        title: charts.requests_by_category
+        data_source: ref:queries/requests_by_category
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: fields

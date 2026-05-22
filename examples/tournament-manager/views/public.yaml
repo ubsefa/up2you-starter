@@ -1,0 +1,17 @@
+view:
+  name: TournamentManagerPublic
+  layout: Stack
+  public: true
+  data_source: ref:queries/public_scoreboard
+  components:
+    - type: DataTable
+      props:
+        entity: Match
+        columns:
+          - field: round
+          - field: participant_a_id
+          - field: participant_b_id
+          - field: winner_id
+          - field: score_a
+          - field: score_b
+          - field: completed_at

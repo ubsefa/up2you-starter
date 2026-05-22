@@ -1,0 +1,44 @@
+workflow:
+  name: reservation_flow
+  entity: ref:entities/Reservation
+  transitions:
+    submit:
+      from: [draft]
+      to: requested
+      permissions: [user, admin]
+      mutation:
+        requester_user_id: "event.user_id"
+
+    confirm:
+      from: [requested]
+      to: confirmed
+      permissions: [admin]
+      guard: "len(state.start_at) > 0 && len(state.end_at) > 0 && event.conflict_checked == true"
+      guard_message: validation.conflictCheckRequired
+      mutation:
+        conflict_checked: "event.conflict_checked"
+        confirmed_at: "event.timestamp"
+
+    cancel:
+      from: [requested, confirmed]
+      to: cancelled
+      permissions: [user, admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        cancellation_reason: "event.reason"
+        cancelled_at: "event.timestamp"
+
+    complete:
+      from: [confirmed]
+      to: completed
+      permissions: [admin]
+      mutation:
+        completed_at: "event.timestamp"
+
+    mark_no_show:
+      from: [confirmed]
+      to: no_show
+      permissions: [admin]
+      mutation:
+        no_show_at: "event.timestamp"

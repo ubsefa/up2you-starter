@@ -1,0 +1,100 @@
+queries:
+  tournament_manager_all:
+    entity: ref:entities/Match
+    sort:
+      - field: round
+        order: asc
+    limit: 200
+
+  all_participants:
+    entity: ref:entities/Participant
+    sort:
+      - field: seed
+        order: asc
+    limit: 200
+
+  all_matches:
+    entity: ref:entities/Match
+    sort:
+      - field: round
+        order: asc
+    include: [participant_a_id, participant_b_id, winner_id]
+    limit: 200
+
+  scheduled_matches:
+    entity: ref:entities/Match
+    filter:
+      field: current_state
+      op: eq
+      value: scheduled
+    sort:
+      - field: round
+        order: asc
+    limit: 100
+
+  in_progress_matches:
+    entity: ref:entities/Match
+    filter:
+      field: current_state
+      op: eq
+      value: in_progress
+    sort:
+      - field: started_at
+        order: desc
+    limit: 100
+
+  completed_matches:
+    entity: ref:entities/Match
+    filter:
+      field: current_state
+      op: eq
+      value: completed
+    sort:
+      - field: completed_at
+        order: desc
+    include: [participant_a_id, participant_b_id, winner_id]
+    limit: 100
+
+  my_referee_matches:
+    entity: ref:entities/Match
+    filter:
+      field: referee_user_id
+      op: eq
+      value: $current_user_id
+    sort:
+      - field: round
+        order: asc
+    limit: 100
+
+  matches_by_state:
+    entity: ref:entities/Match
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  wins_by_participant:
+    entity: ref:entities/Match
+    filter:
+      field: current_state
+      op: eq
+      value: completed
+    aggregates:
+      - func: count
+        field: id
+        group_by: [winner_id]
+        as: count
+
+  public_scoreboard:
+    entity: ref:entities/Match
+    public: true
+    filter:
+      field: current_state
+      op: eq
+      value: completed
+    sort:
+      - field: completed_at
+        order: desc
+    include: [participant_a_id, participant_b_id, winner_id]
+    limit: 100

@@ -1,0 +1,16 @@
+view:
+  name: SimpleCrm
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: pipeline
+            label: Pipeline
+            view: SimpleCrmPipeline
+          - key: mine
+            label: Mine
+            view: SimpleCrmMine
+          - key: stats
+            label: Stats
+            view: SimpleCrmStats

@@ -1,0 +1,70 @@
+{
+  "apps": {
+    "tournament-manager": {
+      "name": "Turnuva Yönetimi",
+      "description": "Katılımcı, maç, hakem atama ve halka açık skor tablosu ile turnuva yönetimi"
+    }
+  },
+  "fields": {
+    "name": "Ad",
+    "team": "Takım",
+    "seed": "Tohum",
+    "country": "Ülke",
+    "notes": "Notlar",
+    "round": "Tur",
+    "participant_a_id": "Katılımcı A",
+    "participant_b_id": "Katılımcı B",
+    "referee_user_id": "Hakem",
+    "scheduled_at": "Planlanan",
+    "started_at": "Başlangıç",
+    "completed_at": "Bitiş",
+    "winner_id": "Kazanan",
+    "score_a": "Skor A",
+    "score_b": "Skor B",
+    "cancellation_reason": "İptal Sebebi",
+    "archived_at": "Arşivlenme Tarihi",
+    "archive_reason": "Arşiv Sebebi",
+    "count": "Adet"
+  },
+  "actions": {
+    "archive": "Arşivle",
+    "assign_referee": "Hakem Ata",
+    "start_match": "Başlat",
+    "complete_match": "Tamamla",
+    "cancel_match": "İptal Et"
+  },
+  "states": {
+    "active": "Aktif",
+    "archived": "Arşivlendi",
+    "scheduled": "Planlandı",
+    "in_progress": "Devam Ediyor",
+    "completed": "Tamamlandı",
+    "cancelled": "İptal Edildi"
+  },
+  "transitions": {
+    "archive": "Arşivle",
+    "assign_referee": "Hakem Ata",
+    "start_match": "Başlat",
+    "complete_match": "Tamamla",
+    "cancel_match": "İptal Et"
+  },
+  "roles": {
+    "admin": "Yönetici",
+    "user": "Kullanıcı"
+  },
+  "views": {
+    "matches": "Maçlar",
+    "participants": "Katılımcılar",
+    "scoreboard": "Skor Tablosu",
+    "stats": "İstatistikler"
+  },
+  "charts": {
+    "matches_by_state": "Duruma Göre Maçlar",
+    "wins_by_participant": "Katılımcıya Göre Galibiyetler"
+  },
+  "validation": {
+    "winnerRequired": "Kazanan zorunludur.",
+    "refereeRequired": "Hakem zorunludur.",
+    "reasonRequired": "Sebep zorunludur."
+  }
+}

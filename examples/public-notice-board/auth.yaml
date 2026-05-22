@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Notice.read: [admin, user]
+    Notice.create: [admin]
+    Notice.update: [admin]
+    Notice.delete: [admin]

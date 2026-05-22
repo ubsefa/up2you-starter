@@ -1,0 +1,62 @@
+view:
+  name: BookingCalendarList
+  layout: Stack
+  data_source: ref:queries/booking_calendar_all
+  components:
+    - type: DataTable
+      props:
+        entity: Reservation
+        create_form: BookingCalendarCreate
+        export: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: resource_name
+          - field: customer_name
+          - field: start_at
+          - field: end_at
+          - field: party_size
+        row_actions:
+          - type: transition
+            entity: Reservation
+            transition: submit
+            icon: SendOutlined
+            from: [draft]
+          - type: edit
+            form: BookingCalendarEdit
+            icon: EditOutlined
+            from: [draft, requested]
+          - type: transition
+            entity: Reservation
+            transition: confirm
+            icon: CheckCircleOutlined
+            from: [requested]
+            payload_fields:
+              - name: conflict_checked
+                type: boolean
+                label: fields.conflict_checked
+                required: true
+          - type: transition
+            entity: Reservation
+            transition: cancel
+            icon: CloseCircleOutlined
+            from: [requested, confirmed]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.cancellation_reason
+                required: true
+          - type: transition
+            entity: Reservation
+            transition: complete
+            icon: CheckSquareOutlined
+            from: [confirmed]
+          - type: transition
+            entity: Reservation
+            transition: mark_no_show
+            icon: ExclamationCircleOutlined
+            icon_only: true
+            from: [confirmed]
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [cancelled, no_show, completed]

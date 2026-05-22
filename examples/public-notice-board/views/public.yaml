@@ -1,0 +1,14 @@
+view:
+  name: PublicNoticeBoardPublic
+  layout: Stack
+  public: true
+  data_source: ref:queries/public_notices
+  components:
+    - type: DataTable
+      props:
+        entity: Notice
+        columns:
+          - field: title
+          - field: body
+          - field: category
+          - field: published_at

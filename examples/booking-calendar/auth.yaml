@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Reservation.read: [admin, user]
+    Reservation.create: [admin, user]
+    Reservation.update: [admin]
+    Reservation.delete: [admin]

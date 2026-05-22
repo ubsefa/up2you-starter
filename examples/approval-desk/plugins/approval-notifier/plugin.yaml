@@ -1,0 +1,11 @@
+plugin:
+  name: approval-notifier
+  service: approval-desk-approval-notifier
+  port: 8202
+  dockerfile: Dockerfile
+  memory: 128m
+  cpus: "0.25"
+  pids_limit: 64
+  effects:
+    - notify_request_approved
+    - notify_request_rejected

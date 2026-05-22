@@ -4,3 +4,12 @@ app:
   version: "1.0.0"
   description: Task management for teams
   main_view: MyTodo
+
+plugins:
+  - name: todo-logger
+    type: http
+    endpoint: http://my-todo-todo-logger:8201
+    effects:
+      - my_todo_log_task_event
+    timeout: 5s
+    retry: 1

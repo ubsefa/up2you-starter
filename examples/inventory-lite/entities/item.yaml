@@ -1,0 +1,60 @@
+entity:
+  name: Item
+  initial_state: active
+  soft_delete: true
+  fields:
+    sku:
+      type: string
+      required: true
+    name:
+      type: string
+      required: true
+    category:
+      type: string
+    quantity:
+      type: number
+      default: 0
+    unit_cost:
+      type: number
+      default: 0
+    reorder_level:
+      type: number
+      default: 10
+    location:
+      type: string
+    notes:
+      type: string
+    restocked_at:
+      type: string
+      format: date-time
+    discontinued_at:
+      type: string
+      format: date-time
+    discontinue_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - sku
+      - name
+      - category
+      - quantity
+      - unit_cost
+      - reorder_level
+      - location
+      - restocked_at
+      - discontinued_at
+  states:
+    active:
+      fields: {}
+    low_stock:
+      fields: {}
+    out_of_stock:
+      fields: {}
+    discontinued:
+      fields: {}
+  indexes:
+    - fields: [sku]
+    - fields: [category]
+    - fields: [location]
+    - fields: [current_state]

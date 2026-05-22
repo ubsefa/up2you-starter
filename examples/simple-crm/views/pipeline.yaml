@@ -1,0 +1,63 @@
+view:
+  name: SimpleCrmPipeline
+  layout: Stack
+  data_source: ref:queries/simple_crm_all
+  components:
+    - type: DataTable
+      props:
+        entity: Lead
+        create_form: SimpleCrmCreate
+        export: true
+        import: true
+        export_formats: ["csv", "json"]
+        columns:
+          - field: name
+          - field: company
+          - field: assignee_user_id
+          - field: source
+          - field: estimated_value
+        row_actions:
+          - type: edit
+            form: SimpleCrmEdit
+            icon: EditOutlined
+            from: [new, qualified, proposal]
+          - type: transition
+            entity: Lead
+            transition: qualify
+            icon: CheckOutlined
+            from: [new]
+          - type: transition
+            entity: Lead
+            transition: send_proposal
+            icon: SendOutlined
+            from: [qualified]
+          - type: transition
+            entity: Lead
+            transition: win
+            icon: TrophyOutlined
+            from: [proposal]
+          - type: transition
+            entity: Lead
+            transition: lose
+            icon: CloseCircleOutlined
+            from: [new, qualified, proposal]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.lost_reason
+                required: true
+          - type: transition
+            entity: Lead
+            transition: archive
+            icon: InboxOutlined
+            icon_only: true
+            from: [won, lost]
+            payload_fields:
+              - name: reason
+                type: TextInput
+                label: fields.archive_reason
+                required: true
+          - type: delete
+            icon: DeleteOutlined
+            icon_only: true
+            from: [archived]

@@ -1,0 +1,6 @@
+app:
+  key: tournament-manager
+  name: Tournament Manager
+  version: "1.0.0"
+  description: Tournament management with participants, matches, referee assignment and public scoreboard
+  main_view: TournamentManager

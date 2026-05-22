@@ -1,0 +1,54 @@
+{
+  "apps": {
+    "public-notice-board": {
+      "name": "Public Notice Board",
+      "description": "Notice board with public read-only view and SSE updates"
+    }
+  },
+  "fields": {
+    "title": "Title",
+    "body": "Body",
+    "category": "Category",
+    "attachment_url": "Attachment",
+    "published_at": "Published At",
+    "archived_at": "Archived At",
+    "archive_reason": "Archive Reason",
+    "count": "Count",
+    "general": "General",
+    "maintenance": "Maintenance",
+    "safety": "Safety",
+    "event": "Event"
+  },
+  "actions": {
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "archive": "Archive"
+  },
+  "states": {
+    "draft": "Draft",
+    "published": "Published",
+    "archived": "Archived"
+  },
+  "transitions": {
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "archive": "Archive"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "admin": "Admin",
+    "published": "Published",
+    "stats": "Stats"
+  },
+  "charts": {
+    "notices_by_state": "Notices by State",
+    "public_notices_by_category": "Published Notices by Category"
+  },
+  "validation": {
+    "titleAndBodyRequired": "Title and body are required before publishing.",
+    "reasonRequired": "Reason is required."
+  }
+}

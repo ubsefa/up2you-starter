@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Request.read: [admin, user]
+    Request.create: [admin, user]
+    Request.update: [admin, user]
+    Request.delete: [admin]

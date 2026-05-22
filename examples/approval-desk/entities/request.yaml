@@ -1,0 +1,64 @@
+entity:
+  name: Request
+  initial_state: draft
+  soft_delete: true
+  fields:
+    title:
+      type: string
+      required: true
+    description:
+      type: string
+    category:
+      type: string
+    priority:
+      type: string
+      default: medium
+    amount:
+      type: number
+      default: 0
+    requester_user_id:
+      type: string
+    decision_note:
+      type: string
+    rejection_reason:
+      type: string
+    submitted_at:
+      type: string
+      format: date-time
+    approved_at:
+      type: string
+      format: date-time
+    rejected_at:
+      type: string
+      format: date-time
+    archived_at:
+      type: string
+      format: date-time
+    archive_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - title
+      - category
+      - priority
+      - amount
+      - requester_user_id
+      - approved_at
+      - rejected_at
+      - archived_at
+  states:
+    draft:
+      fields: {}
+    pending_approval:
+      fields: {}
+    approved:
+      fields: {}
+    rejected:
+      fields: {}
+    archived:
+      fields: {}
+  indexes:
+    - fields: [requester_user_id]
+    - fields: [current_state]
+    - fields: [category]

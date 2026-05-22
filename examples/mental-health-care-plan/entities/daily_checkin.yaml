@@ -1,0 +1,62 @@
+entity:
+  name: DailyCheckin
+  initial_state: submitted
+  soft_delete: true
+  fields:
+    care_plan_id:
+      type: ref:CarePlan
+      required: true
+    mood_score:
+      type: number
+      default: 5
+    anxiety_score:
+      type: number
+      default: 5
+    sleep_hours:
+      type: number
+      default: 7
+    medication_adherence:
+      type: string
+      default: unknown
+    suicidal_ideation:
+      type: boolean
+      default: false
+    risk_score:
+      type: number
+      default: 0
+    notes:
+      type: string
+    reviewed_by_user_id:
+      type: string
+    reviewed_at:
+      type: string
+      format: date-time
+    escalated_at:
+      type: string
+      format: date-time
+    escalation_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - care_plan_id
+      - mood_score
+      - anxiety_score
+      - sleep_hours
+      - medication_adherence
+      - suicidal_ideation
+      - risk_score
+      - reviewed_by_user_id
+      - reviewed_at
+      - escalated_at
+  states:
+    submitted:
+      fields: {}
+    reviewed:
+      fields: {}
+    escalated:
+      fields: {}
+  indexes:
+    - fields: [care_plan_id]
+    - fields: [risk_score]
+    - fields: [current_state]

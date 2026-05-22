@@ -1,0 +1,22 @@
+form:
+  name: EventCheckinCreate
+  entity: Registration
+  fields:
+    - name: event_name
+      type: TextInput
+      props:
+        required: true
+    - name: attendee_name
+      type: TextInput
+      props:
+        required: true
+    - name: email
+      type: TextInput
+    - name: phone
+      type: TextInput
+    - name: code
+      type: TextInput
+      props:
+        required: true
+    - name: seat
+      type: TextInput

@@ -1,0 +1,35 @@
+workflow:
+  name: registration_flow
+  entity: ref:entities/Registration
+  transitions:
+    check_in:
+      from: [registered]
+      to: checked_in
+      permissions: [user, admin]
+      guard: "state.code == event.code && len(event.code) > 0"
+      guard_message: validation.codeRequired
+      mutation:
+        checked_in_at: "event.timestamp"
+      effects:
+        - log_check_in
+
+    cancel:
+      from: [registered]
+      to: cancelled
+      permissions: [user, admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        cancellation_reason: "event.reason"
+        cancelled_at: "event.timestamp"
+      effects:
+        - log_cancellation
+
+    mark_no_show:
+      from: [registered]
+      to: no_show
+      permissions: [admin]
+      mutation:
+        no_show_at: "event.timestamp"
+      effects:
+        - log_no_show

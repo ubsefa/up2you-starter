@@ -1,0 +1,12 @@
+plugin:
+  name: checkin-logger
+  service: event-checkin-checkin-logger
+  port: 8203
+  dockerfile: Dockerfile
+  memory: 128m
+  cpus: "0.25"
+  pids_limit: 64
+  effects:
+    - log_check_in
+    - log_no_show
+    - log_cancellation

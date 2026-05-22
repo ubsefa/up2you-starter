@@ -1,0 +1,38 @@
+form:
+  name: InventoryLiteEdit
+  entity: Item
+  fields:
+    - name: sku
+      type: TextInput
+      props:
+        required: true
+    - name: name
+      type: TextInput
+      props:
+        required: true
+    - name: category
+      type: Select
+      props:
+        options:
+          - value: electronics
+          - value: office
+          - value: consumable
+          - value: other
+    - name: quantity
+      type: NumberInput
+      props:
+        min: 0
+    - name: unit_cost
+      type: NumberInput
+      props:
+        min: 0
+    - name: reorder_level
+      type: NumberInput
+      props:
+        min: 0
+    - name: location
+      type: TextInput
+    - name: notes
+      type: TextArea
+      props:
+        rows: 3

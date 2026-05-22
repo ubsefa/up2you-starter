@@ -1,0 +1,17 @@
+app:
+  key: event-checkin
+  name: Event Check-in
+  version: "1.0.0"
+  description: Event registration with code-based check-in and public discovery
+  main_view: EventCheckin
+
+plugins:
+  - name: checkin-logger
+    type: http
+    endpoint: http://event-checkin-checkin-logger:8203
+    effects:
+      - log_check_in
+      - log_no_show
+      - log_cancellation
+    timeout: 5s
+    retry: 1

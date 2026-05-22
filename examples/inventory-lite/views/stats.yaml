@@ -1,0 +1,27 @@
+view:
+  name: InventoryLiteStats
+  layout: Stack
+  components:
+    - type: Chart
+      props:
+        title: charts.items_by_category
+        data_source: ref:queries/items_by_category
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: fields
+    - type: Chart
+      props:
+        title: charts.quantity_by_category
+        data_source: ref:queries/quantity_by_category
+        chartType: column
+        xField: name
+        yField: count
+        xLabelKey: fields
+    - type: Chart
+      props:
+        title: charts.items_by_location
+        data_source: ref:queries/items_by_location
+        chartType: column
+        xField: name
+        yField: count

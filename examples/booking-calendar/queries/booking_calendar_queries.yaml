@@ -1,0 +1,56 @@
+queries:
+  booking_calendar_all:
+    entity: ref:entities/Reservation
+    sort:
+      - field: start_at
+        order: asc
+    limit: 100
+
+  requested_pending:
+    entity: ref:entities/Reservation
+    filter:
+      field: current_state
+      op: eq
+      value: requested
+    sort:
+      - field: start_at
+        order: asc
+    limit: 100
+
+  confirmed_reservations:
+    entity: ref:entities/Reservation
+    filter:
+      field: current_state
+      op: eq
+      value: confirmed
+    sort:
+      - field: start_at
+        order: asc
+    limit: 100
+
+  my_reservations:
+    entity: ref:entities/Reservation
+    filter:
+      field: requester_user_id
+      op: eq
+      value: $current_user_id
+    sort:
+      - field: start_at
+        order: asc
+    limit: 100
+
+  reservations_by_state:
+    entity: ref:entities/Reservation
+    aggregates:
+      - func: count
+        field: id
+        group_by: [current_state]
+        as: count
+
+  reservations_by_resource:
+    entity: ref:entities/Reservation
+    aggregates:
+      - func: count
+        field: id
+        group_by: [resource_name]
+        as: count

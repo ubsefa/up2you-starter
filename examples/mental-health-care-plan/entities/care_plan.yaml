@@ -1,0 +1,62 @@
+entity:
+  name: CarePlan
+  initial_state: enrolled
+  soft_delete: true
+  fields:
+    patient_id:
+      type: ref:Patient
+      required: true
+    program_key:
+      type: string
+      required: true
+    clinician_user_id:
+      type: string
+    start_date:
+      type: string
+      format: date-time
+    target_end_date:
+      type: string
+      format: date-time
+    risk_score:
+      type: number
+      default: 0
+    last_checkin_at:
+      type: string
+      format: date-time
+    status_note:
+      type: string
+    completed_at:
+      type: string
+      format: date-time
+    discontinued_at:
+      type: string
+      format: date-time
+    discontinue_reason:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - patient_id
+      - program_key
+      - clinician_user_id
+      - start_date
+      - target_end_date
+      - risk_score
+      - last_checkin_at
+      - completed_at
+      - discontinued_at
+  states:
+    enrolled:
+      fields: {}
+    active:
+      fields: {}
+    at_risk:
+      fields: {}
+    completed:
+      fields: {}
+    discontinued:
+      fields: {}
+  indexes:
+    - fields: [patient_id]
+    - fields: [clinician_user_id]
+    - fields: [current_state]

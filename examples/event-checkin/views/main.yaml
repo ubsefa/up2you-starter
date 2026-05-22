@@ -1,0 +1,16 @@
+view:
+  name: EventCheckin
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: gate
+            label: Gate
+            view: EventCheckinGate
+          - key: all
+            label: All
+            view: EventCheckinAll
+          - key: stats
+            label: Stats
+            view: EventCheckinStats

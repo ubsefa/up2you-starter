@@ -1,0 +1,18 @@
+form:
+  name: TournamentManagerEdit
+  entity: Match
+  fields:
+    - name: round
+      type: NumberInput
+      props:
+        min: 1
+    - name: participant_a_id
+      type: TextInput
+    - name: participant_b_id
+      type: TextInput
+    - name: scheduled_at
+      type: DateInput
+    - name: notes
+      type: TextArea
+      props:
+        rows: 2

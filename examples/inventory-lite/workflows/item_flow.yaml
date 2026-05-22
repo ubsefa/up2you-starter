@@ -1,0 +1,32 @@
+workflow:
+  name: item_flow
+  entity: ref:entities/Item
+  transitions:
+    mark_low:
+      from: [active]
+      to: low_stock
+      permissions: [user, admin]
+
+    mark_out:
+      from: [active, low_stock]
+      to: out_of_stock
+      permissions: [user, admin]
+
+    restock:
+      from: [low_stock, out_of_stock]
+      to: active
+      permissions: [user, admin]
+      guard: "len(event.note) > 0"
+      guard_message: validation.noteRequired
+      mutation:
+        restocked_at: "event.timestamp"
+
+    discontinue:
+      from: [active, low_stock, out_of_stock]
+      to: discontinued
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        discontinue_reason: "event.reason"
+        discontinued_at: "event.timestamp"

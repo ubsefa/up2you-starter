@@ -1,0 +1,13 @@
+view:
+  name: BookingCalendarMine
+  layout: Stack
+  data_source: ref:queries/my_reservations
+  components:
+    - type: DataTable
+      props:
+        entity: Reservation
+        columns:
+          - field: resource_name
+          - field: start_at
+          - field: end_at
+          - field: party_size

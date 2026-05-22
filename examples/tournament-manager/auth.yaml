@@ -1,0 +1,10 @@
+auth:
+  permissions:
+    Participant.read: [admin, user]
+    Participant.create: [admin, user]
+    Participant.update: [admin, user]
+    Participant.delete: [admin]
+    Match.read: [admin, user]
+    Match.create: [admin, user]
+    Match.update: [admin, user]
+    Match.delete: [admin]

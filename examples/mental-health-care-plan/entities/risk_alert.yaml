@@ -1,0 +1,52 @@
+entity:
+  name: RiskAlert
+  initial_state: open
+  soft_delete: true
+  fields:
+    patient_id:
+      type: ref:Patient
+      required: true
+    care_plan_id:
+      type: ref:CarePlan
+      required: true
+    checkin_id:
+      type: ref:DailyCheckin
+    severity:
+      type: string
+      default: high
+    summary:
+      type: string
+      required: true
+    assigned_to_user_id:
+      type: string
+    acknowledged_at:
+      type: string
+      format: date-time
+    resolved_at:
+      type: string
+      format: date-time
+    resolution_note:
+      type: string
+  read_model:
+    enabled: true
+    fields:
+      - patient_id
+      - care_plan_id
+      - checkin_id
+      - severity
+      - summary
+      - assigned_to_user_id
+      - acknowledged_at
+      - resolved_at
+  states:
+    open:
+      fields: {}
+    acknowledged:
+      fields: {}
+    resolved:
+      fields: {}
+  indexes:
+    - fields: [patient_id]
+    - fields: [care_plan_id]
+    - fields: [assigned_to_user_id]
+    - fields: [current_state]

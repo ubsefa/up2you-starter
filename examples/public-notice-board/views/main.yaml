@@ -1,0 +1,16 @@
+view:
+  name: PublicNoticeBoard
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: admin
+            label: Admin
+            view: PublicNoticeBoardAdmin
+          - key: published
+            label: Published
+            view: PublicNoticeBoardPublished
+          - key: stats
+            label: Stats
+            view: PublicNoticeBoardStats

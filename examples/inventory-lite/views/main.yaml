@@ -1,0 +1,16 @@
+view:
+  name: InventoryLite
+  layout: Stack
+  components:
+    - type: TabView
+      props:
+        tabs:
+          - key: stock
+            label: Stock
+            view: InventoryLiteStock
+          - key: low
+            label: Low
+            view: InventoryLiteLow
+          - key: stats
+            label: Stats
+            view: InventoryLiteStats

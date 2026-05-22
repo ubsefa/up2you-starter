@@ -1,0 +1,70 @@
+{
+  "apps": {
+    "approval-desk": {
+      "name": "Approval Desk",
+      "description": "Approval workflow with role-based queue and audit trail"
+    }
+  },
+  "fields": {
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "priority": "Priority",
+    "amount": "Amount",
+    "requester_user_id": "Requester",
+    "decision_note": "Decision Note",
+    "rejection_reason": "Rejection Reason",
+    "submitted_at": "Submitted At",
+    "approved_at": "Approved At",
+    "rejected_at": "Rejected At",
+    "archived_at": "Archived At",
+    "archive_reason": "Archive Reason",
+    "count": "Count",
+    "purchase": "Purchase",
+    "access": "Access",
+    "leave": "Leave",
+    "other": "Other",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
+  },
+  "actions": {
+    "submit": "Submit",
+    "approve": "Approve",
+    "reject": "Reject",
+    "revise": "Revise",
+    "archive": "Archive"
+  },
+  "states": {
+    "draft": "Draft",
+    "pending_approval": "Pending Approval",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "archived": "Archived"
+  },
+  "transitions": {
+    "submit": "Submit",
+    "approve": "Approve",
+    "reject": "Reject",
+    "revise": "Revise",
+    "archive": "Archive"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "queue": "Queue",
+    "mine": "Mine",
+    "stats": "Stats"
+  },
+  "charts": {
+    "requests_by_state": "Requests by State",
+    "requests_by_category": "Requests by Category"
+  },
+  "validation": {
+    "titleRequired": "Title is required before submitting.",
+    "decisionNoteRequired": "Decision note is required.",
+    "reasonRequired": "Reason is required."
+  }
+}

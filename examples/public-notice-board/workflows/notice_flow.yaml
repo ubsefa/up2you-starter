@@ -1,0 +1,27 @@
+workflow:
+  name: notice_flow
+  entity: ref:entities/Notice
+  transitions:
+    publish:
+      from: [draft]
+      to: published
+      permissions: [admin]
+      guard: "len(state.title) > 0 && len(state.body) > 0"
+      guard_message: validation.titleAndBodyRequired
+      mutation:
+        published_at: "event.timestamp"
+
+    unpublish:
+      from: [published]
+      to: draft
+      permissions: [admin]
+
+    archive:
+      from: [published]
+      to: archived
+      permissions: [admin]
+      guard: "len(event.reason) > 0"
+      guard_message: validation.reasonRequired
+      mutation:
+        archived_at: "event.timestamp"
+        archive_reason: "event.reason"

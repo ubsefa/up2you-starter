@@ -1,0 +1,13 @@
+view:
+  name: SimpleCrmMine
+  layout: Stack
+  data_source: ref:queries/my_active_leads
+  components:
+    - type: DataTable
+      props:
+        entity: Lead
+        columns:
+          - field: name
+          - field: company
+          - field: source
+          - field: estimated_value

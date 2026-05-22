@@ -1,0 +1,63 @@
+{
+  "apps": {
+    "inventory-lite": {
+      "name": "Inventory Lite",
+      "description": "Lightweight inventory tracking with import/export and aggregates"
+    }
+  },
+  "fields": {
+    "sku": "SKU",
+    "name": "Name",
+    "category": "Category",
+    "quantity": "Quantity",
+    "unit_cost": "Unit Cost",
+    "reorder_level": "Reorder Level",
+    "location": "Location",
+    "notes": "Notes",
+    "restocked_at": "Restocked At",
+    "restock_note": "Restock Note",
+    "discontinued_at": "Discontinued At",
+    "discontinue_reason": "Discontinue Reason",
+    "count": "Count",
+    "electronics": "Electronics",
+    "office": "Office",
+    "consumable": "Consumable",
+    "other": "Other"
+  },
+  "actions": {
+    "mark_low": "Mark Low",
+    "mark_out": "Mark Out",
+    "restock": "Restock",
+    "discontinue": "Discontinue"
+  },
+  "states": {
+    "active": "Active",
+    "low_stock": "Low Stock",
+    "out_of_stock": "Out of Stock",
+    "discontinued": "Discontinued"
+  },
+  "transitions": {
+    "mark_low": "Mark Low",
+    "mark_out": "Mark Out",
+    "restock": "Restock",
+    "discontinue": "Discontinue"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "stock": "Stock",
+    "low": "Low",
+    "stats": "Stats"
+  },
+  "charts": {
+    "items_by_category": "Items by Category",
+    "quantity_by_category": "Quantity by Category",
+    "items_by_location": "Items by Location"
+  },
+  "validation": {
+    "noteRequired": "Restock note is required.",
+    "reasonRequired": "Reason is required."
+  }
+}

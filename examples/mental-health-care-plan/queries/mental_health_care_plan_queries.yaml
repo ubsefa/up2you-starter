@@ -1,0 +1,123 @@
+queries:
+  mental_health_care_plan_all:
+    entity: ref:entities/CarePlan
+    sort:
+      - field: created_at
+        order: desc
+    include: [patient_id]
+    limit: 100
+
+  active_care_plans:
+    entity: ref:entities/CarePlan
+    filter:
+      field: current_state
+      op: in
+      value: [active, at_risk]
+    sort:
+      - field: last_checkin_at
+        order: desc
+    include: [patient_id]
+    limit: 100
+
+  at_risk_care_plans:
+    entity: ref:entities/CarePlan
+    filter:
+      field: current_state
+      op: eq
+      value: at_risk
+    sort:
+      - field: risk_score
+        order: desc
+    include: [patient_id]
+    limit: 100
+
+  all_patients:
+    entity: ref:entities/Patient
+    sort:
+      - field: created_at
+        order: desc
+    limit: 100
+
+  submitted_checkins:
+    entity: ref:entities/DailyCheckin
+    filter:
+      field: current_state
+      op: eq
+      value: submitted
+    sort:
+      - field: created_at
+        order: asc
+    include: [care_plan_id]
+    limit: 100
+
+  all_checkins:
+    entity: ref:entities/DailyCheckin
+    sort:
+      - field: created_at
+        order: desc
+    include: [care_plan_id]
+    limit: 100
+
+  escalated_checkins:
+    entity: ref:entities/DailyCheckin
+    filter:
+      field: current_state
+      op: eq
+      value: escalated
+    sort:
+      - field: escalated_at
+        order: desc
+    include: [care_plan_id]
+    limit: 100
+
+  open_risk_alerts:
+    entity: ref:entities/RiskAlert
+    filter:
+      field: current_state
+      op: in
+      value: [open, acknowledged]
+    sort:
+      - field: created_at
+        order: asc
+    include: [patient_id, care_plan_id, checkin_id]
+    limit: 100
+
+  my_clinician_tasks:
+    entity: ref:entities/ClinicianTask
+    filter:
+      and:
+        - field: assigned_to_user_id
+          op: eq
+          value: $current_user_id
+        - field: current_state
+          op: eq
+          value: open
+    sort:
+      - field: due_at
+        order: asc
+    include: [patient_id, care_plan_id, alert_id]
+    limit: 100
+
+  care_plans_by_state:
+    entity: ref:entities/CarePlan
+    aggregates:
+      - func: count
+        field: id
+        as: count
+        group_by: [current_state]
+
+  alerts_by_severity:
+    entity: ref:entities/RiskAlert
+    aggregates:
+      - func: count
+        field: id
+        as: count
+        group_by: [severity]
+
+  checkins_by_state:
+    entity: ref:entities/DailyCheckin
+    aggregates:
+      - func: count
+        field: id
+        as: count
+        group_by: [current_state]

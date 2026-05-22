@@ -1,0 +1,26 @@
+effects:
+  notify_plan_high_risk:
+    plugin: care-alerts
+    action: notify_high_risk
+    payload:
+      patient_id: "state.patient_id"
+      program_key: "state.program_key"
+      clinician_user_id: "state.clinician_user_id"
+      risk_score: "state.risk_score"
+      note: "state.status_note"
+  notify_checkin_high_risk:
+    plugin: care-alerts
+    action: notify_high_risk
+    payload:
+      care_plan_id: "state.care_plan_id"
+      risk_score: "state.risk_score"
+      suicidal_ideation: "state.suicidal_ideation"
+      escalation_reason: "state.escalation_reason"
+  log_plan_completed:
+    plugin: care-alerts
+    action: log_plan_completed
+    payload:
+      patient_id: "state.patient_id"
+      program_key: "state.program_key"
+      clinician_user_id: "state.clinician_user_id"
+      completed_at: "state.completed_at"

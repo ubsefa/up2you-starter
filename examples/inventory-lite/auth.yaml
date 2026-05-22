@@ -1,0 +1,6 @@
+auth:
+  permissions:
+    Item.read: [admin, user]
+    Item.create: [admin]
+    Item.update: [admin, user]
+    Item.delete: [admin]

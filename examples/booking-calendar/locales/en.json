@@ -1,0 +1,66 @@
+{
+  "apps": {
+    "booking-calendar": {
+      "name": "Booking Calendar",
+      "description": "Reservation lifecycle with date-time fields and admin conflict attestation"
+    }
+  },
+  "fields": {
+    "resource_name": "Resource",
+    "customer_name": "Customer",
+    "customer_email": "Email",
+    "requester_user_id": "Requester",
+    "start_at": "Start",
+    "end_at": "End",
+    "party_size": "Party Size",
+    "notes": "Notes",
+    "conflict_checked": "Conflict Checked",
+    "confirmed_at": "Confirmed At",
+    "cancelled_at": "Cancelled At",
+    "cancellation_reason": "Cancellation Reason",
+    "completed_at": "Completed At",
+    "no_show_at": "No Show At",
+    "name": "Name",
+    "count": "Count",
+    "room-a": "Room A",
+    "room-b": "Room B",
+    "table-1": "Table 1",
+    "table-2": "Table 2"
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "complete": "Complete",
+    "mark_no_show": "No Show"
+  },
+  "states": {
+    "requested": "Requested",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled",
+    "completed": "Completed",
+    "no_show": "No Show"
+  },
+  "transitions": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "complete": "Complete",
+    "mark_no_show": "No Show"
+  },
+  "roles": {
+    "admin": "Admin",
+    "user": "User"
+  },
+  "views": {
+    "list": "List",
+    "mine": "Mine",
+    "stats": "Stats"
+  },
+  "charts": {
+    "reservations_by_state": "Reservations by State",
+    "reservations_by_resource": "Reservations by Resource"
+  },
+  "validation": {
+    "conflictCheckRequired": "Start/end time and conflict check confirmation are required.",
+    "reasonRequired": "Reason is required."
+  }
+}
