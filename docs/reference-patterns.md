@@ -1,6 +1,6 @@
 # Reference App Patterns
 
-The public starter includes `My Todo` as the runnable example. The broader UP2YOU reference app set was used to validate recurring runtime patterns before this starter was extracted.
+The public starter includes `My Todo` as the runnable local demo and a broader `examples/` reference app set for inspecting recurring runtime patterns.
 
 These patterns are useful when designing your own app package.
 
@@ -17,6 +17,8 @@ These patterns are useful when designing your own app package.
 | Optional integration | The app needs custom side effects outside Core. | `effects/`, `plugins/` |
 
 ## Reference Set
+
+The reference apps live under `examples/`. They are compact package patterns, not finished vertical products.
 
 | App | Main Pattern |
 | --- | --- |
