@@ -10,7 +10,7 @@ These patterns are useful when designing your own app package.
 | State workflow | Records move through controlled states. | `workflows/`, `locales/` |
 | Role-gated operations | Different users can see or run different actions. | `auth.yaml`, `workflows/` |
 | Public read view | Anonymous users can read approved public data. | `queries/`, `views/` |
-| Public registration | Anonymous users can submit limited data. | `queries/`, `forms/` |
+| Public discovery | Anonymous users can read approved public data while writes stay authenticated. | `queries/`, `views/` |
 | Admin queue | Staff process pending records from a focused view. | `views/`, `queries/`, `workflows/` |
 | Aggregates and stats | Users need summaries or chart-ready counts. | `queries/`, `views/` |
 | Import/export | Users move tabular data in and out of the app. | `entities/`, `views/` |
@@ -27,7 +27,7 @@ The reference apps live under `examples/`. They are compact package patterns, no
 | Approval Desk | Approval queue, roles, and decision audit |
 | Inventory Lite | Numeric fields, aggregates, and stock state |
 | Public Notice Board | Public query/view with private publishing workflow |
-| Event Check-in | Public registration and private check-in workflow |
+| Event Check-in | Public event discovery and private check-in workflow |
 | Booking Calendar | Datetime fields and reservation lifecycle |
 | Tournament Manager | Participant, match, referee, and public scoreboard flows |
 | Mental Health Care Plan | Sensitive role-gated workflow with no public data |

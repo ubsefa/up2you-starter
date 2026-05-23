@@ -10,6 +10,7 @@ This repository is intentionally small. It does not contain the private hosted P
 - A demo tenant with a plugin-free `my-todo` app ready to run.
 - Reference app packages under `examples/` that can be zipped for Platform upload.
 - Guides for Core runtime usage, YAML app development, packaging, and optional plugins.
+- API reference, authentication guide, error codes, internationalization, and architecture overview.
 
 ## Prerequisites
 
@@ -134,12 +135,20 @@ This repo does not include:
 
 ## Guides
 
-- [Core-only usage](docs/core-only.md)
-- [YAML app development](docs/app-development.md)
-- [YAML contract](docs/yaml-contract.md)
-- [SDUI views](docs/sdui.md)
-- [Packaging for Platform](docs/packaging.md)
-- [Optional plugins](docs/plugins.md)
-- [Reference app patterns](docs/reference-patterns.md)
-- [AI assistant prompt](docs/ai-prompt.md)
-- [Troubleshooting](docs/troubleshooting.md)
+Recommended reading order:
+
+1. [Quick start](docs/quick-start.md) — clone, compose up, demo, first app, package
+2. [YAML contract](docs/yaml-contract.md) — entities, workflows, queries, views, forms, i18n
+3. [Architecture](docs/architecture.md) — Core, SDUI, plugin-host, NATS, PostgreSQL, NGINX flow
+4. [SDUI views](docs/sdui.md) — server-driven UI rendering
+5. [API reference](docs/api-reference.md) — full Core and SDUI endpoint reference
+6. [Authentication](docs/authentication.md) — JWT, roles, tenants, public access
+7. [Error codes](docs/errors.md) — verified error codes and plugin failure patterns
+8. [Internationalization](docs/i18n.md) — locale files, label templates, translations
+9. [YAML app development](docs/app-development.md) — app folder shape, local demo, package conventions
+10. [Core-only usage](docs/core-only.md) — local runtime setup, tenant config, API smoke tests
+11. [Packaging for Platform](docs/packaging.md) — ZIP shape, upload checklist, validator expectations
+12. [Optional plugins](docs/plugins.md) — effect mapping, HTTP contract, security checklist
+13. [Reference app patterns](docs/reference-patterns.md) — reusable patterns from the example app set
+14. [AI assistant prompt](docs/ai-prompt.md) — prompt template for generating YAML app packages
+15. [Troubleshooting](docs/troubleshooting.md) — compose, auth, public query, plugin, and upload fixes
