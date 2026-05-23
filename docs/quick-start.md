@@ -58,6 +58,8 @@ Open the tiny HTML demo UI:
 http://localhost:8080/demo/
 ```
 
+The demo uses the starter's default `AUTH_ENABLED=false` mode so you can smoke-test CRUD, transitions, and public queries without creating JWTs. See [Authentication](authentication.md) when you want to enable auth and test the JWT role model.
+
 Or use the API directly:
 
 ```bash
