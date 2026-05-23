@@ -10,7 +10,7 @@ They are intentionally compact. Use them to inspect entity, workflow, query, for
 - `approval-desk` — approval workflow with role-based queues and audit-friendly state transitions.
 - `inventory-lite` — inventory tracking with import/export and aggregate chart queries.
 - `public-notice-board` — notice publishing with public read-only views.
-- `event-checkin` — event registration and code-based check-in operations.
+- `event-checkin` — public event discovery and code-based check-in operations.
 - `booking-calendar` — reservation lifecycle with date-time fields.
 - `simple-crm` — lightweight CRM pipeline for leads.
 - `tournament-manager` — participants, matches, referee assignment, and public scoreboard.
