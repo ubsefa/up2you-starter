@@ -1,6 +1,6 @@
 # YAML App Development
 
-An UP2YOU app is a folder of YAML files. The same model can run in this starter or be packaged for the hosted Platform.
+An UP2YOU app is a folder of YAML files. The same model can run in this starter or be packaged for a hosted deployment.
 
 For the rules and boundaries of the YAML format, read [YAML contract](yaml-contract.md).
 

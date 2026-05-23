@@ -2,9 +2,9 @@
 
 UP2YOU Core uses JWT tokens for authentication and a permission model based on app-level roles.
 
-This document describes the Core auth model. For hosted Platform auth (login, register, refresh, members, marketplace), see the hosted Platform documentation.
+This document describes the Core auth model. Account and session APIs belong to the product layer of a deployment and are outside this starter contract.
 
-## Core-only vs Hosted Platform
+## Core-only vs Hosted Deployments
 
 **Core-only mode** (this starter):
 
@@ -12,11 +12,11 @@ This document describes the Core auth model. For hosted Platform auth (login, re
 - No token generation is included. You are responsible for providing valid JWTs if you enable auth.
 - Useful for testing YAML app behavior without the Platform layer.
 
-**Hosted Platform**:
+**Hosted deployments**:
 
-- The Platform provides login, registration, password reset, email verification.
-- Tokens are generated automatically with correct claims.
-- App roles are resolved from user membership.
+- A product layer can provide accounts and sessions.
+- That layer is responsible for generating JWTs with the claims Core expects.
+- App roles can be resolved from whatever membership model that deployment owns.
 
 The Core runtime is the same in both modes. The difference is who produces the JWT and resolves app roles.
 

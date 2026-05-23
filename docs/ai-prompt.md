@@ -16,7 +16,7 @@ First read these docs from this repository:
 
 Use examples/my-todo as the reference app shape.
 
-Use https://up2you.app/docs as the hosted Platform documentation reference when you need current Platform UI, publishing, or developer-flow details.
+Use https://up2you.app/docs only when you need deployment-specific hosted product details.
 
 Goal:
 Create a packageable UP2YOU app folder that can run in the local starter and be zipped for the hosted UP2YOU Platform.
@@ -53,4 +53,4 @@ Before finishing:
 - Check app.yaml main_view points to an existing view.
 ```
 
-For advanced app design, plugin deployment, production usage, or hosted Platform questions, contact `admin@up2you.app`.
+For advanced app design, plugin deployment, production usage, or hosted deployment questions, contact `admin@up2you.app`.

@@ -131,7 +131,7 @@ Plugins should:
 
 The included `examples/my-todo/plugins/todo-logger` service demonstrates a minimal HTTP plugin with `/health`, `/execute`, bearer token verification, unknown-effect rejection, and event idempotency.
 
-## Starter vs Hosted Platform
+## Starter vs Hosted Deployments
 
 In this starter:
 
@@ -139,8 +139,8 @@ In this starter:
 - The default tenant app does not require a plugin.
 - If you enable the `examples/my-todo` plugin registration locally, you are responsible for running the custom plugin service at the endpoint declared in `app.yaml`.
 
-In the hosted Platform:
+In hosted product deployments:
 
 - Plugin deployment depends on operator settings.
-- App review can reject unsafe plugin code or Dockerfiles.
+- Product-layer review can reject unsafe plugin code or Dockerfiles.
 - Production secrets and platform internals are not part of the app package.

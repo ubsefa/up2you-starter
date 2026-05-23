@@ -1,6 +1,6 @@
 # Core-only Usage
 
-This starter runs the UP2YOU runtime without the hosted Platform layer.
+This starter runs the UP2YOU runtime without a hosted product layer.
 
 ## Start
 
@@ -87,4 +87,4 @@ curl -N "http://localhost:8080/api/v1/_public/public_open_tasks/stream?tenant_id
 
 ## Auth
 
-This starter defaults to `AUTH_ENABLED=false`. If you enable auth, you must provide valid JWTs and app roles yourself. The hosted Platform handles that product layer for normal marketplace usage.
+This starter defaults to `AUTH_ENABLED=false`. If you enable auth, you must provide valid JWTs and app roles yourself. Hosted product layers can provide account/session flows separately.
