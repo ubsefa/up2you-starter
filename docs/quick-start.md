@@ -242,7 +242,7 @@ auth:
     Task.delete: [admin]
 ```
 
-Workflow transition izinleri `workflows/task_flow.yaml` içindeki `permissions` listesi ile tanımlanır; `auth.permissions` yalnızca entity action'ları (read, create, update, delete vb.) kontrol eder.
+Workflow transition permissions are defined by the `permissions` list in `workflows/task_flow.yaml`; `auth.permissions` only controls entity actions such as read, create, update, and delete.
 
 Copy this folder into the local tenant config:
 

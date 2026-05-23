@@ -4,6 +4,8 @@ UP2YOU is a YAML-driven application runtime. Apps are defined as folders of YAML
 
 This document describes the high-level architecture. Private implementation details are omitted.
 
+If you are writing an app package, focus on Core, SDUI, YAML configuration, and optional plugin effects. If you are operating your own deployment, use the deployment sections to understand the surrounding services and runtime responsibilities.
+
 ---
 
 ## Components
