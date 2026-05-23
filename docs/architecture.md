@@ -103,7 +103,7 @@ Reverse proxy that routes requests to the correct service:
 - `/health`, `/ready` → Core Engine
 - `/uploads/` → File serving
 
-NGINX also handles TLS termination and CORS for the hosted Platform.
+In hosted deployments, NGINX or another reverse proxy can also handle TLS termination and CORS.
 
 ---
 
@@ -237,17 +237,17 @@ Tenants share all runtime components but are isolated through tenant-scoped filt
 
 ---
 
-## Core-only vs Hosted Platform
+## Core-only vs Hosted Deployments
 
 The runtime is the same in both modes. The difference is the **deployment context**:
 
-| Aspect | Core-only (starter) | Hosted Platform |
+| Aspect | Core-only (starter) | Hosted deployment |
 | --- | --- | --- |
-| Auth | Disabled by default; user provides JWT if enabled | Full auth (login, register, members, payments) |
-| Config | Local tenant directory on disk | Uploaded via installer endpoint |
+| Auth | Disabled by default; user provides JWT if enabled | Product layer provides account/session flows |
+| Config | Local tenant directory on disk | Product layer can install package config |
 | Plugins | User runs plugin services | Plugins run on Platform infrastructure |
 | Database | Local PostgreSQL | Shared Platform database with tenant isolation |
 | SDUI | SDUI Gateway serves schemas | Platform renderer draws views |
 | Events | Local NATS JetStream | Platform NATS with durable streams |
 
-For hosted Platform usage, see the hosted Platform documentation at [up2you.app/docs](https://up2you.app/docs).
+For hosted product workflows, use the documentation for that deployment.

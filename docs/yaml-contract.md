@@ -171,7 +171,7 @@ Use `AppMemberSelect` when a form field should let the user choose a member of t
   required: true
 ```
 
-The member list is provided by the hosted Platform. In Core-only mode, AppMemberSelect requires a custom member list source.
+The member list is provided by a product-layer member source. In Core-only mode, AppMemberSelect requires a custom member list source.
 
 ### label_template
 
@@ -227,15 +227,15 @@ This starter is for:
 
 - Running public Core runtime images locally.
 - Testing YAML app behavior.
-- Preparing app packages for hosted Platform upload.
+- Preparing portable app packages for upload.
 - Giving AI agents enough rules to generate valid YAML app folders.
 
 This starter is not:
 
-- The hosted Platform source code.
+- Hosted product source code.
 - A production installer.
 - A place for production secrets.
-- A replacement for app review on the hosted Platform.
+- A replacement for review or operational policy in a hosted deployment.
 
 ## Package Boundaries
 

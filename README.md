@@ -2,7 +2,7 @@
 
 Run the public UP2YOU runtime images locally, test YAML apps, and prepare app packages for the hosted UP2YOU Platform.
 
-This repository is intentionally small. It does not contain the private hosted Platform source code. It uses public UP2YOU runtime images, a standard nginx proxy image, and example YAML app definitions.
+This repository is intentionally small. It does not contain private hosted product source code. It uses public UP2YOU runtime images, a standard nginx proxy image, and example YAML app definitions.
 
 ## What You Get
 
@@ -70,7 +70,7 @@ The starter defaults to:
 AUTH_ENABLED=false
 ```
 
-That keeps local app development and API smoke tests simple. The hosted Platform uses authenticated users, licenses, marketplace workflows, quotas, and review flows. Those product-layer services are not included here.
+That keeps local app development and API smoke tests simple. Hosted product workflows are intentionally outside this Core-only starter and are documented separately.
 
 ## Reference Apps
 
@@ -80,7 +80,7 @@ The `examples/` directory contains small reference apps for common YAML patterns
 - `approval-desk` — approval workflow and role-based queues.
 - `inventory-lite` — inventory records, import/export, and aggregate charts.
 - `public-notice-board` — public read-only view and SSE-friendly notice board.
-- `event-checkin` — registration and code-based check-in.
+- `event-checkin` — public event discovery and code-based check-in.
 - `booking-calendar` — reservation lifecycle with date-time fields.
 - `simple-crm` — lightweight sales pipeline.
 - `tournament-manager` — participants, matches, referees, and public scoreboard.
@@ -100,11 +100,11 @@ With Make:
 make package
 ```
 
-The generated ZIP can be uploaded to the hosted UP2YOU Platform developer flow.
+The generated ZIP is ready for any UP2YOU package upload flow.
 
-## Platform And Support
+## Support
 
-Hosted Platform:
+Project site:
 
 ```text
 https://up2you.app
@@ -116,7 +116,7 @@ Hosted documentation:
 https://up2you.app/docs
 ```
 
-For advanced app design, plugin deployment, production usage, or hosted Platform questions, contact:
+For advanced app design, production usage, or hosted deployment questions, contact:
 
 ```text
 admin@up2you.app
@@ -128,9 +128,9 @@ Starter files are MIT licensed. The Docker images are published runtime artifact
 
 This repo does not include:
 
-- Hosted Platform frontend source.
-- Auth-service / marketplace / payment / admin source.
-- Platform installer source.
+- Hosted product frontend source.
+- Hosted product-layer source code.
+- Private platform services or installers.
 - Private deployment scripts or production secrets.
 
 ## Guides

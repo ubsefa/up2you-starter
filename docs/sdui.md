@@ -249,7 +249,7 @@ Hosted `DataTable` screens send query parameters to the runtime API:
 - `_limit`: result limit.
 - `_cursor`: cursor for the next page.
 
-Exact renderer behavior can differ between hosted Platform and your own frontend, but named queries should be written so they work with these parameters.
+Exact renderer behavior can differ between hosted deployments and your own frontend, but named queries should be written so they work with these parameters.
 
 ## Icons
 
@@ -326,12 +326,12 @@ That split is intentional:
 - Use SDUI Gateway when you want to render YAML-defined screens.
 - Use your own frontend if you want a custom product UI while still using Core APIs.
 
-## Hosted Platform
+## Hosted Deployments
 
-The hosted UP2YOU Platform includes its own frontend renderer for SDUI apps. Developers normally upload YAML app packages, and the platform handles install, permissions, marketplace lifecycle, and rendering.
+Hosted UP2YOU deployments may include their own frontend renderer for SDUI apps. Developers can also upload YAML app packages to a product layer that handles installation, permissions, and rendering.
 
 The hosted renderer is Ant Design-backed. If you build your own frontend, you can render the same SDUI view schema with any UI framework. In that case, you are responsible for mapping UP2YOU component types such as `DataTable`, form fields, `TabView`, `Chart`, and `row_actions` to your own components.
 
 Portable app packages should rely on the documented UP2YOU component model, not private hosted renderer details.
 
-This starter exposes the same app shape locally without including the private hosted Platform source code.
+This starter exposes the same app shape locally without including private hosted product source code.

@@ -2,7 +2,7 @@
 
 This document lists all UP2YOU Core Engine endpoints.
 
-These endpoints are available when running Core locally or when calling the Core layer of the hosted Platform. For hosted Platform endpoints (auth, marketplace, members, payment, audit), see the hosted Platform documentation.
+These endpoints are available when running Core locally or when calling a deployment's Core runtime layer. Product-layer APIs are documented separately by the deployment that provides them.
 
 ## Base URL
 
@@ -12,7 +12,7 @@ Local starter:
 http://localhost:8080
 ```
 
-Hosted Platform: Core runs behind the Platform reverse proxy. The hosted frontend calls these endpoints internally.
+In hosted deployments, Core usually runs behind a reverse proxy. Use the deployment's public routing documentation for external URLs.
 
 ## Authentication
 
@@ -503,18 +503,6 @@ Requests pass through the following middleware in order:
 
 ---
 
-## Hosted Platform vs Core-only
+## Product Layer vs Core Runtime
 
-This reference covers **Core Engine** endpoints only. The hosted Platform adds:
-
-| Category | Endpoints | Location |
-| --- | --- | --- |
-| Auth | `/auth/login`, `/auth/register`, `/auth/refresh` | Hosted Platform docs |
-| Developer | `/auth/developer/apps` | Hosted Platform docs |
-| Installer | `/installer/upload` | Hosted Platform docs |
-| Marketplace | `/auth/marketplace/install` | Hosted Platform docs |
-| Members | `/auth/app/members` | Hosted Platform docs |
-| Payment | `/auth/payment/webhook` | Hosted Platform docs |
-| Audit | `/auth/audit` | Hosted Platform docs |
-
-For hosted Platform API details, see the hosted Platform documentation at [up2you.app/docs](https://up2you.app/docs).
+This reference covers **Core Engine** endpoints only. Account, publishing, workspace, billing, or other product-layer APIs are outside the starter contract and should be documented by the deployment that provides them.

@@ -89,7 +89,7 @@ curl http://localhost:8080/ui/views/MyTodoTasks \
   -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
-This returns a JSON view schema that an SDUI renderer can draw. The hosted Platform includes a built-in renderer; for custom frontends, you map component types like `DataTable`, `Chart`, and `TabView` to your own UI.
+This returns a JSON view schema that an SDUI renderer can draw. Hosted deployments may include a built-in renderer; for custom frontends, you map component types like `DataTable`, `Chart`, and `TabView` to your own UI.
 
 Read [SDUI views](sdui.md) for the full component model.
 
@@ -267,7 +267,7 @@ curl http://localhost:8080/api/v1/_query/all_tasks \
   -H "X-Tenant-ID: 00000000-0000-0000-0000-000000000001"
 ```
 
-## Step 5: Package for the Hosted Platform
+## Step 5: Package the App
 
 Build a ZIP:
 
@@ -275,7 +275,7 @@ Build a ZIP:
 ./scripts/package-app.sh /path/to/my-first-app
 ```
 
-The output is `dist/my-first-app.zip`. Upload this to the hosted Platform.
+The output is `dist/my-first-app.zip`. Use it with any UP2YOU package upload flow.
 
 Read [Packaging](packaging.md) for ZIP shape rules and the upload checklist.
 
@@ -291,4 +291,4 @@ Read [Packaging](packaging.md) for ZIP shape rules and the upload checklist.
 | Reference app patterns | [Reference patterns](reference-patterns.md) |
 | Common error codes | [Errors](errors.md) |
 
-For hosted Platform usage (marketplace, members, licenses, payments), visit the hosted docs at [up2you.app/docs](https://up2you.app/docs).
+For hosted product workflows and deployment-specific operations, use the documentation for that deployment.

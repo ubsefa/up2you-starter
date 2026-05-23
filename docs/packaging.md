@@ -1,6 +1,6 @@
-# Packaging for the Hosted Platform
+# Packaging App Packages
 
-The hosted Platform accepts app packages as ZIP files.
+UP2YOU app packages are ZIP files.
 
 ## Build a ZIP
 
@@ -43,7 +43,7 @@ plugins/
 
 ## Upload Checklist
 
-Before uploading to the hosted Platform (`POST /installer/upload`), verify:
+Before uploading an app package, verify:
 
 - [ ] `app.yaml` exists at the ZIP root (not inside a parent folder).
 - [ ] `app.key` is lowercase words with hyphens (e.g., `my-todo`).
@@ -64,7 +64,7 @@ Before uploading to the hosted Platform (`POST /installer/upload`), verify:
 
 ## Validator Expectations
 
-The hosted Platform validates package shape and semantic references. Prepare the package so these checks pass:
+A package upload flow should validate package shape and semantic references. Prepare the package so these checks pass:
 
 1. **ZIP structure**: `app.yaml` must be at the root.
 2. **YAML parsing**: All `.yaml` files must be valid YAML.
@@ -88,16 +88,8 @@ If validation fails, the upload returns an error with details about which file a
 | `invalid transition` | Workflow transition `from` or `to` state is not in `entity.states` | Add the state to `entity.states` or fix the transition |
 | `invalid locale JSON` | `locales/*.json` is malformed | Validate with `jq . locales/en.json` |
 
-## Local Starter vs Hosted Platform
+## Local Starter vs Hosted Deployments
 
 The starter runs Core-only. It is useful for checking YAML shape and runtime behavior.
 
-The hosted Platform adds:
-
-- Developer accounts.
-- App review.
-- Marketplace listing.
-- Install/uninstall lifecycle.
-- Members and app roles.
-- Licenses and payments.
-- Platform audit.
+Hosted product deployments can add account flows, package review, installation lifecycle, workspaces, usage policies, and other product operations. Those workflows are outside this starter contract.
