@@ -76,6 +76,8 @@ That keeps local app development and API smoke tests simple. Hosted product work
 
 The `examples/` directory contains small reference apps for common YAML patterns:
 
+Each example owns its own `SPEC.md`; treat that file as the behavioral contract for the current package, and update it whenever the app YAML changes.
+
 - `my-todo` — minimal task app and the default local demo.
 - `approval-desk` — approval workflow and role-based queues.
 - `inventory-lite` — inventory records, import/export, and aggregate charts.

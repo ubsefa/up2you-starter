@@ -61,6 +61,8 @@ Core validates JWT tokens using **HS256** signing.
 | `app_roles` | object | Tenant-scoped app role map: `{tenant_id: role}` |
 | `allowed_tenants` | array | Tenants this token can access (cross-tenant) |
 
+In hosted deployments, the product layer is responsible for filling `app_roles` and `allowed_tenants` from its membership and access model. In core-only starter usage, these claims are absent unless you create JWTs yourself for auth-enabled testing.
+
 ---
 
 ## Auth Middleware Flow
@@ -164,7 +166,7 @@ Permission keys follow the pattern:
 
 - `{Entity}.{operation}` for CRUD: `Task.read`, `Task.create`, `Task.update`, `Task.delete`
 
-`auth.permissions` yalnızca entity action izinleri içindir. Workflow yetkisi transition YAML'daki `permissions` listesi ile kontrol edilir; `auth.permissions` içinde workflow key'leri tanımlanmaz.
+`auth.permissions` is only for entity action permissions. Workflow authorization is controlled by the `permissions` list in the transition YAML; workflow keys are not declared inside `auth.permissions`.
 
 ### System Role Behavior
 
