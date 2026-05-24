@@ -60,6 +60,7 @@ Before uploading an app package, verify:
 - [ ] All `views/*.yaml` reference valid queries (`ref:queries/...`).
 - [ ] All `forms/*.yaml` reference valid entities.
 - [ ] All `schedules/*.yaml` reference valid queries, entities, and effects.
+- [ ] Schedule `interval` values are at least `10s`.
 - [ ] Scheduled queries include `system` in `permissions` when permissions are explicit.
 - [ ] `auth.yaml` declares entity access permissions; include roles when your package owns the role list.
 - [ ] `auth.permissions` keys match `{Entity}.{operation}` format. Workflow transition permissions are defined in workflow YAML, not in `auth.permissions`.

@@ -262,6 +262,8 @@ schedules:
   server_health_check:
     interval: 30s
     query: devops_status_panel_active_servers
+    query_params:
+      environment: prod
     entity: Server
     effect: devops_status_panel_check_server
     timeout: 10s
@@ -275,14 +277,20 @@ schedules:
         response_time_ms: data.response_time_ms
         reachable: data.reachable
       transition: data.transition
+      transition_payload:
+        reason: data.reason
 ```
 
 Rules:
 
 - `query`, `entity`, and `effect` must reference resources in the same app package.
+- `interval` must be at least `10s`.
 - The scheduled query should include `system` in its `permissions` list when permissions are explicit, because the platform scheduler runs with system role.
+- `query_params` is optional and passes fixed query parameters to the named query.
+- `max_concurrency` limits how many records from this schedule are processed at the same time. Default is `1`.
+- `timeout` limits one schedule run; keep it close to the plugin's expected runtime.
 - `payload` values can use `state.*` or `record.*`; they refer to the same record context.
-- Plugin success responses may include `data`; `result.patch` and `result.transition` read from `data.*`.
+- Plugin success responses may include `data`; `result.patch`, `result.transition`, and `result.transition_payload` read from `data.*`.
 - Scheduled plugins should be idempotent by `event_id`. A platform scheduler restart can re-fire due jobs.
 - The local starter documents the package contract. Actual scheduled execution is a hosted/platform deployment capability.
 
