@@ -134,6 +134,26 @@ plugins:
 
 Default timeout is 5 seconds.
 
+### Plugin External Request Blocked
+
+If a plugin can receive `/execute` requests but cannot call an external service:
+
+1. **Check `plugin.yaml`**: The external hostname should be listed under `plugin.egress.hosts` when deploying to a hosted platform.
+2. **Check wildcard scope**: `*.example.com` matches `api.example.com`, but not `example.com` or `a.b.example.com`.
+3. **Check the target address**: Private, internal, loopback, and metadata addresses are not valid hosted outbound targets.
+4. **Check proxy support**: Hosted deployments may provide `HTTP_PROXY` and `HTTPS_PROXY`. Use an HTTP client or runtime configuration that respects those variables.
+5. **Avoid raw sockets for integrations**: Direct outbound sockets may be blocked even when standard HTTP(S) through the proxy is allowed.
+
+Example plugin manifest:
+
+```yaml
+plugin:
+  name: approval-notifier
+  egress:
+    hosts:
+      - hooks.slack.com
+```
+
 ### Plugin Not Registered
 
 If the plugin is not registered when an effect triggers:

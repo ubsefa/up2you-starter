@@ -221,6 +221,19 @@ Use plugins for integrations, notifications, sync jobs, or calculations that sho
 
 The default local demo app is plugin-free. The package example under `examples/my-todo` includes an optional plugin example.
 
+Plugins that call external HTTP(S) services should declare outbound hosts in their plugin manifest:
+
+```yaml
+plugin:
+  name: approval-notifier
+  egress:
+    hosts:
+      - hooks.slack.com
+      - "*.webhook.example.com"
+```
+
+`egress.hosts` is a hosted-deployment contract. It lets the platform review and enforce which external hosts a plugin may contact. Wildcards are single-label only: `*.example.com` matches `api.example.com`, but not `example.com` or `a.b.example.com`. Private, internal, loopback, and metadata addresses are not allowed outbound targets.
+
 ## Local Starter Boundaries
 
 This starter is for:
@@ -262,3 +275,4 @@ Before packaging an app:
 - Public queries expose only data intended for anonymous users.
 - Locale keys exist for important labels, states, transitions, and validation messages.
 - Optional plugins have clear manifests and endpoints.
+- Optional plugins that call external HTTP(S) services declare narrow `egress.hosts`.
