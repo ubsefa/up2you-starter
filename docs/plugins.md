@@ -131,6 +131,28 @@ Plugins should:
 
 The included `examples/my-todo/plugins/todo-logger` service demonstrates a minimal HTTP plugin with `/health`, `/execute`, bearer token verification, unknown-effect rejection, and event idempotency.
 
+## Outbound HTTP(S)
+
+If a plugin calls external HTTP(S) services in a hosted deployment, declare the allowed hosts in the plugin manifest:
+
+```yaml
+plugin:
+  name: approval-notifier
+  egress:
+    hosts:
+      - hooks.slack.com
+      - "*.webhook.example.com"
+```
+
+Rules:
+
+- `egress.hosts` is for external hostnames or public IP literals the plugin is allowed to call.
+- Wildcards are allowed only as the full leftmost label. `*.example.com` matches `api.example.com`, but not `example.com` or `a.b.example.com`.
+- Private, internal, loopback, and metadata addresses are not valid outbound targets, even if listed.
+- Do not use broad host patterns when a concrete API host is known.
+
+Hosted deployments can route plugin outbound traffic through an egress proxy. Plugin code should use standard HTTP clients that respect `HTTP_PROXY` and `HTTPS_PROXY`, or configure the proxy explicitly for the runtime. Direct raw socket outbound traffic may be blocked by the hosted runtime.
+
 ## Starter vs Hosted Deployments
 
 In this starter:
@@ -143,4 +165,5 @@ In hosted product deployments:
 
 - Plugin deployment depends on operator settings.
 - Product-layer review can reject unsafe plugin code or Dockerfiles.
+- Product-layer review can require `plugin.egress.hosts` for plugins that call external services.
 - Production secrets and platform internals are not part of the app package.

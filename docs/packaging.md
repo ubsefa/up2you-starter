@@ -58,6 +58,7 @@ Before uploading an app package, verify:
 - [ ] All `forms/*.yaml` reference valid entities.
 - [ ] `auth.yaml` declares entity access permissions; include roles when your package owns the role list.
 - [ ] `auth.permissions` keys match `{Entity}.{operation}` format. Workflow transition permissions are defined in workflow YAML, not in `auth.permissions`.
+- [ ] Plugins that call external HTTP(S) services declare narrow `plugin.egress.hosts` in `plugins/*/plugin.yaml`.
 - [ ] `locales/*.json` are valid JSON with string values.
 - [ ] No symlinks, executable bits, or hidden files in the ZIP (recommended).
 - [ ] ZIP size is under 10 MB (recommended).
@@ -71,7 +72,8 @@ A package upload flow should validate package shape and semantic references. Pre
 3. **Cross-references**: Entity references in workflows, queries, views, and forms should resolve.
 4. **State machine integrity**: Workflow transitions should reference valid states.
 5. **Auth consistency**: Entity permissions should use `{Entity}.{operation}` keys; workflow transition roles belong in workflow YAML.
-6. **File safety**: Do not include symlinks, generated artifacts, local secrets, or private repo files.
+6. **Plugin egress**: Plugins that call external services should declare explicit `egress.hosts`; broad wildcards, private addresses, and metadata addresses may be rejected.
+7. **File safety**: Do not include symlinks, generated artifacts, local secrets, or private repo files.
 
 If validation fails, the upload returns an error with details about which file and field failed.
 
@@ -86,6 +88,7 @@ If validation fails, the upload returns an error with details about which file a
 | `unknown form reference` | View references a form that doesn't exist | Check `forms/` contains the referenced file |
 | `role mismatch` | Workflow permission uses a role your target tenant/platform does not provide | Add the role to the tenant/platform role list or change the workflow permission |
 | `invalid transition` | Workflow transition `from` or `to` state is not in `entity.states` | Add the state to `entity.states` or fix the transition |
+| `invalid egress host` | Plugin manifest declares an unsafe or malformed outbound host | Use a concrete public hostname, or a single-label wildcard such as `*.example.com` |
 | `invalid locale JSON` | `locales/*.json` is malformed | Validate with `jq . locales/en.json` |
 
 ## Local Starter vs Hosted Deployments
