@@ -52,7 +52,7 @@ For production UI experiments, use the SDUI Gateway or your own frontend. The st
 - Keep field names stable once data exists.
 - Mark public queries or views with `public: true` only when their data is safe to expose without login.
 
-## Growing An App Safely
+## Practical App Tips
 
 For the first version, keep the package small: one or two entities, one main workflow, a small set of list/detail views, and only the plugins you actually need.
 
