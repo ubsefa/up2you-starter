@@ -112,6 +112,19 @@ Success response:
 { "success": true }
 ```
 
+Scheduled effects can return optional `data` for the platform scheduler to map back to the entity:
+
+```json
+{
+  "success": true,
+  "data": {
+    "checked_at": "2026-05-24T12:00:00Z",
+    "reachable": true,
+    "transition": "recover"
+  }
+}
+```
+
 Error response:
 
 ```json
@@ -137,6 +150,20 @@ Plugins should:
 - avoid privileged Docker access
 
 The included `examples/my-todo/plugins/todo-logger` service demonstrates a minimal HTTP plugin with `/health`, `/execute`, bearer token verification, unknown-effect rejection, and event idempotency.
+
+## Scheduled Plugins
+
+For periodic work, define a `schedules/*.yaml` file and keep the plugin stateless. The platform scheduler will query Core, call the plugin with `action: "scheduled"`, then apply the plugin response through `result.patch` or `result.transition`.
+
+Use this model for behavior such as server health checks, reminder scans, or periodic sync checks. The plugin should not open its own endless loop, scan all Core records by itself, or require broad internal platform access.
+
+Scheduled plugin rules:
+
+- The schedule references a query, entity, and effect from the same package.
+- The query should allow `system` role when it declares explicit permissions.
+- The plugin handles a single payload and returns `success` plus optional `data`.
+- The plugin should treat `event_id` as an idempotency key because scheduled jobs can re-fire after scheduler restart.
+- If the plugin calls external HTTP(S) services, still declare `plugin.egress.hosts`.
 
 ## Outbound HTTP(S)
 

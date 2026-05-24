@@ -42,6 +42,7 @@ Rules:
 - Define locale labels in locales/.
 - Keep locale keys and label_template usage consistent with docs/i18n.md.
 - Use effects/ and plugins/ only when custom side effects are truly needed.
+- Use schedules/ only for hosted periodic plugin work; do not put infinite loops or broad Core API scans inside plugins.
 - Mark queries or views public only when anonymous users can safely access the data.
 - Keep the first version small and predictable.
 
@@ -58,6 +59,7 @@ Before finishing:
 - Check every view/query/form field exists on the relevant entity.
 - Check locales/ files contain labels for user-facing fields, states, transitions, and views.
 - Check every workflow effect name is registered in app.yaml or remove the effect.
+- Check every schedule query/entity/effect reference exists, and scheduled queries include system when permissions are explicit.
 - Check public queries expose only safe data.
 - Check app.yaml main_view points to an existing view.
 ```

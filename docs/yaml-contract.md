@@ -16,6 +16,7 @@ my-app/
   views/
   forms/
   effects/
+  schedules/
   locales/
   plugins/
 ```
@@ -36,6 +37,7 @@ Use this as a compact checklist before looking at the detailed examples.
 | `views/*.yaml` | For SDUI | `view.name`, `view.data_source`, `view.components`, `view.public` | Server-driven screens. |
 | `forms/*.yaml` | For create/edit | `form.name`, `form.entity`, `form.fields` | Input forms for records and transition payloads. |
 | `effects/*.yaml` | With plugins | `effects.<name>.plugin`, `payload` | Maps workflow side effects to plugin calls. |
+| `schedules/*.yaml` | With scheduled plugins | `schedules.<name>.interval`, `query`, `entity`, `effect`, `payload`, `result` | Runs plugin effects periodically over query results in hosted deployments. |
 | `locales/*.json` | Recommended | `app`, `entities`, `fields`, `states`, `transitions`, `views` | User-facing labels and value translations. |
 | `plugins/*/plugin.yaml` | With plugins | `plugin.name`, `service`, `port`, `effects`, `egress.hosts` | Plugin runtime manifest for hosted deployment. |
 
@@ -250,6 +252,39 @@ plugin:
 ```
 
 `egress.hosts` is a hosted-deployment contract. It lets the platform review and enforce which external hosts a plugin may contact. Wildcards are single-label only: `*.example.com` matches `api.example.com`, but not `example.com` or `a.b.example.com`. Private, internal, loopback, and metadata addresses are not allowed outbound targets.
+
+## Scheduled Effects
+
+Use `schedules/*.yaml` when a hosted deployment should periodically run a plugin over records returned by a query. This is for jobs such as health checks, reminders, sync checks, or polling a known external API. Do not put infinite loops, broad Core API access, or background polling inside the plugin itself.
+
+```yaml
+schedules:
+  server_health_check:
+    interval: 30s
+    query: devops_status_panel_active_servers
+    entity: Server
+    effect: devops_status_panel_check_server
+    timeout: 10s
+    max_concurrency: 4
+    payload:
+      hostname: state.hostname
+      current_state: state.current_state
+    result:
+      patch:
+        last_check_at: data.checked_at
+        response_time_ms: data.response_time_ms
+        reachable: data.reachable
+      transition: data.transition
+```
+
+Rules:
+
+- `query`, `entity`, and `effect` must reference resources in the same app package.
+- The scheduled query should include `system` in its `permissions` list when permissions are explicit, because the platform scheduler runs with system role.
+- `payload` values can use `state.*` or `record.*`; they refer to the same record context.
+- Plugin success responses may include `data`; `result.patch` and `result.transition` read from `data.*`.
+- Scheduled plugins should be idempotent by `event_id`. A platform scheduler restart can re-fire due jobs.
+- The local starter documents the package contract. Actual scheduled execution is a hosted/platform deployment capability.
 
 ## Local Starter Boundaries
 

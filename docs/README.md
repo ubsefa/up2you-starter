@@ -47,7 +47,7 @@ If a hosted deployment documents additional product-layer behavior, treat that h
 | [api-reference.md](api-reference.md) | Core Engine and SDUI Gateway HTTP endpoints. |
 | [authentication.md](authentication.md) | JWT model, app roles, effective role resolution, public routes, and cross-tenant access. |
 | [architecture.md](architecture.md) | Core, SDUI Gateway, Plugin Host, PostgreSQL, NATS, NGINX, request flows, and tenant isolation. |
-| [plugins.md](plugins.md) | Optional HTTP plugin contract, effect mapping, reliability, and security guidance. |
+| [plugins.md](plugins.md) | Optional HTTP plugin contract, scheduled effect model, effect mapping, reliability, and security guidance. |
 | [errors.md](errors.md) | Error response shape, error codes, causes, and fixes. |
 | [troubleshooting.md](troubleshooting.md) | Local debugging checklists for compose, schema, auth, transitions, plugins, and database issues. |
 | [core-only.md](core-only.md) | Starter-specific runtime usage without a hosted product layer. |
@@ -62,6 +62,7 @@ This repository documents:
 - Portable YAML app package structure.
 - SDUI schema contracts used by app packages.
 - Optional HTTP plugin shape.
+- Scheduled plugin effect package contract.
 - Core API, auth, error, and troubleshooting behavior.
 
 This repository does not document private hosted product source code, production account/session APIs, billing, workspace lifecycle, package review policy, or deployment-specific operational rules.
