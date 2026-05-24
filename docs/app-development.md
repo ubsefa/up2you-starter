@@ -51,3 +51,17 @@ For production UI experiments, use the SDUI Gateway or your own frontend. The st
 - Set `main_view` in `app.yaml` when the main view has a custom name.
 - Keep field names stable once data exists.
 - Mark public queries or views with `public: true` only when their data is safe to expose without login.
+
+## Growing An App Safely
+
+For the first version, keep the package small: one or two entities, one main workflow, a small set of list/detail views, and only the plugins you actually need.
+
+As the app grows:
+
+- Add one entity or workflow at a time and re-check references after each change.
+- Prefer explicit named queries over duplicating filter logic inside many views.
+- Keep workflow transition names stable; changing them can break buttons, docs, tests, or user habits.
+- Use `include` and `label_template` for human-readable referenced records instead of copying display names into multiple entities.
+- Keep public views and queries separate from authenticated operational screens.
+- Put side effects in plugins only when YAML cannot express the behavior cleanly.
+- Document any external integration host in the plugin manifest before packaging.
