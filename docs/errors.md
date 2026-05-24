@@ -127,6 +127,27 @@ Example:
 { "code": "VALIDATION_ERROR", "message": "field 'title' is required" }
 ```
 
+### `INVALID_FIELD`
+
+- **HTTP Status**: 400
+- **Source**: Core Engine
+- **Cause**: The request includes a field that is not defined on the target entity.
+- **Fix**: Remove the unknown field or add it to the entity schema before sending it.
+
+### `READONLY_FIELD`
+
+- **HTTP Status**: 400
+- **Source**: Core Engine
+- **Cause**: The request tries to update a computed/read-only field.
+- **Fix**: Remove the read-only field from the update payload.
+
+### `UNIQUE_CONSTRAINT`
+
+- **HTTP Status**: 409
+- **Source**: Core Engine
+- **Cause**: A value protected by a unique index already exists on another record.
+- **Fix**: Use a different unique value, or update/revise the existing record instead of creating a conflicting one.
+
 ---
 
 ## Workflow Errors
@@ -252,6 +273,9 @@ Read [Plugins](plugins.md) for the plugin HTTP contract and security checklist.
 | `FORBIDDEN` | 403 | Permission |
 | `APP_ROLE_REQUIRED` | 403 | Permission |
 | `VALIDATION_ERROR` | 400 | Validation |
+| `INVALID_FIELD` | 400 | Validation |
+| `READONLY_FIELD` | 400 | Validation |
+| `UNIQUE_CONSTRAINT` | 409 | Validation |
 | `TRANSITION_ERROR` | 409 | Workflow |
 | `QUERY_ERROR` | 500 | Query |
 | `VIEW_NOT_FOUND` | 404 | SDUI |
