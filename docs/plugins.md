@@ -106,6 +106,11 @@ POST /execute
 }
 ```
 
+Common `action` values:
+
+- `entity_transitioned`: a workflow transition triggered the effect.
+- `scheduled`: the platform scheduler triggered the effect from `schedules/*.yaml`.
+
 Success response:
 
 ```json
@@ -160,8 +165,11 @@ Use this model for behavior such as server health checks, reminder scans, or per
 Scheduled plugin rules:
 
 - The schedule references a query, entity, and effect from the same package.
+- `interval` must be at least `10s`; `max_concurrency` defaults to `1`.
+- `query_params` can pass fixed parameters to the scheduled query.
 - The query should allow `system` role when it declares explicit permissions.
 - The plugin handles a single payload and returns `success` plus optional `data`.
+- `result.transition_payload` can pass plugin `data.*` values into a workflow transition payload.
 - The plugin should treat `event_id` as an idempotency key because scheduled jobs can re-fire after scheduler restart.
 - If the plugin calls external HTTP(S) services, still declare `plugin.egress.hosts`.
 
