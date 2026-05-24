@@ -440,7 +440,10 @@ Common error codes:
 | --- | --- | --- |
 | `FORBIDDEN` | 403 | Permission denied |
 | `VALIDATION_ERROR` | 400 | Invalid input data |
+| `INVALID_FIELD` | 400 | Submitted field is not defined |
+| `READONLY_FIELD` | 400 | Computed/read-only field cannot be changed |
 | `TRANSITION_ERROR` | 409 | Invalid state transition |
+| `UNIQUE_CONSTRAINT` | 409 | Unique field or index value already exists |
 | `APP_ROLE_REQUIRED` | 403 | JWT missing app role claim |
 | `TENANT_FORBIDDEN` | 403 | Token cannot access this tenant |
 | `TENANT_CONFIG_ERROR` | 503 | Tenant configuration is invalid |
