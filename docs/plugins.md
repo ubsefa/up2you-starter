@@ -33,6 +33,13 @@ Plugins are language-agnostic HTTP services. The examples use Go by convention, 
 
 Choose the Dockerfile for the plugin's runtime. A Go plugin might compile a static binary, while a Node.js, Python, PHP, Ruby, Rust, or Java plugin needs its own base image, dependency install step, exposed port, and start command.
 
+Runtime notes:
+
+- The platform contract is HTTP, not Go-specific. Any language is acceptable if it exposes `/health` and `/execute`.
+- Use the runtime's standard HTTP client when calling external APIs. Standard clients are more likely to support `HTTP_PROXY` and `HTTPS_PROXY`.
+- If the language does not automatically read proxy environment variables, configure the proxy explicitly in the plugin code or runtime flags.
+- Avoid raw TCP sockets for integrations. Hosted deployments can block direct outbound sockets and require HTTP(S) through the egress proxy.
+
 ## App Registration
 
 Register the plugin from `app.yaml`.

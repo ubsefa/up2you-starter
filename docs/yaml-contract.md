@@ -22,6 +22,23 @@ my-app/
 
 Only `app.yaml` is always required. Other folders are included when the app needs that behavior.
 
+## File Quick Reference
+
+Use this as a compact checklist before looking at the detailed examples.
+
+| File | Required | Main keys | Purpose |
+| --- | --- | --- | --- |
+| `app.yaml` | Yes | `app.key`, `app.name`, `app.version`, `app.main_view`, `plugins` | App identity, entry view, and optional plugin registration. |
+| `auth.yaml` | Recommended | `auth.roles`, `auth.permissions` | App roles and entity action permissions. |
+| `entities/*.yaml` | Usually | `entity.name`, `entity.initial_state`, `entity.fields`, `entity.soft_delete` | Persistent data model and state list. |
+| `workflows/*.yaml` | When states change | `workflow.entity`, `workflow.transitions` | Allowed state transitions, guards, mutations, permissions, and effects. |
+| `queries/*.yaml` | When listing/searching | `queries.<name>.entity`, `filter`, `sort`, `include`, `public` | Reusable read models for views, APIs, exports, and public reads. |
+| `views/*.yaml` | For SDUI | `view.name`, `view.data_source`, `view.components`, `view.public` | Server-driven screens. |
+| `forms/*.yaml` | For create/edit | `form.name`, `form.entity`, `form.fields` | Input forms for records and transition payloads. |
+| `effects/*.yaml` | With plugins | `effects.<name>.plugin`, `payload` | Maps workflow side effects to plugin calls. |
+| `locales/*.json` | Recommended | `app`, `entities`, `fields`, `states`, `transitions`, `views` | User-facing labels and value translations. |
+| `plugins/*/plugin.yaml` | With plugins | `plugin.name`, `service`, `port`, `effects`, `egress.hosts` | Plugin runtime manifest for hosted deployment. |
+
 ## Naming Rules
 
 - App keys use lowercase words with hyphens: `my-todo`, `public-notice-board`.
