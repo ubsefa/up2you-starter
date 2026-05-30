@@ -302,10 +302,16 @@ The stable app contract is the UP2YOU YAML component model, not the full Ant Des
 - `TabView`
 - `Chart`
 - `StatCard`
+- `HeroSection`
+- `PublicStats`
 - `Text`
 - `Alert`
 - `DetailHeader`
 - layout containers such as `Row`, `Col`, `Space`, and `Divider`
+
+`HeroSection` is intended for public landing-style views. Supported props are `title`, `subtitle`, optional `eyebrow`, `image`, `cta_label`, `cta_url`, and `align`. `cta_url` should be a same-origin app path such as `/marketplace`, `/auth/login`, `/p/...`, or `/app/...`; do not use `javascript:`, external protocols, or external origins.
+
+`PublicStats` is intended for small public metric summaries. Supported props are optional `data_source` and a `stats` list. Each stat can define `label`, `field` or fixed `value`, and optional `prefix`/`suffix`. When `data_source` is used, design the query to return a single summary row in `items[0]`, for example `{ "items": [{ "total_lessons": 12 }] }`.
 
 Use the Ant Design component and icon catalogs to understand component behavior and available icon names:
 

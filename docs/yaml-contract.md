@@ -231,6 +231,9 @@ Rules:
 - Forms do not have a public access contract; all form submissions require authentication.
 - The underlying data source must also be accessible. For a public view, the referenced query or entity must allow public access.
 - Do not mark views public if the data includes sensitive information.
+- Public landing views should use the normal public view contract, not a separate route or builder. Hosted renderers may support `HeroSection` and `PublicStats` for this purpose.
+- `HeroSection.cta_url` must be a same-origin app path. Do not use `javascript:`, external protocols, external origins, shell syntax, or path traversal behavior.
+- `PublicStats` queries should return one summary row under `items[0]`; stat entries read values by `field`. Use fixed `value` only for intentionally static numbers.
 
 ## Effects And Plugins
 
