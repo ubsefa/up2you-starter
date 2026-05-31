@@ -169,6 +169,57 @@ Use `ScoreMatrixInput` when a form needs several numeric score fields presented 
 
 Each entry in `props.fields` is submitted as its own top-level number field. `ScoreMatrixInput` changes form layout only; it does not create a nested object.
 
+## Live Scoreboard Display
+
+Use `ScoreboardDisplay` when a view needs a read-only TV/live display backed by one query row. The component renders the latest state; scoring, timer control, bracket logic, and side effects stay in workflows, plugins, or app-specific services.
+
+```yaml
+view:
+  name: MatchTv
+  public: true
+  data_source: ref:queries/current_match_scoreboard
+  components:
+    - type: ScoreboardDisplay
+      props:
+        title_field: match_title
+        phase_field: round_label
+        timer_field: timer_display
+        status_field: status
+        winner_field: winner_side
+        status_items:
+          - field: activity_timer
+            label: Activity
+            tone: warning
+            show_when: present
+        sides:
+          - key: home
+            label_field: home_name
+            score_field: home_score
+            meta_fields: [home_team]
+            indicators:
+              - field: home_penalties
+                label: Pen
+                tone: warning
+                show_when: nonzero
+            color: red
+          - key: away
+            label_field: away_name
+            score_field: away_score
+            meta_fields: [away_team]
+            indicators:
+              - field: away_penalties
+                label: Pen
+                tone: warning
+                show_when: nonzero
+            color: blue
+```
+
+For authenticated screens, Core's entity SSE stream invalidates the view/query cache. For public TV screens, mark the query `public: true`; the public view route subscribes to the query stream and refreshes when Core emits updates.
+
+Use `status_items[]` for match-level indicators and `sides[].indicators[]` for side-level indicators. The renderer only understands generic presentation hints (`kind`, `tone`, `show_when`); sport-specific meaning stays in field names, queries, and workflows.
+
+`title`, `subtitle`, `timer`, and `empty_text` can be used as i18n keys or literal fallback values when the matching `*_field` value is empty.
+
 ## Tabs And Multi-Table Views
 
 Use `TabView` to split a main app screen into focused tabs.
