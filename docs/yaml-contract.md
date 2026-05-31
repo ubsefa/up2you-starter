@@ -224,6 +224,12 @@ Use `ScoreboardDisplay` for a read-only live scoreboard/TV surface backed by a q
     title_field: match_title
     phase_field: round_label
     timer_field: timer_display
+    live_timer:
+      mode: countdown
+      remaining_field: remaining_seconds
+      running_field: timer_running
+      updated_at_field: timer_updated_at
+      server_time_field: server_time
     status_field: status
     winner_field: winner_side
     status_items:
@@ -258,10 +264,11 @@ Rules:
 
 - The component reads the first row from the view/query result unless `props.record` is provided.
 - `title`, `subtitle`, `timer`, and `empty_text` can be i18n keys or literal fallback values when the matching field value is empty.
+- `live_timer` supports anchor-based local ticking with `mode` (`countdown` or `countup`), `remaining_field`, `elapsed_field`, `duration_field`, `running_field`, `updated_at_field`, `started_at_field`, and `server_time_field`.
 - `sides[]` should contain two side definitions. Each side can define `key`, `label`, `label_field`, `score_field`, `meta_fields`, and `color`.
 - `status_items[]` and `sides[].indicators[]` render generic badges or flags from fields. Entries support `field`, `label`, `kind` (`text`, `flag`, `dot`), `tone` (`default`, `info`, `success`, `warning`, `danger`), and `show_when` (`present`, `truthy`, `nonzero`, `always`).
 - Supported colors are `red`, `blue`, `green`, `amber`, and `neutral`.
-- The component is display-only. Score entry, timer calculation, bracket logic, and event publishing belong in workflows, plugins, or app-specific services.
+- The component is display-only. Score entry, timer control, bracket logic, and event publishing belong in workflows, plugins, or app-specific services. Backend code should publish timer anchor changes on start, pause, reset, and period changes instead of writing every second.
 - Realtime refresh comes from Core SSE invalidation. Public TV screens should use a `public: true` query so the public view route can subscribe to the query stream.
 
 ### label_template

@@ -184,6 +184,12 @@ view:
         title_field: match_title
         phase_field: round_label
         timer_field: timer_display
+        live_timer:
+          mode: countdown
+          remaining_field: remaining_seconds
+          running_field: timer_running
+          updated_at_field: timer_updated_at
+          server_time_field: server_time
         status_field: status
         winner_field: winner_side
         status_items:
@@ -219,6 +225,8 @@ For authenticated screens, Core's entity SSE stream invalidates the view/query c
 Use `status_items[]` for match-level indicators and `sides[].indicators[]` for side-level indicators. The renderer only understands generic presentation hints (`kind`, `tone`, `show_when`); sport-specific meaning stays in field names, queries, and workflows.
 
 `title`, `subtitle`, `timer`, and `empty_text` can be used as i18n keys or literal fallback values when the matching `*_field` value is empty.
+
+Use `live_timer` when the scoreboard must keep counting between backend events. Store timer state as anchor data: remaining or elapsed seconds, a running flag, an update timestamp, and optionally the server time. The renderer advances the display locally and then reconciles when SSE/public query stream delivers the next canonical state.
 
 ## Tabs And Multi-Table Views
 
