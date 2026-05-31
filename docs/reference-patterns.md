@@ -9,6 +9,7 @@ These patterns are useful when designing your own app package.
 | Basic CRUD | Users create, update, list, and delete records. | `entities/`, `forms/`, `views/` |
 | State workflow | Records move through controlled states. | `workflows/`, `locales/` |
 | Role-gated operations | Different users can see or run different actions. | `auth.yaml`, `workflows/` |
+| Profile-level content access | Users can read only records at or below their assigned level. | `entities/` with `read_scope`, profile entity |
 | Public read view | Anonymous users can read approved public data. | `queries/`, `views/` |
 | Public discovery | Anonymous users can read approved public data while writes stay authenticated. | `queries/`, `views/` |
 | Admin queue | Staff process pending records from a focused view. | `views/`, `queries/`, `workflows/` |
@@ -33,3 +34,5 @@ The reference apps live under `examples/`. They are compact package patterns, no
 | Mental Health Care Plan | Sensitive role-gated workflow with no public data |
 
 Keep the first public version of an app small. If an app requires a highly custom interface, start with a list or table fallback and add specialized UI after the app contract is stable.
+
+For profile-level content access, child content records should carry a required rank copied from the parent record. Do not rely on a low default rank for child content; that makes mistakes fail open.

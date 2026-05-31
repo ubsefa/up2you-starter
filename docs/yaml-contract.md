@@ -76,6 +76,29 @@ entity:
 
 Use simple field types first. Keep custom behavior in workflows, queries, forms, views, or optional plugins.
 
+Use `read_scope.type: user_rank` when records have an access level that must be enforced by Core, not merely hidden in the UI. The entity stores its required rank in `rank_field`; Core looks up the current user's profile entity and only returns records where `rank_field <= profile_rank_field`. Use `default_rank` for users without a profile and `bypass_roles` for operational roles such as admin or reviewer.
+
+```yaml
+entity:
+  name: Lesson
+  fields:
+    level_rank:
+      type: number
+      default: 0
+  read_scope:
+    type: user_rank
+    rank_field: level_rank
+    profile_entity: LearnerProfile
+    profile_user_field: user_id
+    profile_rank_field: level_rank
+    default_rank: 0
+    bypass_roles: [admin]
+```
+
+`read_scope` applies to entity list/get, query results, exports, history/replay, and public query streams. It is backend read enforcement; role-gated tabs and hidden buttons are only UX helpers.
+
+For child/content records, store the parent-derived rank on the child record too. Make that child `rank_field` required and avoid a permissive `default: 0`; otherwise a high-level parent can accidentally expose low-rank child content.
+
 ## Workflows
 
 Workflows define allowed state transitions.
