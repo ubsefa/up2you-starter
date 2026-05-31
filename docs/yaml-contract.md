@@ -192,6 +192,28 @@ Use `AppMemberSelect` when a form field should let the user choose a member of t
 
 The member list is provided by a product-layer member source. In Core-only mode, AppMemberSelect requires a custom member list source.
 
+### ScoreMatrixInput
+
+Use `ScoreMatrixInput` when several number fields should be edited as one compact score matrix.
+
+```yaml
+- type: ScoreMatrixInput
+  props:
+    min: 0
+    max: 10
+    fields:
+      - name: technical_score
+        required: true
+      - name: tactical_score
+        required: true
+```
+
+Rules:
+
+- Each `props.fields[]` item must reference an entity field by `name`.
+- The submitted payload contains separate top-level number fields, not a nested score object.
+- Per-field `label`, `required`, `min`, `max`, and `step` can override the group defaults.
+
 ### label_template
 
 `label_template` formats values for display in table columns, select options, and detail views.
@@ -234,6 +256,8 @@ Rules:
 - Public landing views should use the normal public view contract, not a separate route or builder. Hosted renderers may support `HeroSection` and `PublicStats` for this purpose.
 - `HeroSection.cta_url` must be a same-origin app path. Do not use `javascript:`, external protocols, external origins, shell syntax, or path traversal behavior.
 - `PublicStats` queries should return one summary row under `items[0]`; stat entries read values by `field`. Use fixed `value` only for intentionally static numbers.
+- Hosted renderers may support `BlockRenderer` for structured JSON content blocks. Supported props are optional `block_field`, `title_field`, `summary_field`, `filter_lang`, and `limit`. Keep block payloads data-only; `report_example.sections[]` and `pitch.markers[]` are simple display data, and link blocks must use same-origin safe URLs.
+- Hosted renderers may support `ValidationSummary` for status/score summaries and `ReviewDecisionPanel` for compact reviewer decision lists. These components read from the current view data source and do not change backend validation or workflow behavior.
 
 ## Effects And Plugins
 
