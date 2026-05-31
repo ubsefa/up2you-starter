@@ -214,6 +214,56 @@ Rules:
 - The submitted payload contains separate top-level number fields, not a nested score object.
 - Per-field `label`, `required`, `min`, `max`, and `step` can override the group defaults.
 
+### ScoreboardDisplay
+
+Use `ScoreboardDisplay` for a read-only live scoreboard/TV surface backed by a query result.
+
+```yaml
+- type: ScoreboardDisplay
+  props:
+    title_field: match_title
+    phase_field: round_label
+    timer_field: timer_display
+    status_field: status
+    winner_field: winner_side
+    status_items:
+      - field: activity_timer
+        label: Activity
+        tone: warning
+        show_when: present
+    sides:
+      - key: home
+        label_field: home_name
+        score_field: home_score
+        meta_fields: [home_team]
+        indicators:
+          - field: home_penalties
+            label: Pen
+            tone: warning
+            show_when: nonzero
+        color: red
+      - key: away
+        label_field: away_name
+        score_field: away_score
+        meta_fields: [away_team]
+        indicators:
+          - field: away_penalties
+            label: Pen
+            tone: warning
+            show_when: nonzero
+        color: blue
+```
+
+Rules:
+
+- The component reads the first row from the view/query result unless `props.record` is provided.
+- `title`, `subtitle`, `timer`, and `empty_text` can be i18n keys or literal fallback values when the matching field value is empty.
+- `sides[]` should contain two side definitions. Each side can define `key`, `label`, `label_field`, `score_field`, `meta_fields`, and `color`.
+- `status_items[]` and `sides[].indicators[]` render generic badges or flags from fields. Entries support `field`, `label`, `kind` (`text`, `flag`, `dot`), `tone` (`default`, `info`, `success`, `warning`, `danger`), and `show_when` (`present`, `truthy`, `nonzero`, `always`).
+- Supported colors are `red`, `blue`, `green`, `amber`, and `neutral`.
+- The component is display-only. Score entry, timer calculation, bracket logic, and event publishing belong in workflows, plugins, or app-specific services.
+- Realtime refresh comes from Core SSE invalidation. Public TV screens should use a `public: true` query so the public view route can subscribe to the query stream.
+
 ### label_template
 
 `label_template` formats values for display in table columns, select options, and detail views.
