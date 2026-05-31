@@ -153,6 +153,22 @@ Use `EntitySelect` when a user should choose another entity record.
 
 `options_query` must point to a named query that returns the selectable records. The selected value is normally the referenced entity ID.
 
+Use `ScoreMatrixInput` when a form needs several numeric score fields presented as one compact group.
+
+```yaml
+- type: ScoreMatrixInput
+  props:
+    min: 0
+    max: 10
+    fields:
+      - name: technical_score
+        required: true
+      - name: tactical_score
+        required: true
+```
+
+Each entry in `props.fields` is submitted as its own top-level number field. `ScoreMatrixInput` changes form layout only; it does not create a nested object.
+
 ## Tabs And Multi-Table Views
 
 Use `TabView` to split a main app screen into focused tabs.
@@ -301,6 +317,9 @@ The stable app contract is the UP2YOU YAML component model, not the full Ant Des
 - `DataTable`
 - `TabView`
 - `Chart`
+- `BlockRenderer`
+- `ValidationSummary`
+- `ReviewDecisionPanel`
 - `StatCard`
 - `HeroSection`
 - `PublicStats`
@@ -312,6 +331,12 @@ The stable app contract is the UP2YOU YAML component model, not the full Ant Des
 `HeroSection` is intended for public landing-style views. Supported props are `title`, `subtitle`, optional `eyebrow`, `image`, `cta_label`, `cta_url`, and `align`. `cta_url` should be a same-origin app path such as `/marketplace`, `/auth/login`, `/p/...`, or `/app/...`; do not use `javascript:`, external protocols, or external origins.
 
 `PublicStats` is intended for small public metric summaries. Supported props are optional `data_source` and a `stats` list. Each stat can define `label`, `field` or fixed `value`, and optional `prefix`/`suffix`. When `data_source` is used, design the query to return a single summary row in `items[0]`, for example `{ "items": [{ "total_lessons": 12 }] }`.
+
+`BlockRenderer` is intended for structured content stored in a JSON field. Supported props are optional `block_field` (default `blocks`), `title_field` (default `title`), `summary_field` (default `summary`), `filter_lang`, and `limit`. The hosted renderer supports block types such as `rich_text`/`paragraph`, `heading`, `callout`, `link`, `checklist`, `quiz`, `report_example`, `radar`, and `pitch`. `report_example.sections[]` can provide simple `label`/`text` sections; `pitch.markers[]` can provide `label`, `x`, `y`, and optional `meta`. Link blocks are filtered to same-origin safe URLs.
+
+`ValidationSummary` summarizes validation result rows from the current view data source. Supported props are optional `status_field` (default `status`) and `score_field` (default `score`).
+
+`ReviewDecisionPanel` shows recent reviewer decisions as a compact list. Supported props are optional `limit`; the default fields are `target_type`, `decision`, and `reason`.
 
 Use the Ant Design component and icon catalogs to understand component behavior and available icon names:
 
