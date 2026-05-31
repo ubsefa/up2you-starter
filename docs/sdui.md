@@ -54,6 +54,8 @@ view:
 
 `data_source` usually points to a named query under `queries/`. A `DataTable` can also define its own `data_source`; this is useful when a view contains more than one table.
 
+`create_form` renders a create button. Hosted renderers may hide that button when `auth.permissions["<Entity>.create"]` does not include the current app role. Core API permissions remain the source of truth.
+
 ## DataTable Row Actions
 
 `row_actions` render per-row actions. They are evaluated against the row state using `from`.
@@ -246,7 +248,13 @@ view:
           - key: stats
             label: Stats
             view: MyTodoStats
+          - key: admin
+            label: Admin
+            view: MyTodoAdmin
+            permissions: [admin]
 ```
+
+Tabs may include `permissions` or `roles`. Hosted renderers hide a tab when the current app role is not listed. This is UX gating only; backend permissions still enforce access.
 
 For dashboards or split operational screens, each `DataTable` can fetch a different query.
 

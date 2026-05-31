@@ -113,7 +113,7 @@ auth:
     Task.create: [admin, user]
 ```
 
-Frontend visibility is only convenience. Core API permission checks are the real enforcement point.
+Frontend visibility is only convenience. Core API permission checks are the real enforcement point. Hosted SDUI renderers may use these permissions to hide row actions and `DataTable.create_form` buttons when the current app role is not allowed for the relevant entity action.
 
 ## Queries
 
@@ -160,6 +160,8 @@ Without `include`, the query only returns the raw ID. With `include`, the render
 Views describe screens for SDUI renderers. Forms describe create/edit inputs.
 
 Keep views small and predictable. For the first version of an app, prefer list, table, detail, form, and stats patterns before custom UI.
+
+`TabView` tabs must reference defined views. A tab may include `permissions` or `roles`; hosted renderers hide that tab unless the current app role is included. This is presentation-layer gating, not a replacement for Core permissions.
 
 ### EntitySelect
 
