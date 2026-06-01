@@ -76,28 +76,38 @@ entity:
 
 Use simple field types first. Keep custom behavior in workflows, queries, forms, views, or optional plugins.
 
-Use `read_scope.type: user_rank` when records have an access level that must be enforced by Core, not merely hidden in the UI. The entity stores its required rank in `rank_field`; Core looks up the current user's profile entity and only returns records where `rank_field <= profile_rank_field`. Use `default_rank` for users without a profile and `bypass_roles` for operational roles such as admin or reviewer.
+Use `access_scope` when records have a per-record access boundary that must be enforced by Core, not merely hidden in the UI. It is a composable list of rules that cover reads **and** writes. Each rule has a `type` (`owner` or `rank`), a `field`, and an `operations` list (any of `read`, `update`, `delete`, `create`).
+
+An `owner` rule ties a record to the user whose id is stored in `field`: that user can read and modify only their own records, and on `create` Core sets the field to the caller. A `rank` rule ties records to a profile level: Core looks up the caller's profile entity and only allows records where `field <= profile_rank_field`.
 
 ```yaml
 entity:
-  name: Lesson
+  name: Report
   fields:
+    owner_user_id:
+      type: string
     level_rank:
       type: number
       default: 0
-  read_scope:
-    type: user_rank
-    rank_field: level_rank
-    profile_entity: LearnerProfile
-    profile_user_field: user_id
-    profile_rank_field: level_rank
-    default_rank: 0
-    bypass_roles: [admin]
+  access_scope:
+    rules:
+      - type: owner
+        field: owner_user_id
+        operations: [read, update, delete]
+        bypass_roles: [admin]
+      - type: rank
+        field: level_rank
+        operations: [read]
+        profile_entity: LearnerProfile
+        profile_user_field: user_id
+        profile_rank_field: level_rank
+        default_rank: 0
+        bypass_roles: [admin]
 ```
 
-`read_scope` applies to entity list/get, query results, exports, history/replay, and public query streams. It is backend read enforcement; role-gated tabs and hidden buttons are only UX helpers.
+Rules combine with AND, and `bypass_roles` plus the `system` role are exempt. `read` rules apply to entity list/get, query results, exports, history/replay, public query streams, and `include` references (an out-of-scope reference resolves to `null`; a single out-of-scope GET returns 404). `update`/`delete` rules gate the update, delete, and transition endpoints (an out-of-scope write returns 404). This is backend enforcement; role-gated tabs and hidden buttons are only UX helpers. (The raw event stream is not yet scope-checked, only permission-checked; use scoped/public query streams for scoped live data.)
 
-For child/content records, store the parent-derived rank on the child record too. Make that child `rank_field` required and avoid a permissive `default: 0`; otherwise a high-level parent can accidentally expose low-rank child content.
+For child/content records under a `rank` rule, store the parent-derived rank on the child record too. Make that child `field` required and avoid a permissive `default: 0`; otherwise a high-level parent can accidentally expose low-rank child content.
 
 A `computed` field holds a read-only value derived from the record's other fields. It requires an `expression` (using `expr-lang` syntax, evaluated with the record's fields as variables):
 
@@ -112,7 +122,7 @@ fields:
     expression: price * quantity
 ```
 
-The value is computed at read time, not stored: it is added to entity list/get and query results, and stripped from exports. You cannot set it on create, update, or transition mutations (the API returns `READONLY_FIELD`). Because it is a read-time projection and never a stored column, a `computed` field cannot be used as a `read_scope` `rank_field` or `profile_rank_field` — for an enforced or filterable derived value, use a stored `number`/`string` field instead (populate it in a workflow or plugin if needed).
+The value is computed at read time, not stored: it is added to entity list/get and query results, and stripped from exports. You cannot set it on create, update, or transition mutations (the API returns `READONLY_FIELD`). Because it is a read-time projection and never a stored column, a `computed` field cannot be used as an `access_scope` rank rule's `field` — for an enforced or filterable derived value, use a stored `number`/`string` field instead (populate it in a workflow or plugin if needed).
 
 ## Workflows
 

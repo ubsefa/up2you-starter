@@ -176,12 +176,12 @@ Example scenarios:
 - **Cause**: Query execution failed. This is a server-side error; the query YAML may reference a non-existent entity, or a database error occurred.
 - **Fix**: Check server logs for the specific query failure. Verify the query's `entity` reference and filter expressions.
 
-### `READ_SCOPE_ERROR`
+### `ACCESS_SCOPE_ERROR`
 
 - **HTTP Status**: 500
 - **Source**: Core Engine
-- **Cause**: Core could not evaluate an entity `read_scope`, usually because the profile lookup failed or the configured profile/rank fields are not available at runtime.
-- **Fix**: Check the entity `read_scope` definition. Verify `profile_entity`, `profile_user_field`, `profile_rank_field`, and `rank_field` exist and that the rank fields are numeric.
+- **Cause**: Core could not evaluate an entity `access_scope` rule, usually because a rank rule's profile lookup failed or the configured profile/rank fields are not available at runtime.
+- **Fix**: Check the entity `access_scope` definition. For rank rules verify `profile_entity`, `profile_user_field`, `profile_rank_field`, and the rank `field` exist and that the rank fields are numeric.
 
 ---
 

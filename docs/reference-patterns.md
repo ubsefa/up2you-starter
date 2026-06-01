@@ -9,7 +9,8 @@ These patterns are useful when designing your own app package.
 | Basic CRUD | Users create, update, list, and delete records. | `entities/`, `forms/`, `views/` |
 | State workflow | Records move through controlled states. | `workflows/`, `locales/` |
 | Role-gated operations | Different users can see or run different actions. | `auth.yaml`, `workflows/` |
-| Profile-level content access | Users can read only records at or below their assigned level. | `entities/` with `read_scope`, profile entity |
+| Profile-level content access | Users can read only records at or below their assigned level. | `entities/` with `access_scope` rank rule, profile entity |
+| Owner-scoped records | Users see and modify only their own records (reads and writes). | `entities/` with `access_scope` owner rule |
 | Public read view | Anonymous users can read approved public data. | `queries/`, `views/` |
 | Public discovery | Anonymous users can read approved public data while writes stay authenticated. | `queries/`, `views/` |
 | Admin queue | Staff process pending records from a focused view. | `views/`, `queries/`, `workflows/` |

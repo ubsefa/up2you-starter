@@ -120,7 +120,7 @@ All entity endpoints follow the pattern `/api/v1/{entity}` where `{entity}` is t
 GET /api/v1/{entity}
 ```
 
-Returns a paginated list of entity records. If the entity defines `read_scope`, Core returns only records inside the caller's scope.
+Returns a paginated list of entity records. If the entity defines `access_scope`, Core returns only records inside the caller's scope.
 
 Query parameters:
 
@@ -159,7 +159,7 @@ curl -X POST http://localhost:8080/api/v1/Task \
 GET /api/v1/{entity}/{id}
 ```
 
-If the entity defines `read_scope` and the record is outside the caller's scope, Core returns `404 NOT_FOUND`.
+If the entity defines `access_scope` and the record is outside the caller's scope, Core returns `404 NOT_FOUND`.
 
 ```bash
 curl http://localhost:8080/api/v1/Task/<task-id> \
@@ -450,7 +450,7 @@ Common error codes:
 | `TENANT_FORBIDDEN` | 403 | Token cannot access this tenant |
 | `TENANT_CONFIG_ERROR` | 503 | Tenant configuration is invalid |
 | `QUERY_ERROR` | 500 | Query execution failed |
-| `READ_SCOPE_ERROR` | 500 | Entity read scope could not be evaluated |
+| `ACCESS_SCOPE_ERROR` | 500 | Entity access scope could not be evaluated |
 | `INVALID_TOKEN` | 401 | JWT is invalid or expired |
 | `UNAUTHORIZED` | 401 | Authorization header missing |
 | `MISSING_TENANT` | 400 | X-Tenant-ID header required |
