@@ -99,6 +99,21 @@ entity:
 
 For child/content records, store the parent-derived rank on the child record too. Make that child `rank_field` required and avoid a permissive `default: 0`; otherwise a high-level parent can accidentally expose low-rank child content.
 
+A `computed` field holds a read-only value derived from the record's other fields. It requires an `expression` (using `expr-lang` syntax, evaluated with the record's fields as variables):
+
+```yaml
+fields:
+  price:
+    type: number
+  quantity:
+    type: number
+  total:
+    type: computed
+    expression: price * quantity
+```
+
+The value is computed at read time, not stored: it is added to entity list/get and query results, and stripped from exports. You cannot set it on create, update, or transition mutations (the API returns `READONLY_FIELD`). Because it is a read-time projection and never a stored column, a `computed` field cannot be used as a `read_scope` `rank_field` or `profile_rank_field` — for an enforced or filterable derived value, use a stored `number`/`string` field instead (populate it in a workflow or plugin if needed).
+
 ## Workflows
 
 Workflows define allowed state transitions.
