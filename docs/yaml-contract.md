@@ -124,6 +124,8 @@ fields:
 
 The value is computed at read time, not stored: it is added to entity list/get and query results, and stripped from exports. You cannot set it on create, update, or transition mutations (the API returns `READONLY_FIELD`). Because it is a read-time projection and never a stored column, a `computed` field cannot be used as an `access_scope` rank rule's `field` — for an enforced or filterable derived value, use a stored `number`/`string` field instead (populate it in a workflow or plugin if needed).
 
+When `read_model.enabled: true`, Core still stores the full record internally, but non-system read responses are projected to `read_model.fields`. Entity list/get, named queries, public query streams, exports, replay output, event payload maps, and `include` references do not expose fields outside that projection. Service-to-service `system` calls can still read full state. Use this for fields that must exist on the record but should not appear in normal read surfaces.
+
 ## Workflows
 
 Workflows define allowed state transitions.
@@ -201,7 +203,7 @@ The `include` field accepts:
 - A single field name: `include: patient_id`
 - A list: `include: [patient_id, program_key]`
 
-Without `include`, the query only returns the raw ID. With `include`, the renderer receives the full referenced object and can format it with `label_template`.
+Without `include`, the query only returns the raw ID. With `include`, the renderer receives the referenced object projected by that entity's read model and can format it with `label_template`.
 
 ## Views And Forms
 

@@ -120,7 +120,7 @@ All entity endpoints follow the pattern `/api/v1/{entity}` where `{entity}` is t
 GET /api/v1/{entity}
 ```
 
-Returns a paginated list of entity records. If the entity defines `access_scope`, Core returns only records inside the caller's scope.
+Returns a paginated list of entity records. If the entity defines `access_scope`, Core returns only records inside the caller's scope. If it defines `read_model.enabled: true`, record `data` is projected to `read_model.fields`.
 
 Query parameters:
 
@@ -159,7 +159,7 @@ curl -X POST http://localhost:8080/api/v1/Task \
 GET /api/v1/{entity}/{id}
 ```
 
-If the entity defines `access_scope` and the record is outside the caller's scope, Core returns `404 NOT_FOUND`.
+If the entity defines `access_scope` and the record is outside the caller's scope, Core returns `404 NOT_FOUND`. If it defines `read_model.enabled: true`, record `data` is projected to `read_model.fields`.
 
 ```bash
 curl http://localhost:8080/api/v1/Task/<task-id> \
@@ -277,7 +277,7 @@ GET /api/v1/_query/{query}
 POST /api/v1/_query/{query}
 ```
 
-GET for simple queries; POST for queries that accept a body (e.g., filter overrides).
+GET for simple queries; POST for queries that accept a body (e.g., filter overrides). If the target entity defines `read_model.enabled: true`, item `data` and included referenced records are projected to each entity's `read_model.fields`.
 
 ```bash
 curl http://localhost:8080/api/v1/_query/my_todo_all \
