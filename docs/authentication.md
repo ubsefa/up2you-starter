@@ -24,7 +24,7 @@ The Core runtime is the same in both modes. The difference is who produces the J
 
 ## JWT Token Model
 
-Core validates JWT tokens using **HS256** by default. Newer self-hosted deployments can also use **RS256** by setting `JWT_PUBLIC_KEY_PEM_B64` on Core/SDUI/plugin-host and `JWT_PRIVATE_KEY_PEM_B64` on the service that signs tokens. If `JWT_SECRET` is also set, HS256 remains accepted as a legacy fallback.
+Core validates JWT tokens using **HS256** by default. Newer self-hosted deployments can also use **RS256** by setting `JWT_PUBLIC_KEY_PEM_B64` on Core/SDUI/plugin-host and `JWT_PRIVATE_KEY_PEM_B64` on the service that signs tokens. If `JWT_SECRET` is also set, HS256 remains accepted as a legacy fallback; after an RS256 migration is complete and old HS256 tokens have expired, remove `JWT_SECRET` from verifier services to stop accepting HS256 tokens.
 
 When `AUTH_ENABLED=true`, `JWT_SECRET` must be set to a non-placeholder value with at least 32 characters. The starter `.env.example` uses a development-only value so auth-enabled local testing boots cleanly; replace it for any real deployment.
 
