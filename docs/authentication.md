@@ -24,7 +24,7 @@ The Core runtime is the same in both modes. The difference is who produces the J
 
 ## JWT Token Model
 
-Core validates JWT tokens using **HS256** signing.
+Core validates JWT tokens using **HS256** by default. Newer self-hosted deployments can also use **RS256** by setting `JWT_PUBLIC_KEY_PEM_B64` on Core/SDUI/plugin-host and `JWT_PRIVATE_KEY_PEM_B64` on the service that signs tokens. If `JWT_SECRET` is also set, HS256 remains accepted as a legacy fallback.
 
 When `AUTH_ENABLED=true`, `JWT_SECRET` must be set to a non-placeholder value with at least 32 characters. The starter `.env.example` uses a development-only value so auth-enabled local testing boots cleanly; replace it for any real deployment.
 
@@ -239,7 +239,7 @@ If neither condition is met, the request is rejected with `TENANT_FORBIDDEN`.
 
 ## Token Generation (Core-only Mode)
 
-In Core-only mode, you must generate your own JWT tokens. Generate a JWT with any HS256 library. Use these parameters:
+In Core-only mode, you must generate your own JWT tokens. For the default starter setup, generate a JWT with any HS256 library. Use these parameters:
 
 | Parameter | Value |
 | --- | --- |
@@ -269,6 +269,8 @@ const token = jwt.sign(
   { expiresIn: '24h' }
 );
 ```
+
+For RS256 self-hosted setups, sign with the private key from `JWT_PRIVATE_KEY_PEM_B64` and configure Core/SDUI/plugin-host with the matching `JWT_PUBLIC_KEY_PEM_B64`.
 
 ---
 
