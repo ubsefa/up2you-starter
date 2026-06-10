@@ -26,6 +26,8 @@ The Core runtime is the same in both modes. The difference is who produces the J
 
 Core validates JWT tokens using **HS256** signing.
 
+When `AUTH_ENABLED=true`, `JWT_SECRET` must be set to a non-placeholder value with at least 32 characters. The starter `.env.example` uses a development-only value so auth-enabled local testing boots cleanly; replace it for any real deployment.
+
 ```json
 {
   "user_id": "user-uuid",
@@ -97,7 +99,7 @@ Core does not use the JWT `role` claim directly for permission checks. Instead, 
    - `app_roles[tenant_id]` is the effective role.
    - If the tenant key is missing from `app_roles`, the request is rejected with `APP_ROLE_REQUIRED`.
 
-4. **Fallback**: If `app_roles` is not present in the JWT, the JWT `role` claim is used.
+4. **Fallback**: If `app_roles` is not present in the JWT, the JWT `role` claim is used. This exists for simple core-only tests and legacy token compatibility. For portable app packages and hosted integrations, include an explicit `app_roles` map and do not rely on fallback behavior as a long-term contract.
 
 ```
 EffectiveRole resolution:
@@ -243,7 +245,7 @@ In Core-only mode, you must generate your own JWT tokens. Generate a JWT with an
 | --- | --- |
 | Signing method | HS256 |
 | Issuer (`iss`) | `up2you` |
-| Secret | Value from `JWT_SECRET` env var |
+| Secret | Value from `JWT_SECRET` env var; at least 32 characters when auth is enabled |
 | Required claims | `user_id`, `tenant_id`, `role` |
 
 Token expiry should be set in your token's `exp` claim as needed by your application. The Core runtime validates `exp` against the current time but does not enforce a specific expiry duration through configuration.

@@ -72,7 +72,10 @@ func main() {
 	if port == "" {
 		port = "8202"
 	}
-	jwtSecret := os.Getenv("JWT_SECRET")
+	jwtSecret := os.Getenv("PLUGIN_EXECUTION_JWT_SECRET")
+	if jwtSecret == "" {
+		jwtSecret = os.Getenv("JWT_SECRET")
+	}
 	if len(jwtSecret) < 32 || strings.EqualFold(jwtSecret, "changeme") {
 		log.Fatal("JWT_SECRET must be at least 32 characters and must not be a placeholder")
 	}
@@ -88,10 +91,10 @@ func main() {
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
-			"status":            "ok",
-			"plugin":            "approval-notifier",
+			"status":             "ok",
+			"plugin":             "approval-notifier",
 			"webhook_configured": webhookURL != "",
-			"supported_effects": effectsList,
+			"supported_effects":  effectsList,
 		})
 	})
 
@@ -135,13 +138,13 @@ func main() {
 		}
 
 		body := map[string]any{
-			"effect":      req.EffectName,
-			"tenant_id":   req.TenantID,
-			"request_id":  req.EntityID,
-			"transition":  req.Transition,
-			"event_id":    req.EventID,
-			"payload":     payload,
-			"sent_at":     time.Now().UTC().Format(time.RFC3339),
+			"effect":     req.EffectName,
+			"tenant_id":  req.TenantID,
+			"request_id": req.EntityID,
+			"transition": req.Transition,
+			"event_id":   req.EventID,
+			"payload":    payload,
+			"sent_at":    time.Now().UTC().Format(time.RFC3339),
 		}
 		raw, err := json.Marshal(body)
 		if err != nil {

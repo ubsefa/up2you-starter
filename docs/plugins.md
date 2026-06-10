@@ -154,6 +154,8 @@ Plugins should:
 - run with a non-root container user
 - avoid privileged Docker access
 
+Hosted deployments can provide plugin `/execute` tokens signed with a plugin-execution secret rather than the platform's main JWT secret. Plugin examples read `PLUGIN_EXECUTION_JWT_SECRET` first and fall back to `JWT_SECRET` for older/local setups.
+
 The included `examples/my-todo/plugins/todo-logger` service demonstrates a minimal HTTP plugin with `/health`, `/execute`, bearer token verification, unknown-effect rejection, and event idempotency.
 
 ## Scheduled Plugins

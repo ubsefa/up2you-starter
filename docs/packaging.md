@@ -66,8 +66,8 @@ Before uploading an app package, verify:
 - [ ] `auth.permissions` keys match `{Entity}.{operation}` format. Workflow transition permissions are defined in workflow YAML, not in `auth.permissions`.
 - [ ] Plugins that call external HTTP(S) services declare narrow `plugin.egress.hosts` in `plugins/*/plugin.yaml`.
 - [ ] `locales/*.json` are valid JSON with string values.
-- [ ] No symlinks, executable bits, or hidden files in the ZIP (recommended).
-- [ ] ZIP size is under 10 MB (recommended).
+- [ ] No symlinks, executable bits, or hidden files in the ZIP. This is a portability and hosted-review recommendation; package validators may normalize or reject these differently by deployment.
+- [ ] ZIP size is under 10 MB for fast upload/review. Runtime hard caps can be higher and are deployment-specific.
 
 ## Validator Expectations
 
@@ -80,7 +80,7 @@ A package upload flow should validate package shape and semantic references. Pre
 5. **Auth consistency**: Entity permissions should use `{Entity}.{operation}` keys; workflow transition roles belong in workflow YAML.
 6. **Schedules**: Schedule definitions should reference existing queries, entities, and effects.
 7. **Plugin egress**: Plugins that call external services should declare explicit `egress.hosts`; broad wildcards, private addresses, and metadata addresses may be rejected.
-8. **File safety**: Do not include symlinks, generated artifacts, local secrets, or private repo files.
+8. **File safety**: Do not include symlinks, generated artifacts, local secrets, or private repo files. Treat this as package hygiene even when a local validator accepts or ignores a file.
 
 If validation fails, the upload returns an error with details about which file and field failed.
 

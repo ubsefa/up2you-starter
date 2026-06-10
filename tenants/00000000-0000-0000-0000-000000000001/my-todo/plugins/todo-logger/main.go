@@ -67,7 +67,10 @@ func main() {
 	if port == "" {
 		port = "8201"
 	}
-	jwtSecret := os.Getenv("JWT_SECRET")
+	jwtSecret := os.Getenv("PLUGIN_EXECUTION_JWT_SECRET")
+	if jwtSecret == "" {
+		jwtSecret = os.Getenv("JWT_SECRET")
+	}
 	if len(jwtSecret) < 32 || strings.EqualFold(jwtSecret, "changeme") {
 		log.Fatal("JWT_SECRET must be at least 32 characters and must not be a placeholder")
 	}
