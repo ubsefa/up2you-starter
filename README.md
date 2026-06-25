@@ -41,6 +41,12 @@ make up
 make smoke
 ```
 
+Validate the example apps against the core-engine image (same runtime validation the upload flow uses):
+
+```bash
+make validate
+```
+
 Open the demo screen:
 
 ```text

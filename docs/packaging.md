@@ -84,6 +84,17 @@ A package upload flow should validate package shape and semantic references. Pre
 
 If validation fails, the upload returns an error with details about which file and field failed.
 
+## Validate Locally Against Core
+
+`make validate` runs every app under `examples/` through the core-engine image's `validate` command — the same runtime validation (entities, workflows, queries, effects, and guard/computed expressions) that the hosted upload flow applies before persisting a package. Passing locally means the same core accepts the YAML at upload time.
+
+```bash
+make validate                              # validate the bundled examples/
+./scripts/validate-examples.sh ./my-apps   # validate a folder of app directories
+```
+
+Requires Docker; it uses the published `${REGISTRY}/core-engine:${VERSION}` image. This covers the Core runtime contract (data model + expressions). Package shape, naming conventions, and view/form references are enforced separately by the upload-time package validator described above.
+
 ## Common Upload Errors
 
 | Error | Cause | Fix |
