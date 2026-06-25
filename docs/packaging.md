@@ -93,7 +93,9 @@ make validate                              # validate the bundled examples/
 ./scripts/validate-examples.sh ./my-apps   # validate a folder of app directories
 ```
 
-Requires Docker; it uses the published `${REGISTRY}/core-engine:${VERSION}` image. This covers the Core runtime contract (data model + expressions). Package shape, naming conventions, and view/form references are enforced separately by the upload-time package validator described above.
+Errors are reported as `file:line: field -> reason -> how to fix`, pointing at the exact YAML location (e.g. `entities/task.yaml:7: entity 'Task' field 'priority' -> unknown type 'bogus' -> use one of ...`).
+
+Requires Docker; it uses the published `${REGISTRY}/core-engine:${VERSION}` image. This covers the Core runtime contract (data model + expressions). Package shape, naming conventions, and view/form references are enforced separately by the upload-time package validator described above (the hosted platform), so a clean `make validate` does not guarantee the hosted upload's package/marketplace checks also pass.
 
 ## Common Upload Errors
 
