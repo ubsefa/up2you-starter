@@ -1,4 +1,4 @@
-.PHONY: setup up down reset logs ps smoke package config validate
+.PHONY: setup up down reset logs ps smoke package config validate new
 
 setup:
 	@if [ ! -f .env ]; then cp .env.example .env; fi
@@ -31,3 +31,7 @@ config:
 
 validate:
 	./scripts/validate-examples.sh
+
+new:
+	@test -n "$(APP)" || { echo "usage: make new APP=<app-key>"; exit 1; }
+	./scripts/new-app.sh "$(APP)"

@@ -41,6 +41,12 @@ make up
 make smoke
 ```
 
+Scaffold a new app skeleton (correct naming conventions, validates clean):
+
+```bash
+make new APP=my-todo
+```
+
 Validate the example apps against the core-engine image (same runtime validation the upload flow uses):
 
 ```bash
