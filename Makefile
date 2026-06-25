@@ -1,4 +1,4 @@
-.PHONY: setup up down reset logs ps smoke package config
+.PHONY: setup up down reset logs ps smoke package config validate
 
 setup:
 	@if [ ! -f .env ]; then cp .env.example .env; fi
@@ -28,3 +28,6 @@ package:
 
 config:
 	docker compose config --quiet
+
+validate:
+	./scripts/validate-examples.sh
