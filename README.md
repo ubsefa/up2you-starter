@@ -147,6 +147,8 @@ This repo does not include:
 - Private platform services or installers.
 - Private deployment scripts or production secrets.
 
+For exactly what your app can rely on here versus on a hosted platform — including public/read-only semantics and core-only caveats — see [Capabilities and boundaries](docs/capabilities.md).
+
 ## Guides
 
 Recommended reading order:
@@ -166,3 +168,4 @@ Recommended reading order:
 13. [Reference app patterns](docs/reference-patterns.md) — reusable patterns from the example app set
 14. [AI assistant prompt](docs/ai-prompt.md) — prompt template for generating YAML app packages
 15. [Troubleshooting](docs/troubleshooting.md) — compose, auth, public query, plugin, and upload fixes
+16. [Capabilities and boundaries](docs/capabilities.md) — core-only vs hosted, public/read-only semantics, core-only caveats
