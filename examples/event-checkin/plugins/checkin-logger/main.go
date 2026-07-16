@@ -79,12 +79,10 @@ func main() {
 		log.Fatal("JWT_SECRET must be at least 32 characters and must not be a placeholder")
 	}
 	store := newIdempotencyStore()
-
 	effectsList := make([]string, 0, len(supportedEffects))
 	for name := range supportedEffects {
 		effectsList = append(effectsList, name)
 	}
-
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
@@ -93,7 +91,6 @@ func main() {
 			"supported_effects": effectsList,
 		})
 	})
-
 	http.HandleFunc("/execute", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			writeError(w, http.StatusMethodNotAllowed, "method not allowed", false)
@@ -128,7 +125,6 @@ func main() {
 			req.TenantID, req.EffectName, req.EntityID, eventName, attendee, req.Transition)
 		writeSuccess(w)
 	})
-
 	server := &http.Server{
 		Addr:         ":" + port,
 		ReadTimeout:  10 * time.Second,

@@ -82,12 +82,10 @@ func main() {
 	webhookURL := os.Getenv("WEBHOOK_URL")
 	httpClient := &http.Client{Timeout: 8 * time.Second}
 	store := newIdempotencyStore()
-
 	effectsList := make([]string, 0, len(supportedEffects))
 	for name := range supportedEffects {
 		effectsList = append(effectsList, name)
 	}
-
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
@@ -97,7 +95,6 @@ func main() {
 			"supported_effects":  effectsList,
 		})
 	})
-
 	http.HandleFunc("/execute", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			writeError(w, http.StatusMethodNotAllowed, "method not allowed", false)
@@ -122,21 +119,18 @@ func main() {
 			writeSuccess(w)
 			return
 		}
-
 		payload := req.Payload
 		if payload == nil {
 			payload = map[string]any{}
 		}
 		title, _ := payload["request_title"].(string)
 		requester, _ := payload["requester_user_id"].(string)
-
 		if webhookURL == "" {
 			log.Printf("[approval-notifier] tenant=%s effect=%s request=%s title=%q requester=%s (no webhook configured, logging only)",
 				req.TenantID, req.EffectName, req.EntityID, title, requester)
 			writeSuccess(w)
 			return
 		}
-
 		body := map[string]any{
 			"effect":     req.EffectName,
 			"tenant_id":  req.TenantID,
@@ -161,7 +155,6 @@ func main() {
 		if req.EventID != "" {
 			httpReq.Header.Set("X-Up2You-Event-Id", req.EventID)
 		}
-
 		resp, err := httpClient.Do(httpReq)
 		if err != nil {
 			log.Printf("[approval-notifier] webhook network error: %v", err)
@@ -170,7 +163,6 @@ func main() {
 		}
 		defer resp.Body.Close()
 		_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 64*1024))
-
 		switch {
 		case resp.StatusCode >= 200 && resp.StatusCode < 300:
 			log.Printf("[approval-notifier] tenant=%s effect=%s request=%s webhook=%d delivered",
@@ -184,7 +176,6 @@ func main() {
 			writeError(w, http.StatusBadGateway, fmt.Sprintf("webhook permanent failure: %d", resp.StatusCode), false)
 		}
 	})
-
 	server := &http.Server{
 		Addr:         ":" + port,
 		ReadTimeout:  10 * time.Second,
